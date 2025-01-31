@@ -7,7 +7,7 @@
     "compilerOptions": {
         "target": "ES2020",
         "module": "ESNext",
-        "userDefineForClassFields": true,
+        "useDefineForClassFields": true,
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "moduleResolution": "Bundler",
         "allowImportingTsExtensions": true,
