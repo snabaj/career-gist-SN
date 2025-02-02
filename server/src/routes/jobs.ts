@@ -1,36 +1,73 @@
-import { Router, Request, Response } from 'express';
-import redisCacheService from '../cache/redisCacheService.js';
+import express, {NextFunction, Request, Response, Router} from "express";
+import axios from "axios";
+import { getCache, setCache, deleteCache, clearCache } from "../cache/redisCacheService.js";
+import AxiosXHR = Axios.AxiosXHR;
 
-const router: Router = Router();
+const router : Router = express.Router();
+const API_URL = "https://jobs.github.com/positions.json"; // Example GitHub jobs API
 
-// Simulated PostgreSQL Query (Replace with actual DB query later)
-const fetchJobsFromDatabase = async (search: string) => {
-  console.log(`Fetching jobs from PostgreSQL for: ${search}`);
-  return [
-    { id: 1, title: "Software Engineer", company: "TechCorp" },
-    { id: 2, title: "Frontend Developer", company: "WebWorks" }
-  ];
-};
+// ✅ Job Search Route with Redis Caching
+router.get("/search", (req: Request, res: Response, next: NextFunction) : void => {
+  const query = req.query.q as string;
+  const location = req.query.location as string;
+  const cacheKey = `jobs:${query}`;
 
-router.get('/', async (req: Request, res: Response): Promise<void> => {
-  const search = req.query.search as string;
+  (async () : Promise<void> => {
+    try {
+      // Check if response is cached
+      const cachedData = await getCache(cacheKey);
+      if (cachedData) {
+        console.log("⚡ Serving from cache");
+        res.json(cachedData);
+        return;
+      }
 
-  if (!search) {
-    res.status(400).json({ error: "Search query required" });
+      // If not cached, fetch from API
+      const response : AxiosXHR<unknown> = await axios.get(API_URL, { params: { description: query, location } });
+
+      await setCache(cacheKey, response.data, 7200); // 2 hours of storage
+
+      console.log("🌍 Fetched from API");
+      res.json(response.data);
+      return;
+    } catch (error) {
+      console.error("❌ API Error:", error);
+      next(error); // Ensure the error is forwarded correctly
+      return;
+    }
+  })();
+});
+
+// ✅ Route to delete a specific cache key
+router.delete("/clear-cache", (req: Request, res: Response, next: NextFunction): void => {
+  const key = req.query.key as string;
+
+  if (!key) {
+    res.status(400).json({ error: "Cache key is required." });
     return;
   }
 
-  const cachedData = await redisCacheService.get<object[]>(`jobs:${search}`);
-  if (cachedData) {
-    console.log("🔄 Serving from Redis cache");
-    res.json(cachedData);
-    return;
+  deleteCache(key)
+    .then(() : void => {
+      console.log(`🗑️ Deleted cache key: ${key}`);
+      res.json({ message: `Cache entry '${key}' deleted.` });
+    })
+    .catch((error) : void => {
+      console.error("❌ Error deleting cache:", error);
+      next(error);
+    });
+});
+
+// ✅ Route to clear ALL cache (Dangerous, use wisely!)
+router.delete("/clear-all-cache", async (_req: Request, res: Response) : Promise<void> => {
+  try {
+    await clearCache();
+    console.log("🧹 Cleared all Redis cache.");
+    res.json({ message: "All cache cleared." });
+  } catch (error) {
+    console.error("❌ Error clearing cache:", error);
+    res.status(500).json({ error: "Failed to clear cache." });
   }
-
-  const jobs = await fetchJobsFromDatabase(search);
-  await redisCacheService.set(`jobs:${search}`, jobs, 900); // Cache for 15 minutes (too long, too short?) Discuss with team.
-
-  res.json(jobs);
 });
 
 export default router;
