@@ -1,37 +1,55 @@
-import { createClient } from 'redis';
+import Redis from "ioredis";
+import dotenv from "dotenv";
 
-const redisClient = createClient({
-  socket: {
-    host: process.env.REDIS_HOST ?? '127.0.0.1',
-    port: Number(process.env.REDIS_PORT) || 6379,
-  }
+dotenv.config();
+
+const redisClient = new Redis({
+  host: process.env.REDIS_HOST ?? "127.0.0.1",
+  port: Number(process.env.REDIS_PORT) || 6379,
+  password: process.env.REDIS_PASSWORD ?? "",
+  tls: process.env.REDIS_TLS ? {} : undefined as any,
 });
 
-redisClient.on('error', (err) => console.error('❌ Redis Error:', err));
+redisClient.on("connect", () : void => console.log("✅ Connected to Redis"));
+redisClient.on("error", (err : Error) : void => console.error("❌ Redis error:", err));
+redisClient.on("end", () : void => console.warn("⚠️ Redis connection closed"));
+redisClient.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
 
-(async () => {
-  await redisClient.connect();
-  console.log('✅ Redis Connected!');
-})();
 
-class RedisCacheService {
-  async set<T>(key: string, value: T, ttl: number = 300): Promise<void> {
-    const jsonValue = JSON.stringify(value);
-    await redisClient.set(key, jsonValue, { EX: ttl });
+export const setCache : (key : string, value : unknown, ttl?: number) => Promise<void> = async (key: string, value: unknown, ttl: number = 7200) : Promise<void> => {
+  try {
+    const serializedValue = JSON.stringify(value);
+    await redisClient.setex(key, ttl, serializedValue);
+    console.log(`✅ Cached: ${key} (TTL: ${ttl}s)`);
+  } catch (error) {
+    console.error("❌ Error setting cache:", error);
   }
+};
 
-  async get<T>(key: string): Promise<T | null> {
-    const result = await redisClient.get(key);
-    return result ? JSON.parse(result) : null;
+export const getCache : (key : string) => Promise<string | null> = async (key: string): Promise<string | null> => {
+  try {
+    const cachedData : string | null = await redisClient.get(key);
+    return cachedData ? JSON.parse(cachedData) : null;
+  } catch (error) {
+    console.error("❌ Error getting cache:", error);
+    return null;
   }
+};
 
-  async delete(key: string): Promise<void> {
+export const deleteCache : (key : string) => Promise<void> = async (key: string) : Promise<void> => {
+  try {
     await redisClient.del(key);
+    console.log(`🗑️ Cache deleted: ${key}`);
+  } catch (error) {
+    console.error("❌ Error deleting cache:", error);
   }
+};
 
-  async clear(): Promise<void> {
-    await redisClient.flushAll();
+export const clearCache : () => Promise<void> = async () : Promise<void> => {
+  try {
+    await redisClient.flushall();
+    console.log("✅ Redis cache cleared!");
+  } catch (error) {
+    console.error("❌ Error clearing cache:", error);
   }
-}
-
-export default new RedisCacheService();
+};
