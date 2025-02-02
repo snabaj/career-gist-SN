@@ -6,7 +6,6 @@ import AxiosXHR = Axios.AxiosXHR;
 const router : Router = express.Router();
 const API_URL = "https://jobs.github.com/positions.json"; // Example GitHub jobs API
 
-// ✅ Job Search Route with Redis Caching
 router.get("/search", (req: Request, res: Response, next: NextFunction) : void => {
   const query = req.query.q as string;
   const location = req.query.location as string;
@@ -14,7 +13,6 @@ router.get("/search", (req: Request, res: Response, next: NextFunction) : void =
 
   (async () : Promise<void> => {
     try {
-      // Check if response is cached
       const cachedData = await getCache(cacheKey);
       if (cachedData) {
         console.log("⚡ Serving from cache");
@@ -22,23 +20,21 @@ router.get("/search", (req: Request, res: Response, next: NextFunction) : void =
         return;
       }
 
-      // If not cached, fetch from API
       const response : AxiosXHR<unknown> = await axios.get(API_URL, { params: { description: query, location } });
 
-      await setCache(cacheKey, response.data, 7200); // 2 hours of storage
+      await setCache(cacheKey, response.data, 7200);
 
       console.log("🌍 Fetched from API");
       res.json(response.data);
       return;
     } catch (error) {
       console.error("❌ API Error:", error);
-      next(error); // Ensure the error is forwarded correctly
+      next(error);
       return;
     }
   })();
 });
 
-// ✅ Route to delete a specific cache key
 router.delete("/clear-cache", (req: Request, res: Response, next: NextFunction): void => {
   const key = req.query.key as string;
 
@@ -58,7 +54,6 @@ router.delete("/clear-cache", (req: Request, res: Response, next: NextFunction):
     });
 });
 
-// ✅ Route to clear ALL cache (Dangerous, use wisely!)
 router.delete("/clear-all-cache", async (_req: Request, res: Response) : Promise<void> => {
   try {
     await clearCache();
@@ -66,7 +61,7 @@ router.delete("/clear-all-cache", async (_req: Request, res: Response) : Promise
     res.json({ message: "All cache cleared." });
   } catch (error) {
     console.error("❌ Error clearing cache:", error);
-    res.status(500).json({ error: "Failed to clear cache." });
+    res.status(500).json({ error: "❌ Failed to clear cache.", errorMessage: (error instanceof Error ? error.message : "Failed to clear cache... Please try again.") });
   }
 });
 
