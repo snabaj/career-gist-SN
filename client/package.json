@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "../node_modules/.bin/vite",
-    "build": "../node_modules/.bin/tsc -b && vite build",
-    "lint": "../node_modules/.bin/eslint . --fix",
-    "preview": "../node_modules/.bin/vite preview"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
     "jwt-decode": "^4.0.0",
