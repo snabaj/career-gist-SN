@@ -1,83 +1,77 @@
-import express, {Request, Response, Router} from "express";
+import express, { Request, Response, Router } from "express";
 import { getCache, setCache, deleteCache } from "../cache/redisCacheService.js";
 
-const router : Router = express.Router();
+const router: Router = express.Router();
 
-// ✅ Add job to favorites
-router.post("/add", async (req: Request, res: Response) : Promise<void> => {
+router.post("/add", async (req: Request, res: Response, next: Function): Promise<void> => {
   const { userId, jobId, jobData } = req.body;
   const cacheKey = `favorites:${userId}`;
 
   try {
-    let favorites = await getCache(cacheKey);
-    if (!favorites) favorites = [];
+    let favorites: { jobId: unknown; [key: string]: unknown }[] = JSON.parse(await getCache(cacheKey) ?? '[]');
 
     favorites.push({ jobId, ...jobData });
 
-    await setCache(cacheKey, favorites, 604800); // Store for 1 week
+    await setCache(cacheKey, favorites, 7200);
 
-    res.json({ message: "Job added to favorites", favorites });
+    res.json({ message: "✅ Job added to favorites", favorites });
   } catch (error) {
-    console.error("❌ Error adding favorite:", error);
-    res.status(500).json({ error: "Failed to add favorite" });
+    next(error);
   }
 });
 
-// ✅ Get user favorites
-router.get("/:userId", async (req: Request, res: Response) : Promise<void> => {
+router.get("/:userId", async (req: Request, res: Response, next: Function): Promise<void> => {
   const { userId } = req.params;
   const cacheKey = `favorites:${userId}`;
 
   try {
-    const favorites = await getCache(cacheKey);
-    res.json(favorites || []);
+    const favorites: { jobId: unknown; [key: string]: unknown }[] = JSON.parse(await getCache(cacheKey) ?? '[]');
+    res.json(favorites);
   } catch (error) {
-    console.error("❌ Error fetching favorites:", error);
-    res.status(500).json({ error: "Failed to fetch favorites" });
+    next(error);
   }
 });
 
-// ✅ Remove job from favorites (Using `deleteCache`)
-router.delete("/:userId", async (req: Request, res: Response) : Promise<void> => {
+router.delete("/:userId", async (req: Request, res: Response, next: Function): Promise<void> => {
   const { userId } = req.params;
   const cacheKey = `favorites:${userId}`;
 
   try {
-    await deleteCache(cacheKey); // 🔥 Use deleteCache to remove all favorites for this user
-    res.json({ message: "All favorites removed for user", userId });
+    await deleteCache(cacheKey);
+    res.json({ message: "😭 All favorites removed for user", userId });
   } catch (error) {
-    console.error("❌ Error removing favorites:", error);
-    res.status(500).json({ error: "Failed to remove favorites" });
+    next(error);
   }
 });
 
-// ✅ Remove specific job from favorites
-router.delete("/:userId/:jobId", async (req: Request, res: Response) : Promise<void> => {
+router.delete("/:userId/:jobId", async (req: Request, res: Response, next: Function): Promise<void> => {
   const { userId, jobId } = req.params;
   const cacheKey = `favorites:${userId}`;
 
   try {
-    let favorites = await getCache(cacheKey);
-    if (!favorites) {
-        res.json({ message: "No favorites found" });
-        return;
+    let favorites: { jobId: unknown; [key: string]: unknown }[] = JSON.parse(await getCache(cacheKey) ?? '[]');
+    if (favorites.length === 0) {
+      res.json({ message: "🤔 No favorites found" });
+      return;
     }
 
-    // Remove specific job
-    favorites = favorites.filter((job: any) => job.jobId !== jobId);
+    favorites = favorites.filter((job: { jobId: unknown }) : boolean => job.jobId !== jobId);
 
-    // If no jobs left, delete the cache entirely
     if (favorites.length === 0) {
       await deleteCache(cacheKey);
     } else {
-      await setCache(cacheKey, favorites, 604800);
+      await setCache(cacheKey, favorites, 7200);
     }
 
-    res.json({ message: `Job ${jobId} removed from favorites`, favorites });
+    res.json({ message: `👋🏻 Job ${jobId} removed from favorites`, favorites });
   } catch (error) {
-    console.error("❌ Error removing favorite:", error);
-    res.status(500).json({ error: "Failed to remove favorite" });
+    next(error);
   }
+});
+
+router.use((err: Error, _req: Request, res: Response, _next: Function) => {
+  console.error("❌ Error:", err);
+  res.status(500).json({ error: "❌ Internal Server Error", err: err.message });
 });
 
 export default router;
