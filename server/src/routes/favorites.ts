@@ -14,7 +14,7 @@ router.post("/add", async (req: Request, res: Response, next: Function): Promise
 
     await setCache(cacheKey, favorites, 7200);
 
-    res.json({ message: "✅ Job added to favorites", favorites });
+    res.json({ message: "✅ JobModel added to favorites", favorites });
   } catch (error) {
     next(error);
   }

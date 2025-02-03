@@ -16,10 +16,13 @@ redisClient.on("end", () : void => console.warn("⚠️ Redis connection closed"
 redisClient.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
 
 
-export const setCache : (key : string, value : unknown, ttl?: number) => Promise<void> = async (key: string, value: unknown, ttl: number = 7200) : Promise<void> => {
+export const setCache : (key : string, value : unknown, ttl?: number) => Promise<void> = async (key: string, value: unknown, ttl: number = 3600) : Promise<void> => {
   try {
-    const serializedValue = JSON.stringify(value);
-    await redisClient.setex(key, ttl, serializedValue);
+    const data = {
+      timestamp: Date.now(),
+      value
+    };
+    await redisClient.setex(key, ttl, JSON.stringify(data));
     console.log(`✅ Cached: ${key} (TTL: ${ttl}s)`);
   } catch (error) {
     console.error("❌ Error setting cache:", error);
@@ -29,12 +32,16 @@ export const setCache : (key : string, value : unknown, ttl?: number) => Promise
 export const getCache : (key : string) => Promise<string | null> = async (key: string): Promise<string | null> => {
   try {
     const cachedData : string | null = await redisClient.get(key);
-    return cachedData ? JSON.parse(cachedData) : null;
+    if (!cachedData) return null;
+
+    const parsedData = JSON.parse(cachedData);
+    return parsedData.value;
   } catch (error) {
-    console.error("❌ Error getting cache:", error);
+    console.error("❌ Redis is down! Falling back to PostgreSQL.");
     return null;
   }
 };
+
 
 export const deleteCache : (key : string) => Promise<void> = async (key: string) : Promise<void> => {
   try {
