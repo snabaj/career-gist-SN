@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run client:build && npm run server",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
+    "start:full": "concurrently \"redis-server\" \"sleep 2 && npm run start:dev\"",
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
     "install": "if [ -d './server' ]; then cd server && npm i; cd ..; fi && cd client && npm i",

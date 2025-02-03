@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import logger from './middleware/logger.js';
 import errorHandler from './middleware/errorHandler.js';
 import routes from './routes/index.js';
-import jobRoutes from './routes/jobs.js';
+import jobRoutes from './routes/jobsRoutes.js';
 import gptAPIRouter from "./services/api/gptAPI.js";
 import favoriteRoutes from './routes/favorites.js';
 
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(logger);
 
 app.use(routes);
-
+app.use('/api/', routes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/gpt', gptAPIRouter);
 app.use('/api/favorites', favoriteRoutes);
