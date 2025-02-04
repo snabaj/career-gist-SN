@@ -10,6 +10,7 @@ import AppliedTo from './pages/AppliedTo.js';
 import SignUp from './pages/SignUp.js';
 import LogIn from './pages/LogIn.js';
 import Footer from './pages/Footer.js';
+import './index.css';
 
 // Get the root element
 const rootElement = document.getElementById('root');

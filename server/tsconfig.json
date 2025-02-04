@@ -2,11 +2,15 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
       /* Modules */
-      "rootDir": "src" /* Specify the root folder within your source files. */,
-  
-      /* Emit */
-      "outDir": "dist", /* Specify an output folder for all emitted files. */
-       "noEmitOnError": true, /* Disable emitting files if any type checking errors are reported. */
+      "rootDir": "src", /* Specify the root folder within your source files. */
+      "moduleResolution": "node", /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+      "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+      "outDir": "./dist", /* Redirect output structure to the directory. */
+      "baseUrl": "./", /* Specify the base directory to resolve non-relative module names. */
+      "paths": {
+        "*": ["node_modules/*", "src/types/*"]
+      },
+      "noEmitOnError": true, /* Disable emitting files if any type checking errors are reported. */
     },
     "include": ["src"],
     "typeRoots": ["./node_modules/@types", "./src/types"]
