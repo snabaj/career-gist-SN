@@ -5,7 +5,7 @@ interface TypingAnimationProps {
   typingSpeed: number;
 }
 
-const Headers: React.FC<TypingAnimationProps> = ({ text, typingSpeed }) => {
+const TypingAnimation: React.FC<TypingAnimationProps> = ({ text, typingSpeed }) => {
   const [displayedText, setDisplayedText] = useState<string>(''); // Explicitly setting the type for useState
 
   useEffect(() => {
@@ -24,5 +24,4 @@ const Headers: React.FC<TypingAnimationProps> = ({ text, typingSpeed }) => {
   return <span>{displayedText}</span>;
 };
 
-export default Headers;
-
+export default TypingAnimation;
