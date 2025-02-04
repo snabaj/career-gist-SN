@@ -3,13 +3,13 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Error from './pages/Error';
-import HomePage from './pages/HomePage';
-import SavedJobs from './pages/SavedJobs';
-import AppliedTo from './pages/AppliedTo';
-import SignUp from './pages/SignUp';
-import LogIn from './pages/LogIn';
-import Footer from './pages/Footer';
+import Error from './pages/Error.js';
+import HomePage from './pages/HomePage.js';
+import SavedJobs from './pages/SavedJobs.js';
+import AppliedTo from './pages/AppliedTo.js';
+import SignUp from './pages/SignUp.js';
+import LogIn from './pages/LogIn.js';
+import Footer from './pages/Footer.js';
 
 // Get the root element
 const rootElement = document.getElementById('root');
