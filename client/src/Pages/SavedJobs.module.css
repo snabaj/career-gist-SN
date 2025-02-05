@@ -1,0 +1,19 @@
+/* src/pages/SavedJobs.module.css */
+.container {
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    color: #333;
+}
+
+.jobsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.jobItem {
+    margin-bottom: 10px;
+    font-size: 18px;
+}

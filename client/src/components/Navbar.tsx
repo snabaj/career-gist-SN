@@ -1,35 +1,37 @@
 import { Link, useLocation } from 'react-router-dom';
 import '../index.css';
 
-function Navbar () {
+function Navbar() {
     const location = useLocation().pathname;
 
     return (
         <>
             <ul className="navbar navbar-tabs">
                 <li>
-                    <Link to="/HomePage" className={location === '/' ? 'active' : ''}>Home</Link>
+                    <Link to="/" className={location === '/' ? 'active' : ''}>Home</Link>
                 </li>
                 <li>
-                    <Link to="/SavedJobs" className={location === '/SavedJobs' ? 'active' : ''}>SavedJobs</Link>
+                    <Link to="/saved-jobs" className={location === '/saved-jobs' ? 'active' : ''}>Saved Jobs</Link>
                 </li>
                 <li>
-                    <Link to="/AppliedTo" className={location === '/AppliedTo' ? 'active' : ''}>AppliedTo</Link>
+                    <Link to="/applied-to" className={location === '/applied-to' ? 'active' : ''}>Applied To</Link>
                 </li>
                 <li>
-                    <Link to="/Privacy" className={location === '/Privacy Policy' ? 'active' : ''}>Privacy Policy</Link>
+                    <Link to="/privacy-policy" className={location === '/privacy-policy' ? 'active' : ''}>Privacy Policy</Link>
                 </li>
+                {/* Uncomment and correct other paths as necessary */}
                 {/* <li>
-                    <Link to="/Logout" className={location === '/Logout' ? 'active' : ''}>Logout</Link>
+                    <Link to="/logout" className={location === '/logout' ? 'active' : ''}>Logout</Link>
                 </li>
                 <li>
-                    <Link to="/Login" className={location === '/Login' ? 'active' : ''}>Login</Link>
+                    <Link to="/login" className={location === '/login' ? 'active' : ''}>Login</Link>
                 </li>
                 <li>
-                    <Link to="/Signup" className={location === '/Signup' ? 'active' : ''}>Signup</Link>
+                    <Link to="/signup" className={location === '/signup' ? 'active' : ''}>Signup</Link>
                 </li> */}
             </ul>
         </>
-    )
+    );
 }
+
 export default Navbar;
