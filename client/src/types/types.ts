@@ -1,4 +1,3 @@
-// src/types/types.ts
 export type Job = {
     id: string;
     type: string;

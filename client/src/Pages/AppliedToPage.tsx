@@ -1,4 +1,3 @@
-// AppliedToPage.tsx
 import React from 'react';
 import { useJobs } from '../contexts/JobsContext';
 import JobList from '../components/JobList';

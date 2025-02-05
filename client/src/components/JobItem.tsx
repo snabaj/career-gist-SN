@@ -1,4 +1,3 @@
-// JobItem.tsx
 import React from 'react';
 import { Job } from '../types/types'; // Ensure this path is correct
 import styles from './JobList.module.css';
