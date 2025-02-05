@@ -1,19 +1,21 @@
-// JobList.tsx
 import React from 'react';
-import JobItem from './JobItem';
-import { Job } from '../types/types'; // Ensure this path is correct
+import { Job } from '../types/types';
 
 interface Props {
   jobs: Job[];
-  listType: 'saved' | 'applied';
+  listType: 'saved' | 'applied' | 'searchResults'; // Add 'searchResults' as a valid type
 }
 
-const JobList: React.FC<Props> = ({ jobs, listType }) => (
+const JobList: React.FC<Props> = ({ jobs, listType }) => {
+  return (
     <ul>
-        {jobs.map(job => (
-            <JobItem key={job.id} {...job} listType={listType} />
-        ))}
+      {jobs.map(job => (
+        <li key={job.id}>
+          {job.title} at {job.company} - {job.location}
+        </li>
+      ))}
     </ul>
-);
+  );
+};
 
 export default JobList;
