@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import SearchForm from '../components/SearchForm';  // Ensure correct path
-import JobList from '../components/JobList';       // Ensure correct path
-import Spinner from '../components/Spinner';       // Ensure correct path
-import { Job } from '../types/types';              // Ensure correct path
+import SearchForm from '../components/SearchForm';
+import JobList from '../components/JobList';
+import Spinner from '../components/Spinner';
+import { Job } from '../types/types';
 import '../App.css';
 
 const HomePage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(0);  // Assuming API uses 0-based indexing for pages
+  const [page, setPage] = useState<number>(0);
   const [query, setQuery] = useState<string>('');
   const [location, setLocation] = useState<string>('');
+  const [searchHistory, setSearchHistory] = useState<string[]>([]);
+  const [showHistory, setShowHistory] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchJobs = async () => {
       setLoading(true);
       try {
-        // Update the API endpoint as necessary
         const response = await fetch(`https://example.com/api/jobs?page=${page}&query=${query}&location=${location}`);
         const data = await response.json();
-        setHasMore(data.hasMore);  // Assume API returns a hasMore flag
+        setHasMore(data.hasMore);
         setJobs(prevJobs => page === 0 ? data.jobs : [...prevJobs, ...data.jobs]);
       } catch (error) {
         console.error('Failed to load jobs:', error);
@@ -44,8 +45,16 @@ const HomePage: React.FC = () => {
   }, [loading, hasMore]);
 
   const handleSearch = () => {
-    setPage(0);  // Reset to the first page
-    // No need to call fetchJobs directly here since useEffect will react to changes in 'page', 'query', or 'location'
+    const newSearch = `${query.trim()} in ${location.trim()}`;
+    if (!searchHistory.includes(newSearch)) {
+      setSearchHistory(prevHistory => [...prevHistory, newSearch]);
+    }
+    setPage(0);
+    setShowHistory(false); // Hide search history when new search is initiated
+  };
+
+  const toggleSearchHistory = () => {
+    setShowHistory(!showHistory);
   };
 
   return (
@@ -60,6 +69,17 @@ const HomePage: React.FC = () => {
         onSearch={handleSearch}
         loading={loading}
       />
+      <button onClick={toggleSearchHistory}>Toggle Search History</button>
+      {showHistory && (
+        <div>
+          <h3>Search History</h3>
+          <ul>
+            {searchHistory.map((history, index) => (
+              <li key={index}>{history}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       {loading && <Spinner />}
       {jobs.length > 0 ? (
         <JobList jobs={jobs} listType="searchResults" />
