@@ -1,5 +1,5 @@
-import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../config/database.js";
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelize from '../config/connection.js';
 
 interface JobAttributes {
   id: number;
