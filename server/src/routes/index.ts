@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import jobsRoutes from './jobsRoutes.js';
 import favorites from "./favorites.js";
-import gptAPI from "../services/api/gptAPI.js";
+import gptAPI from "./api/gptRoutes.js";
 
 
 const router: Router = Router();
