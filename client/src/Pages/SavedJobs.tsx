@@ -1,34 +1,21 @@
-// src/pages/SavedJobs.tsx
-import React, { useState, useEffect } from 'react';
-import styles from './SavedJobs.module.css'; // Ensure you have this CSS module created
-
-
-type Job = {
-    id: string;
-    title: string;
-    company: string;
-    location: string;
-};
+import React from 'react';
+import { useJobs } from '../contexts/JobsContext';
+import styles from './SavedJobs.module.css';
 
 const SavedJobs: React.FC = () => {
-    const [savedJobs, setSavedJobs] = useState<Job[]>([]);
-
-    // Load saved jobs from local storage on component mount
-    useEffect(() => {
-        const jobs = localStorage.getItem('savedJobs');
-        if (jobs) {
-            setSavedJobs(JSON.parse(jobs));
-        }
-    }, []);
+    const { jobs, applyToJob } = useJobs();
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Saved Jobs</h1>
-            {savedJobs.length > 0 ? (
+            <h1>Saved Jobs</h1>
+            {jobs.length > 0 ? (
                 <ul className={styles.jobsList}>
-                    {savedJobs.map(job => (
-                        <li className={styles.jobItem} key={job.id}>
+                    {jobs.map(job => (
+                        <li key={job.id} className={styles.jobItem}>
                             {job.title} at {job.company} - {job.location}
+                            <button onClick={() => applyToJob(job.id, new Date().toISOString())}>
+                                Apply
+                            </button>
                         </li>
                     ))}
                 </ul>
