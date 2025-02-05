@@ -1,4 +1,5 @@
-import sequelize from "../config/database";
+import sequelize from '../config/connection.js';
+import {User} from "./userModel";
 
 const testConnection = async ()  => {
   try {
@@ -13,4 +14,4 @@ testConnection()
   .then(() => console.log("✅ PostgreSQL connection tested."))
   .catch(console.error);
 
-export default { sequelize };
+export default { sequelize, User };
