@@ -1,60 +1,52 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { Job } from '../types/types';
+// JobsContext.tsx
+import React, { createContext, useContext, useState, useEffect, PropsWithChildren } from 'react';
+import { Job } from '../types/types';  // Adjust the path as necessary
 
-interface JobsContextType {
+type JobsContextType = {
     jobs: Job[];
     loading: boolean;
     error: string | null;
     saveJob: (job: Job) => void;
-    applyToJob: (jobId: string, appliedDate: string) => void;
-}
+    applyToJob: (jobId: string, date: string) => void;
+    removeJob: (jobId: string) => void;
+    updateJobStatus: (jobId: string, status: string) => void;
+};
 
 const JobsContext = createContext<JobsContextType | undefined>(undefined);
 
-export const JobsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const JobsProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     const [jobs, setJobs] = useState<Job[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchJobs = async () => {
-        try {
-            // Simulate an API call
-            const response = await fetch('/api/jobs');
-            const data = await response.json();
-            setJobs(data);
-            setError(null); // Clear previous errors on successful load
-        } catch (err) {
-            setError('Failed to load jobs');
-        }
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        fetchJobs(); // Call this function to load jobs on component mount
-    }, []);
-
     const saveJob = (job: Job) => {
-        // Implement the logic to save a job
         setJobs(prevJobs => [...prevJobs, job]);
     };
 
-    const applyToJob = (jobId: string, appliedDate: string) => {
-        // Implement the logic to apply to a job
+    const applyToJob = (jobId: string, date: string) => {
         setJobs(prevJobs =>
-            prevJobs.map(job =>
-                job.id === jobId ? { ...job, appliedDate } : job
-            )
+            prevJobs.map(job => job.id === jobId ? { ...job, appliedDate: date } : job)
+        );
+    };
+
+    const removeJob = (jobId: string) => {
+        setJobs(prevJobs => prevJobs.filter(job => job.id !== jobId));
+    };
+
+    const updateJobStatus = (jobId: string, status: string) => {
+        setJobs(prevJobs =>
+            prevJobs.map(job => job.id === jobId ? {...job, status: status} : job)
         );
     };
 
     return (
-        <JobsContext.Provider value={{ jobs, loading, error, saveJob, applyToJob }}>
+        <JobsContext.Provider value={{ jobs, loading, error, saveJob, applyToJob, removeJob, updateJobStatus }}>
             {children}
         </JobsContext.Provider>
     );
 };
 
-export const useJobs = (): JobsContextType => {
+export const useJobs = () => {
     const context = useContext(JobsContext);
     if (!context) {
         throw new Error('useJobs must be used within a JobsProvider');

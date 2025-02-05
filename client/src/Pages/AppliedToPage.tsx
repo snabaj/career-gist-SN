@@ -1,24 +1,14 @@
+// AppliedToPage.tsx
 import React from 'react';
 import { useJobs } from '../contexts/JobsContext';
 import JobList from '../components/JobList';
-import Spinner from '../components/Spinner'; // Make sure this is properly imported
+import Spinner from '../components/Spinner';
 
 const AppliedToPage: React.FC = () => {
-    const { jobs, loading, error } = useJobs();
+    const { jobs, loading, error, removeJob, updateJobStatus } = useJobs();
 
-    if (loading) {
-        return <Spinner />;
-    }
-
-    if (error) {
-        return (
-            <div>
-                <h1>Applied To Jobs</h1>
-                <div>Failed to load jobs. Please try again later or contact support.</div>
-                {/* Optionally, suggest reloading or checking network if the error might be temporary or network-related */}
-            </div>
-        );
-    }
+    if (loading) return <Spinner />;
+    if (error) return <div>Error loading jobs: {error}</div>;
 
     const appliedJobs = jobs.filter(job => job.appliedDate);
 
@@ -26,12 +16,15 @@ const AppliedToPage: React.FC = () => {
         <div>
             <h1>Applied To Jobs</h1>
             {appliedJobs.length > 0 ? (
-                <JobList jobs={appliedJobs} listType="applied" />
+                <JobList
+                    jobs={appliedJobs}
+                    onSave={() => {}}
+                    onShare={() => {}}
+                    onRemove={removeJob}
+                    onUpdateStatus={updateJobStatus}
+                />
             ) : (
-                <div>
-                    <p>You have not applied to any jobs yet.</p>
-                    <a href="/jobs">Browse available jobs</a>  // Encourage user action if they haven't applied yet
-                </div>
+                <p>You have not applied to any jobs yet.</p>
             )}
         </div>
     );
