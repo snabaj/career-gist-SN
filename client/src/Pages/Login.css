@@ -30,6 +30,7 @@
   justify-content: center;
   font-size: 2.5rem;
   font: 400 2.5rem 'Open Sans', sans-serif;
+  border-radius: 50px;
 }
 
 .login-input {
