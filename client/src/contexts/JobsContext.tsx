@@ -6,17 +6,17 @@ interface JobsContextType {
     loading: boolean;
     error: string | null;
     fetchJobs: () => Promise<void>;
-    saveJob: (job: Job) => Promise<void>;
-    applyToJob: (jobId: string, appliedDate: string) => Promise<void>;
-    removeJob: (jobId: string) => Promise<void>;
-    updateJobStatus: (jobId: string, status: string) => Promise<void>;
+    saveJob: (job: Job) => void;
+    applyToJob: (jobId: string, appliedDate: string) => void;
+    removeJob: (jobId: string) => void;
+    updateJobStatus: (jobId: string, status: string) => void; // Add updateJobStatus to the interface
 }
 
 const JobsContext = createContext<JobsContextType | undefined>(undefined);
 
 export const JobsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [jobs, setJobs] = useState<Job[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     const fetchJobs = async () => {
@@ -36,64 +36,28 @@ export const JobsProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         fetchJobs();
     }, []);
 
-    const saveJob = async (job: Job) => {
-        setLoading(true);
-        try {
-            // Simulate API call to save job
-            setJobs(prevJobs => [...prevJobs, job]);
-            setError(null);
-        } catch (err) {
-            setError('Failed to save job');
-        } finally {
-            setLoading(false);
-        }
+    const saveJob = (job: Job) => {
+        setJobs(prevJobs => [...prevJobs, job]);
     };
 
-    const applyToJob = async (jobId: string, appliedDate: string) => {
-        setLoading(true);
-        try {
-            // Simulate API call to apply to job
-            setJobs(prevJobs =>
-                prevJobs.map(job =>
-                    job.id === jobId ? { ...job, appliedDate } : job
-                )
-            );
-            setError(null);
-        } catch (err) {
-            setError('Failed to apply to job');
-        } finally {
-            setLoading(false);
-        }
+    const applyToJob = (jobId: string, appliedDate: string) => {
+        setJobs(prevJobs =>
+            prevJobs.map(job =>
+                job.id === jobId ? { ...job, appliedDate } : job
+            )
+        );
     };
 
-    const removeJob = async (jobId: string) => {
-        setLoading(true);
-        try {
-            // Simulate API call to remove job
-            setJobs(prevJobs => prevJobs.filter(job => job.id !== jobId));
-            setError(null);
-        } catch (err) {
-            setError('Failed to remove job');
-        } finally {
-            setLoading(false);
-        }
+    const removeJob = (jobId: string) => {
+        setJobs(prevJobs => prevJobs.filter(job => job.id !== jobId));
     };
 
-    const updateJobStatus = async (jobId: string, status: string) => {
-        setLoading(true);
-        try {
-            // Simulate API call to update job status
-            setJobs(prevJobs =>
-                prevJobs.map(job =>
-                    job.id === jobId ? { ...job, status } : job
-                )
-            );
-            setError(null);
-        } catch (err) {
-            setError('Failed to update job status');
-        } finally {
-            setLoading(false);
-        }
+    const updateJobStatus = (jobId: string, status: string) => {
+        setJobs(prevJobs =>
+            prevJobs.map(job =>
+                job.id === jobId ? { ...job, status } : job
+            )
+        );
     };
 
     return (
