@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';  // Adjust path as necessary
 import JobList from '../components/JobList';  // Adjust path as necessary
-import Spinner from '../components/Spinner';  // Adjust path as necessary
+import Spinner from '../components/Spinner';  // Ensure Spinner is imported
 import { Job } from '../types/types';  // Adjust path as necessary
 import '../App.css';  // Ensure CSS is correctly linked
 
@@ -48,28 +48,6 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore]);
 
-  const handleSaveJob = (job: Job) => {
-    console.log('Saving job:', job);
-    // Implement actual save functionality here
-  };
-
-  const handleShareJob = (job: Job) => {
-    const mailtoLink = `mailto:?subject=Check out this job: ${job.title}&body=Check out this job at ${job.company} on ${job.url}`;
-    window.open(mailtoLink, '_blank');
-  };
-
-  const handleRemoveJob = (jobId: string) => {
-    console.log('Removing job with ID:', jobId);
-    setJobs(currentJobs => currentJobs.filter(job => job.id !== jobId));
-  };
-
-  const handleUpdateJobStatus = (jobId: string, newStatus: string) => {
-    console.log('Updating job status for ID:', jobId, 'to', newStatus);
-    setJobs(currentJobs =>
-      currentJobs.map(job => job.id === jobId ? { ...job, status: newStatus } : job)
-    );
-  };
-
   const handleSearch = () => {
     const newSearch = `${query.trim()} in ${location.trim()}`;
     if (!searchHistory.includes(newSearch)) {
@@ -111,10 +89,10 @@ const HomePage: React.FC = () => {
       {jobs.length > 0 ? (
         <JobList
           jobs={jobs}
-          onSave={handleSaveJob}
-          onShare={handleShareJob}
-          onRemove={handleRemoveJob}
-          onUpdateStatus={handleUpdateJobStatus}
+          onSave={() => {}}
+          onShare={() => {}}
+          onRemove={() => {}}
+          onUpdateStatus={() => {}}
         />
       ) : (
         !loading && <p>No results found.</p>
