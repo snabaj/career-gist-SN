@@ -34,3 +34,15 @@
         background: radial-gradient(circle, rgba(240,238,227,1) 63%, rgba(173,180,182,1) 100%);
         color: #616161;
     }
+
+    @media (max-width: 768px) {
+        .homepage-h1 {
+            font-size: 3rem;
+        }
+        .homepage-h2 {
+            font-size: 2rem;
+        }
+        .searchform-button {
+            padding: 8px 8px;
+        }
+    }

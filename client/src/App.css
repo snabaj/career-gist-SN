@@ -114,3 +114,9 @@ ul {
     padding: 1rem;
     align-items: center;
   }
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+    }
+  }
