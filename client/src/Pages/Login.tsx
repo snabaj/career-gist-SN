@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 interface LoginProps {
   setIsLoggedIn: (status: boolean) => void; // Prop to update the login state
@@ -40,22 +41,29 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <div>
+    <>
+    <h2 className="login-h2">Welcome Back!</h2>
+    <h3 className="login-h3">Found a job you love? Login to your account now.</h3>
+    <div className="login-form">
       <input
+        className="login-input"
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Username"
       />
       <input
+        className="login-input"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
-      <button onClick={handleLogin}>Login</button>
+      <br />
+      <button className="Login-button" onClick={handleLogin}>Login</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
+    </>
   );
 };
 
