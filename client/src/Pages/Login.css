@@ -47,7 +47,8 @@
   margin-bottom: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  background-color: #007bff;
+  background: rgb(240,238,227);
+  background: radial-gradient(circle, rgba(240,238,227,1) 63%, rgba(173,180,182,1) 100%);
   color: #fff;
 }
 

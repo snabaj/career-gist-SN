@@ -1,0 +1,36 @@
+.homepage-h1 {
+    margin-bottom: 10px;
+    color: #616161;
+    padding: 10px;
+    box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.1);
+    background: rgb(195,191,204);
+    background: linear-gradient(209deg, rgba(195,191,204,1) 68%, rgba(161,164,227,1) 100%);
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+    font: 400 4rem 'Open Sans', sans-serif;
+    border-radius: 50px;
+  }
+
+  .homepage-h2 {  
+    margin-bottom: 10px;
+    color: #616161;
+    padding: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    background: rgb(195,191,204);
+    background: linear-gradient(135deg, rgba(195,191,204,1) 68%, rgba(161,164,227,1) 100%);
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    font: 400 2.5rem 'Open Sans', sans-serif;
+    border-radius: 50px;}
+
+    .searchform-button {
+        padding: 10px 10 px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background: rgb(240,238,227);
+        background: radial-gradient(circle, rgba(240,238,227,1) 63%, rgba(173,180,182,1) 100%);
+        color: #616161;
+    }

@@ -5,6 +5,7 @@ import JobList from '../components/JobList';  // Adjust path as necessary
 import Spinner from '../components/Spinner';  // Ensure Spinner is imported
 import { Job } from '../types/types';  // Adjust path as necessary
 import '../App.css';  // Ensure CSS is correctly linked
+import './HomePage.css';  // Ensure CSS is correctly linked
 
 const HomePage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -63,8 +64,8 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <h1>Welcome to Career Gist</h1>
-      <h2>Because Searching for Jobs Should be Easy</h2>
+      <h1 className="homepage-h1">Welcome to Career Gist</h1>
+      <h2 className="homepage-h2">Because Searching for Jobs Should be Easy</h2>
       <SearchForm
         query={query}
         location={location}
@@ -73,7 +74,7 @@ const HomePage: React.FC = () => {
         onSearch={handleSearch}
         loading={loading}
       />
-      <button onClick={toggleSearchHistory}>Toggle Search History</button>
+      <button className="searchform-button" onClick={toggleSearchHistory}>Toggle Search History</button>
       {showHistory && (
         <div>
           <h3>Search History</h3>
