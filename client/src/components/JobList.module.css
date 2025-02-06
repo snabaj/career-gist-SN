@@ -1,0 +1,16 @@
+.listItem {
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    color: #333;
+  }
+  
+  .location {
+    font-style: sans-serif;
+  }
+  
+  .link {
+    color: #0066cc;
+    text-decoration: none;
+  }

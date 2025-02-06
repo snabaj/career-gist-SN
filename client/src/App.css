@@ -1,42 +1,115 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  background: rgb(165,170,175);
+  background: radial-gradient(circle, rgba(165,170,175,1) 34%, rgba(68,82,99,1) 100%);
+}
+
+
+ul.nav.nav-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 1rem;
+  }
+/* Additional styling within src/index.css */
+.navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;  /* Aligns items in a row */
+  align-items: center;  /* Aligns items vertically */
+  justify-content: center;  /* Aligns items horizontally */
+}
+
+.navbar li {
+  margin-right: 20px;  /* Adjust spacing between links */
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;  /* Set default link color */
+}
+
+.navbar a.active {
+  font-weight: bold;
+  color: #007BFF;  /* Highlight color for active link */
+}
+
+ul {
+  background: rgb(240,238,227);
+  background: radial-gradient(circle, rgba(240,238,227,1) 63%, rgba(173,180,182,1) 100%);
+  list-style-type: none;
   text-align: center;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 8px 8x 8px #3F403E;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0;
+  gap: 50px;
+  color: white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar-tabs li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .Career {
+    color: white;
+    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px #3F403E;
+    justify-content: center;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  h1 {
+    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin: 50px 50px 50px 50px;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  h2 {
+    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
 
-.read-the-docs {
-  color: #888;
-}
+  .search {
+    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
+    font-size: 2.25rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .location {
+    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
+    font-size: 2.25rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .HomePage {
+    display: flex;
+    justify-content: center;
+    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    align-items: center;
+  }
