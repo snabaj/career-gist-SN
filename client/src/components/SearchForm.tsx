@@ -1,32 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface Props {
-  query: string;
-  location: string;
-  onQueryChange: (query: string) => void;
-  onLocationChange: (location: string) => void;
-  onSearch: () => void;
+  onSearch: (query: string) => void;
   loading: boolean;
 }
 
-const SearchForm: React.FC<Props> = ({ query, location, onQueryChange, onLocationChange, onSearch, loading }) => (
-  <div>
-    <input
-      type="text"
-      value={query}
-      onChange={e => onQueryChange(e.target.value)}
-      placeholder="Job Description"
-    />
-    <input
-      type="text"
-      value={location}
-      onChange={e => onLocationChange(e.target.value)}
-      placeholder="Location"
-    />
-    <button onClick={onSearch} disabled={loading}>
-      {loading ? 'Loading...' : 'Search'}
-    </button>
-  </div>
-);
+const SearchForm: React.FC<Props> = ({ onSearch, loading }) => {
+  const [query, setQuery] = useState<string>('');
+
+  const handleSearchClick = () => {
+    if (query.trim() !== '') {
+      onSearch(query); // Call search only when the button is clicked
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Job Description"
+      />
+      <button onClick={handleSearchClick} disabled={loading}>
+        {loading ? 'Loading...' : 'Search'}
+      </button>
+    </div>
+  );
+};
 
 export default SearchForm;
