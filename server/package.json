@@ -29,6 +29,7 @@
     "express": "^4.21.2",
     "ioredis": "^5.4.2",
     "jsonwebtoken": "^9.0.2",
+    "openai": "^4.83.0",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
     "redis": "^4.7.0",
