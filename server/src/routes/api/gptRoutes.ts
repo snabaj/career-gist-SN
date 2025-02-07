@@ -1,15 +1,16 @@
 import express, {Router, Request, Response, NextFunction} from 'express';
 import { getCache, setCache } from '../../cache/redisCacheService.js';
+import OpenAI from "openai";
+
 
 const router: Router = express.Router();
 const CAREER_GIST_API: string = process.env.CAREER_GIST_API ?? '';
-const CAREER_GIST_URL: string = process.env.CAREER_GIST_URL ?? '';
 
 // POST /generate - Get a GPT-4o response
 router.post('/generate', (req: Request, res: Response, next: NextFunction) => {
   (async function () {
     const { jobTitle, description } = req.body;
-    const cacheKey = `gpt:${jobTitle}`;
+    const cacheKey = `gpt:${jobTitle}, ${description}`;
 
     try {
       const cachedData: string | null = await getCache(cacheKey);
@@ -17,33 +18,25 @@ router.post('/generate', (req: Request, res: Response, next: NextFunction) => {
         console.log(`⚡️ Serving GPT-4o response from cache...`);
         return res.json({ success: true, result: cachedData });
       }
-
-      const response = await fetch(CAREER_GIST_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${CAREER_GIST_API}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-4o",
-          prompt: `Summarize the job: ${jobTitle}\nDescription: ${description}`,
-          max_tokens: 250,
-        }),
+      const openai = new OpenAI({
+        apiKey: CAREER_GIST_API
       });
 
-      if (!response.ok) {
-        console.warn(`⚠️ GPT API request failed: ${response.status} - ${response.statusText}`);
-        return res.status(response.status).json({
-          success: false,
-          message: "GPT API request failed. Please try again later.",
-          statusCode: response.status
-        });
-      }
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          { role: "developer", content: "You are a person searching for a job." },
+          {
+            role: "user",
+            content: `Summarize the job: ${jobTitle}\nDescription: ${description}`,
+          },
+        ],
+        store: true,
+      });
 
-      const data = await response.json();
-      const generatedText = data?.choices?.[0]?.text ?? "No meaningful response received.";
+      const generatedText = completion.choices[0].message.content;
 
-      await setCache(cacheKey, generatedText, 3600);
+      await setCache(cacheKey, generatedText, 3600); // Cache for 1 hour
 
       console.log("🌍 GPT response fetched from API");
       return res.json({ success: true, result: generatedText });

@@ -8,15 +8,16 @@ const RAPIDAPI_KEY = "4c1c0eb8d1mshf21fead71f6126bp1c4d51jsn398f10a07a9e"; // Mo
 export const fetchJobs = async (query: string): Promise<any> => {
   const cacheKey = `job-search:${query}`;
 
-  // Check Redis Cache First
-  const cachedJobs: string | null = await getCache(cacheKey);
-  if (cachedJobs) {
-    console.log("📌 Serving jobs from cache...");
-    return JSON.parse(cachedJobs); // Ensure JSON format
-  }
-
   try {
-    const response = await fetch(`${JSEARCH_API_URL}?query=${query}&num_pages=1`, {
+    // Check Redis Cache First
+    const cachedJobs: string | null = await getCache(cacheKey);
+    if (cachedJobs) {
+      console.log("📌 Serving jobs from cache...");
+      return JSON.parse(cachedJobs);
+    }
+
+    console.log("🔍 Fetching jobs from JSearch API...");
+    const response = await fetch(`${JSEARCH_API_URL}?query=${query}&num_pages=2`, {
       method: "GET",
       headers: {
         "X-RapidAPI-Host": RAPIDAPI_HOST,
@@ -27,27 +28,27 @@ export const fetchJobs = async (query: string): Promise<any> => {
     if (!response.ok) {
       console.warn("⚠️ JSearch API returned an error:", response.status);
       return {
-        message: "JSearch API is currently unavailable. Serving cached data if available.",
+        message: "JSearch API is currently unavailable. Please try again later.",
         fallback: true,
       };
     }
 
     const data = await response.json();
-    await setCache(cacheKey, JSON.stringify(data), 1800); // Store as string
+    console.log("✅ Fetched jobs successfully. Caching results...");
+    await setCache(cacheKey, JSON.stringify(data), 3600); // Cache for 1 hour
 
+    // Store in PostgreSQL
     let existingJob = await JobModel.findOne({ where: { query } });
 
-    if (existingJob instanceof JobModel) {
+    if (existingJob) {
       await existingJob.update({ results: JSON.stringify(data) });
     } else {
-      await JobModel.create({query, results: JSON.stringify(data)});
+      await JobModel.create({ query, results: JSON.stringify(data) });
     }
-
+  // Return cached data
     return data;
   } catch (error) {
     console.error("❌ JSearch API failed:", error instanceof Error ? error.message : error);
     return { message: "Error fetching jobs. Please try again later." };
   }
 };
-
-export default fetchJobs;
