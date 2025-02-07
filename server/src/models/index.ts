@@ -1,16 +1,17 @@
-import sequelize from "../config/database";
+import sequelize from '../config/connection.js';
+import {User} from "./userModel";
 
-const testConnection = async ()  => {
-  try {
-    await sequelize.authenticate();
-    console.log("✅ PostgreSQL connected successfully.");
-  } catch (error) {
-    console.error("❌ Unable to connect to PostgreSQL:", error);
-  }
-};
 
-testConnection()
-  .then(() => console.log("✅ PostgreSQL connection tested."))
-  .catch(console.error);
 
-export default { sequelize };
+
+// User.hasMany(Ticket, { foreignKey: 'assignedUserId' }); !EXAMPLE - not real code!
+// Setup associations
+
+// export User work and applications
+
+
+
+
+
+
+export default { sequelize, User };
