@@ -6,23 +6,17 @@ interface Props {
 }
 
 const SearchForm: React.FC<Props> = ({ onSearch, loading }) => {
-  const [query, setQuery] = useState<string>('');
-
-  const handleSearchClick = () => {
-    if (query.trim() !== '') {
-      onSearch(query); // Call search only when the button is clicked
-    }
-  };
+  const [query, setQuery] = useState('');
 
   return (
     <div>
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Job Description"
+        onChange={e => setQuery(e.target.value)}
+        placeholder="Job Title"
       />
-      <button onClick={handleSearchClick} disabled={loading}>
+      <button onClick={() => onSearch(query)} disabled={loading}>
         {loading ? 'Loading...' : 'Search'}
       </button>
     </div>

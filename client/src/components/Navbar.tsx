@@ -32,14 +32,8 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
           <li>
             <Link to="/login" className={location === '/login' ? 'active' : ''}>Login</Link>
           </li>
-          <li>
-            <Link to="/signup" className={location === '/signup' ? 'active' : ''}>Sign Up</Link>
-          </li>
         </>
       )}
-      <li>
-        <Link to="/privacy-policy" className={location === '/privacy-policy' ? 'active' : ''}>Privacy Policy</Link>
-      </li>
     </ul>
   );
 };
