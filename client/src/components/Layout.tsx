@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Navbar from './Navbar'; // Import Navbar component
+import Navbar from './Navbar';
 import '../index.css';
 
 interface LayoutProps {
@@ -14,9 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ isLoggedIn, onLogout, children }) => {
       <header>
         <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       </header>
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </div>
   );
 };
