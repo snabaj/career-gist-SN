@@ -35,7 +35,7 @@ export const fetchJobs = async (query: string): Promise<any> => {
 
     const data = await response.json();
     console.log("✅ Fetched jobs successfully. Caching results...");
-    await setCache(cacheKey, JSON.stringify(data), 1800); // Cache for 30 minutes
+    await setCache(cacheKey, JSON.stringify(data), 900); // Cache for 30 minutes
 
     // Store in PostgreSQL
     let existingJob = await JobModel.findOne({ where: { query } });
