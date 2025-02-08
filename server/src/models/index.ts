@@ -5,7 +5,7 @@ import { Sequelize } from 'sequelize';
 import { CompanyFactory } from './companyModel.js';
 import { JobContactInfoFactory } from './jobContactInfoModel.js';
 import { SkillFactory } from './skillsModel.js';
-import { JobFactory } from './JobModel.js';
+import { JobFactory } from './jobsModel.js';
 import { ApplicationFactory } from './applicationsModel.js';
 import { UserFactory } from './userModel.js';
 
