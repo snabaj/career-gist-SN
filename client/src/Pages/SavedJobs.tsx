@@ -3,15 +3,30 @@ import Spinner from '../components/Spinner';
 import { Job } from '../types/types';
 import styles from './SavedJobs.module.css';
 
+//State initialization
+    // jobs → Stores the list of saved jobs.
+    // loading → true by default; once jobs are fetched, it becomes false.
+    // error → Stores an error message if fetching jobs fails.
 const SavedJobs: React.FC = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
+    //Fetching Saved Jobs
+        // useEffect() runs once when the component mounts (because of [] dependency array).
+        // Inside fetchSavedJobs() function:
+        // A test userId (1) is used (you’ll replace this with dynamic user authentication later).
+        // Calls API endpoint /api/favourites/${userId} to fetch saved jobs.
+        // Parses JSON response and stores it in setJobs().
+        // If an error occurs, logs it to console and sets setError().
+        // After API call, setLoading(false) stops the loading animation.
     useEffect(() => {
         const fetchSavedJobs = async () => {
             try {
-                const response = await fetch('/api/saved-jobs');
+                //we need to know the user ID to fetch saved jobs
+                const userId = 1; //tester userId
+                //note that the apis here are placeholders and need to be replaced with the actual API endpoints
+                const response = await fetch(`/api/favourites/${userId}`); // `/api/favourites/1/${userId}` tester endpoint
                 const data = await response.json();
                 setJobs(data);
             } catch (error) {
@@ -22,6 +37,18 @@ const SavedJobs: React.FC = () => {
         };
         fetchSavedJobs();
     }, []);
+
+    //Rendering Saved Jobs
+        // <h1>Saved Jobs</h1> → Displays the page title.
+        // Show Spinner if loading is true → {loading && <Spinner />}
+        // Show error message if error exists → {error && <p className="error">{error}</p>}
+        // Display jobs if available → jobs.length > 0
+        // Loops through the jobs array using .map(), displaying:
+        // Job title
+        // Company name
+        // Clickable link to job posting
+        // If no jobs found, it shows "No jobs saved yet."
+
 
     return (
         <div className={styles.container}>

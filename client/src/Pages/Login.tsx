@@ -48,6 +48,8 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
     // (1) set Error(null) clears any previous error messages
     // (2) alert('Login successful!') displays a success message
     // (3) console.log(data) helps us debug the response
+
+  //note that the apis here are placeholders and need to be replaced with the actual API endpoints
     try {
       const response = await fetch('/api/login', {
         method: 'POST',
@@ -69,8 +71,10 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
       //call setIsLoggedIn to update the login status (provided by a parent component)
       //This updates the global state so that the other components know the user is logged in
         //redirects the user to the homepage (/) using navigate ('/)
+
       setIsLoggedIn(true);
       navigate('/');
+
       //Handling Errors
         //Catches any errors (like network issues or wrong credentials)
         //Logs the error to the console (console.error ())

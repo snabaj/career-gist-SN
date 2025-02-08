@@ -41,6 +41,7 @@ const HomePage: React.FC = () => {
     setLoading(true);
     setError(null);
 
+    //This API is the tru API endpoint
     try {
       const response = await fetch(`/api/jsearch/query?query=${query}`);
       const data = await response.json();
@@ -62,6 +63,7 @@ const HomePage: React.FC = () => {
     //Key optimization:
       //no state changes needed (Backend handles job saving)
       //no unnecessary re-renders (Frontend does not track the saved jobs)
+      //note that the apis here are placeholders and need to be replaced with the actual API endpoints
   const handleSaveJob = async (job: Job) => {
     try {
       const response = await fetch('/api/save-job', {
@@ -102,33 +104,34 @@ export default HomePage;
 
 
 //UI Breakdown
+
 // Header Titles
+  // "Welcome to Career Gist"
+  // "Because Searching for Jobs Should be Easy"
 
-// "Welcome to Career Gist"
-// "Because Searching for Jobs Should be Easy"
-// Search Form (SearchForm)
 
-// Calls handleSearch when the user clicks search
-// Disables the button when loading is true
-// Loading Spinner (Spinner)
+  // Search Form (SearchForm)
+    // Calls handleSearch when the user clicks search
+    // Disables the button when loading is true
+    // Loading Spinner (Spinner)
 
 // Only visible when loading === true
-// Error Message
+  // Error Message
 
 // Displays when error is not null
-// Job List (JobList)
+  // Job List (JobList)
 
 // If jobs exist, it renders the job list
-// If no jobs exist, it displays "No results found."
+  // If no jobs exist, it displays "No results found."
 
 
 //How Everything Should Tie Together:
-// 1️⃣ User enters a job title in SearchForm and clicks search
-// 2️⃣ handleSearch() is triggered, sending an API request
-// 3️⃣ The API returns job listings, and jobs state updates
-// 4️⃣ Job listings are displayed inside JobList
-// 5️⃣ User can click "Save Job", triggering handleSaveJob()
-// 6️⃣ Job gets saved to the backend
+  // 1️⃣ User enters a job title in SearchForm and clicks search
+  // 2️⃣ handleSearch() is triggered, sending an API request
+  // 3️⃣ The API returns job listings, and jobs state updates
+  // 4️⃣ Job listings are displayed inside JobList
+  // 5️⃣ User can click "Save Job", triggering handleSaveJob()
+  // 6️⃣ Job gets saved to the backend
 
 //Key Optimization and Features:
 // ✅ Minimal re-renders (Only updates when searching)

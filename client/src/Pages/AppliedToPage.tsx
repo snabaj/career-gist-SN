@@ -3,6 +3,11 @@ import Spinner from '../components/Spinner';
 import { Job } from '../types/types';
 
 const AppliedToPage: React.FC = () => {
+    //Setting p Component State
+        // jobs (Job[]): Stores the list of applied jobs.
+        // loading (boolean): Keeps track of the fetch operation status (true = data is loading).
+        // error (string | null): Holds an error message if something goes wrong.
+
     const [jobs, setJobs] = useState<Job[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -10,7 +15,7 @@ const AppliedToPage: React.FC = () => {
     useEffect(() => {
         const fetchAppliedJobs = async () => {
             try {
-                const response = await fetch('/api/applied-jobs');
+                const response = await fetch('/api/applied-jobs'); //api is a placeholder for the actual API endpoint
                 const data = await response.json();
                 setJobs(data);
             } catch (error) {
@@ -44,3 +49,10 @@ const AppliedToPage: React.FC = () => {
 };
 
 export default AppliedToPage;
+
+
+//Key Points:
+    // This page does not rerender unnecessarily because:
+        // The effect runs only once ([] dependency array)
+        // State updates only when API returns new data
+
