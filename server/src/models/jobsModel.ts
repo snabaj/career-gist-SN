@@ -8,6 +8,7 @@ interface JobAttributes {
   salary: string;
   date_published: Date;
   experience_level: string;
+  company_id: number;
 }
 
 interface JobCreationAttributes extends Optional<JobAttributes, "id"> {}
@@ -20,6 +21,7 @@ export class Job extends Model<JobAttributes, JobCreationAttributes> implements 
   public salary!: string;
   public date_published!: Date;
   public experience_level!: string;
+  public company_id!: number;
 }
 export function JobFactory(sequelize: Sequelize): typeof Job {
   Job.init(
@@ -49,6 +51,10 @@ export function JobFactory(sequelize: Sequelize): typeof Job {
     },
     experience_level: {
       type: DataTypes.STRING,
+    },
+    company_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
