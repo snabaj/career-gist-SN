@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response, Router } from "express";
 import { getCache, setCache, deleteCache, clearCache } from "../cache/redisCacheService.js";
 
 const router: Router = express.Router();
-const API_URL = "https://jobs.github.com/positions.json"; // Example GitHub jobs API
+const JSEARCH_API_URL = process.env.JSEARCH_API_URL;
 
 router.get("/search", (req: Request, res: Response, next: NextFunction) => {
   (async function () {
@@ -17,7 +17,7 @@ router.get("/search", (req: Request, res: Response, next: NextFunction) => {
         return res.json(cachedData);
       }
 
-      const response = await fetch(`${API_URL}?description=${query}&location=${location}`);
+      const response = await fetch(`${JSEARCH_API_URL}?description=${query}&location=${location}`);
 
       if (!response.ok) {
         console.warn("⚠️ GitHub Jobs API returned an error:", response.status);
