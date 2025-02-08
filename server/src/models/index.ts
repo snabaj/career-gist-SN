@@ -26,14 +26,21 @@ const Job = JobFactory(sequelize);
 const Application = ApplicationFactory(sequelize);
 const User = UserFactory(sequelize);
 
-Company.hasMany(JobContactInfo, { foreignKey: 'company_id' });
-JobContactInfo.belongsTo(Company, { foreignKey: 'company_id', as: 'company' });
-
-Skill.belongsTo(Company, { foreignKey: 'company_id', as: 'company' });
+Company.hasMany(Job, { foreignKey: 'company_id', onUpdate: 'CASCADE', onDelete: 'CASCADE' });
 Job.belongsTo(Company, { foreignKey: 'company_id', as: 'company' });
+
+Job.hasMany(JobContactInfo, { foreignKey: 'job_id', onUpdate: 'CASCADE', onDelete: 'CASCADE' });
+JobContactInfo.belongsTo(Job, { foreignKey: 'job_id', as: 'job' });
+
+Job.hasMany(Application, { foreignKey: 'job_id', onUpdate: 'CASCADE', onDelete: 'CASCADE' });
 Application.belongsTo(Job, { foreignKey: 'job_id', as: 'job' });
-User.hasMany(Application, { foreignKey: 'user_id' });
+
+User.hasMany(Application, { foreignKey: 'user_id', onUpdate: 'CASCADE', onDelete: 'CASCADE' });
 Application.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
+Job.hasMany(Skill, { foreignKey: 'job_id', onUpdate: 'CASCADE', onDelete: 'CASCADE' });
+Skill.belongsTo(Job, { foreignKey: 'job_id', as: 'job' });
+
 export { sequelize, Company, JobContactInfo, Skill, Job, Application, User };
+
 
