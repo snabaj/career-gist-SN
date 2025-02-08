@@ -2,12 +2,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { Sequelize } from 'sequelize';
-import { CompanyFactory } from './companies/companyModel';
-import { JobContactInfoFactory } from './jobContacts/jobContactInfoModel';
-import { SkillFactory } from './skills/skillsModel';
-import { JobFactory } from './jobs/job';
-import { ApplicationFactory } from './applications/application';
-import { UserFactory } from './users/userModel';
+import { CompanyFactory } from './companyModel.js';
+import { JobContactInfoFactory } from './jobContactInfoModel.js';
+import { SkillFactory } from './skillsModel.js';
+import { JobFactory } from './JobModel.js';
+import { ApplicationFactory } from './applicationsModel.js';
+import { UserFactory } from './userModel.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
