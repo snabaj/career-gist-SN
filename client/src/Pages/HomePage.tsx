@@ -63,6 +63,7 @@ const HomePage: React.FC = () => {
     //Key optimization:
       //no state changes needed (Backend handles job saving)
       //no unnecessary re-renders (Frontend does not track the saved jobs)
+      
       //note that the apis here are placeholders and need to be replaced with the actual API endpoints
   const handleSaveJob = async (job: Job) => {
     try {
