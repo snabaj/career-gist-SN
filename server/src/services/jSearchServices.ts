@@ -16,7 +16,7 @@ export const fetchJobs = async (query: string): Promise<any> => {
     }
 
     console.log("🔍 Fetching jobs from JSearch API...");
-    const response = await fetch(`${JSEARCH_API_URL}?query=${query}&num_pages=2`, {
+    const response = await fetch(`${JSEARCH_API_URL}?query=${query}`, {
       method: "GET",
       headers: {
         "X-RapidAPI-Host": RAPIDAPI_HOST,
