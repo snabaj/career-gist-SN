@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import dotenv from 'dotenv';
 import logger from './middleware/logger.js';
 import errorHandler from './middleware/errorHandler.js';
-import {userRouter} from "./routes/api/userRoutes";
+import {userRouter} from "./routes/api/userRoutes.js";
 import gptAPIRouter from './routes/api/gptRoutes.js';
 import favoriteRoutes from './routes/favorites.js';
 import jSearchRoutes from './routes/api/jSearchRoutes.js';

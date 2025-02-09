@@ -1,4 +1,4 @@
-import { JobContactInfo } from '../models/jobContactInfoModel';
+import { JobContactInfo } from '../models/jobContactInfoModel.js';
 
 export const seedJobContacts = async () => {
     await JobContactInfo.bulkCreate([

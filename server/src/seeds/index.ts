@@ -4,7 +4,7 @@ import { seedUsers } from './user-seeds.js';
 import { seedApplications } from './application-seeds.js';
 import { seedSkills } from './skill-seeds.js';
 import { seedJobContacts } from './jobContactInfo-seeds.js';
-import { sequelize } from '../models/index';
+import { sequelize } from '../models/index.js';
 
 const seedAll = async (): Promise<void> => {
   try {
