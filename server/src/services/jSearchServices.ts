@@ -1,5 +1,5 @@
 import { setCache, getCache } from "../cache/redisCacheService.js";
-import JobModel from "../models/JobModel.js";
+import JobModel from "../models/JobQueryModel.js"
 
 const JSEARCH_API_URL : string = process.env.JSEARCH_API_URL ?? "";
 const RAPIDAPI_HOST : string = process.env.RAPIDAPI_HOST ?? "";
@@ -16,7 +16,7 @@ export const fetchJobs = async (query: string): Promise<any> => {
     }
 
     console.log("🔍 Fetching jobs from JSearch API...");
-    const response = await fetch(`${JSEARCH_API_URL}?query=${query}&num_pages=2`, {
+    const response = await fetch(`${JSEARCH_API_URL}?query=${query}`, {
       method: "GET",
       headers: {
         "X-RapidAPI-Host": RAPIDAPI_HOST,
@@ -43,6 +43,7 @@ export const fetchJobs = async (query: string): Promise<any> => {
     } else {
       await JobModel.create({ query, results: JSON.stringify(data) });
     }
+  // Return cached data
     return data;
   } catch (error) {
     console.error("❌ JSearch API failed:", error instanceof Error ? error.message : error);

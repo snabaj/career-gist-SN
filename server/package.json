@@ -9,7 +9,7 @@
     "start": "npm run build && node dist/server.js --ignore client",
     "dev": "npx nodemon --watch src --ext ts,json,js --exec 'npx tsc && node dist/server.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node dist/seeds/index.js"
+    "seed": "node dist/server/src/seeds/index.js"
   },
   "nodemonConfig": {
     "watch": [

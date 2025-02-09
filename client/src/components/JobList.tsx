@@ -21,7 +21,7 @@ interface JobListProps {
 const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => {
   console.log("Rendering jobs in JobList.tsx:", jobs); // ✅ Debugging Log
 
-  if (!jobs || jobs.length === 0) {
+  if (!jobs || jobs.length == 0) {
     return <p>No jobs found.</p>; // ✅ Display message if jobs is empty
   }
 

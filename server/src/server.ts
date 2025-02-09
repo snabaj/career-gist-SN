@@ -8,7 +8,7 @@ import gptAPIRouter from './routes/api/gptRoutes.js';
 import favoriteRoutes from './routes/favorites.js';
 import jSearchRoutes from './routes/api/jSearchRoutes.js';
 import sequelize from './config/connection.js';
-import JobModel from './models/JobModel.js';
+import JobModel from './models/JobQueryModel.js';
 import limiter from "./middleware/rateLimiter.js";
 import {authenticateToken} from "./middleware/auth.js";
 import cors from 'cors';
@@ -70,3 +70,4 @@ app.use(errorHandler);
     process.exit(1);
   }
 })();
+
