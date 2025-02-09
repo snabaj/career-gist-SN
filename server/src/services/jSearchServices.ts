@@ -10,7 +10,6 @@ export const fetchJobs = async (query: string): Promise<any> => {
   const cacheKey = `job-search:${query}`;
 
   try {
-    // Check Redis Cache First
     const cachedJobs: string | null = await getCache(cacheKey);
     if (cachedJobs) {
       console.log("📌 Serving jobs from cache...");
@@ -18,14 +17,14 @@ export const fetchJobs = async (query: string): Promise<any> => {
     }
 
     console.log("🔍 Fetching jobs from JSearch API...");
-    const response = await fetch(`${JSEARCH_API_URL}?query=${query}&num_pages=1`, {
+    const response = await fetch(`${JSEARCH_API_URL}?query=${query}&num_pages=2`, {
       method: "GET",
       headers: {
         "X-RapidAPI-Host": RAPIDAPI_HOST,
         "X-RapidAPI-Key": RAPIDAPI_KEY,
       },
     });
-    console.log(response);
+
     if (!response.ok) {
       console.warn("⚠️ JSearch API returned an error:", response.status);
       return {
@@ -36,9 +35,8 @@ export const fetchJobs = async (query: string): Promise<any> => {
 
     const data = await response.json();
     console.log("✅ Fetched jobs successfully. Caching results...");
-    await setCache(cacheKey, JSON.stringify(data), 900); // Cache for 30 minutes
+    await setCache(cacheKey, JSON.stringify(data), 900);
 
-    // Store in PostgreSQL
     let existingJob = await JobModel.findOne({ where: { query } });
 
     if (existingJob) {
@@ -46,23 +44,8 @@ export const fetchJobs = async (query: string): Promise<any> => {
     } else {
       await JobModel.create({ query, results: JSON.stringify(data) });
     }
-      
-    // 🔹 Store individual jobs in Job table
-    for (const job of data.jobs) {
-      await Job.upsert({
-        position: job.job_title,
-        description: job.description,
-        remote_onsite: job.remote ? "Remote" : "Onsite",
-        salary: job.salary ?? "Not specified",
-        date_published: new Date(job.date_posted),
-        experience_level: job.experience_level ?? "Not specified",
-        company_id: job.company_id, 
-      });
-    }
-
   // Return cached data
     return data;
-  //   return { message: "JSearch API is currently unavailable. Please try again later." };
   } catch (error) {
     console.error("❌ JSearch API failed:", error instanceof Error ? error.message : error);
     return { message: "Error fetching jobs. Please try again later." };

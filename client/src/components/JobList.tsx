@@ -1,29 +1,38 @@
-// JobList.tsx
 import React from 'react';
-import JobItem from './JobItem';  // Ensure this path is correct
-import { Job } from '../types/types';  // Ensure this path is correct
+import { Job } from '../types/types';
 
+//Defining Props for the Component
+  // jobs: Job[] → The list of jobs passed as a prop to be displayed.
+  // onSave: (job: Job) => void → A function prop that handles job-saving actions.
 interface JobListProps {
-    jobs: Job[];
-    onSave: (job: Job) => void;
-    onShare: (job: Job) => void;
-    onRemove: (jobId: string) => void;
-    onUpdateStatus: (jobId: string, status: string) => void;
+  jobs: Job[];
+  onSave: (job: Job) => void;
 }
 
-const JobList: React.FC<JobListProps> = ({ jobs, onSave, onShare, onRemove, onUpdateStatus }) => (
-    <ul>
-        {jobs.map(job => (
-            <JobItem 
-                key={job.id} 
-                {...job} 
-                onSave={onSave}
-                onShare={onShare}
-                onRemove={() => onRemove(job.id)}
-                onUpdateStatus={status => onUpdateStatus(job.id, status)}
-            />
-        ))}
-    </ul>
+//Functional Component Definition
+  // JobList is a functional component that accepts jobs and onSave as props.
+  // Uses TypeScript’s React Functional Component (React.FC) for type safety.
+  //rendering the list of jobs
+const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => (
+  <ul>
+    {jobs.map(job => (
+      <li key={job.id}>
+        <h2>{job.title} at {job.company}</h2>
+        <p>{job.description}</p>
+        <a href={job.url} target="_blank" rel="noopener noreferrer">View Job</a>
+        <button onClick={() => onSave(job)}>Save Job</button>
+      </li>
+    ))}
+  </ul>
 );
 
 export default JobList;
+
+
+//Key Points:
+  //Keeping this file since we don't want the HomePage to be also responsible for rendering the job list.
+  //This file separates concerns (as Jason has advised). HomePage.tsx fetches data, while this displays it
+  //This makes the code more modular and easier to maintain.
+  //If we need to show the job list on another page, we won't have to rewrite the logic
+
+  //We can also re-use it instead of duplicating job list rendering logic

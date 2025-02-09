@@ -28,4 +28,4 @@ const cleanupExpiredJobs : () => Promise<void> = async () : Promise<void> => {
   }
 };
 
-setInterval(cleanupExpiredJobs, 30 * 60 * 1000);
+setInterval(cleanupExpiredJobs, 15 * 60 * 1000);
