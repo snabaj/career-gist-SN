@@ -1,8 +1,6 @@
 import { Job } from '../models/jobsModel.js';
-import { Company } from '../models/companyModel.js';
 
 export const seedJobs = async () => {
-    const companies = await Company.findAll();
     await Job.bulkCreate([
         {
           position: "Software Engineer",
@@ -11,7 +9,7 @@ export const seedJobs = async () => {
           salary: '$80,000 - $100,000',
           date_published: new Date(),
           experience_level: 'Mid-Level',
-          company_id: companies[0].id,
+          company_id: 1,
     },
     {
           position: 'Frontend Developer',
@@ -20,7 +18,7 @@ export const seedJobs = async () => {
           salary: '$70,000 - $90,000',
           date_published: new Date(),
           experience_level: 'Entry Level',
-          company_id: companies[1].id,
+          company_id: 2,
     },
     {
           position: 'Backend Developer',
@@ -29,7 +27,7 @@ export const seedJobs = async () => {
           salary: '$90,000 - $110,000',
           date_published: new Date(),
           experience_level: 'Senior',
-          company_id: companies[2].id,
+          company_id: 3,
       },
     ]);
     };
