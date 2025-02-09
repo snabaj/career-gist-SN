@@ -62,6 +62,6 @@ export function JobFactory(sequelize: Sequelize): typeof Job {
     tableName: "jobs",
   }
 );
-
-  return Job;
+return Job;
 };
+
