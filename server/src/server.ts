@@ -11,10 +11,25 @@ import sequelize from './config/connection.js';
 import JobModel from './models/JobModel.js';
 import limiter from "./middleware/rateLimiter.js";
 import {authenticateToken} from "./middleware/auth.js";
+import cors from 'cors';
+
+
 
 dotenv.config();
 
 const app: Application = express();
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+}));
+
+app.use(express.json({ limit: "10mb" })); // Increase body size limit
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+
+
 const PORT: number = parseInt(process.env.PORT ?? "3001", 10);
 
 app.use(express.json());

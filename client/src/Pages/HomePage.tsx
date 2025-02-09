@@ -41,18 +41,26 @@ const HomePage: React.FC = () => {
     setLoading(true);
     setError(null);
 
-    //This API is the tru API endpoint
     try {
-      const response = await fetch(`/api/jsearch/query?query=${query}`);
+      const response = await fetch(`http://localhost:3001/api/jsearch/query?query=${encodeURIComponent(query)}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
+      }
+
       const data = await response.json();
-      setJobs(data.jobs);
+      setJobs(data.data.data); // ✅ Extracts job listings from the response
+      // Adjust according to API response structure
     } catch (error) {
-      console.error('Failed to load jobs:', error);
-      setError('Unable to fetch jobs. Please try again later.');
+      console.error("Failed to load jobs:", error);
+      setError("Unable to fetch jobs. Please try again later.");
     }
 
     setLoading(false);
   };
+
 
   //Saving Jobs
     //Sends a POST request to api/save-job with the job data
