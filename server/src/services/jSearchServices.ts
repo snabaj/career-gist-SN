@@ -1,5 +1,6 @@
 import { setCache, getCache } from "../cache/redisCacheService.js";
 import JobModel from "../models/JobQueryModel.js";
+import { Job } from "../models/jobsModel.js";
 
 const JSEARCH_API_URL : string = process.env.JSEARCH_API_URL ?? "";
 const RAPIDAPI_HOST : string = process.env.RAPIDAPI_HOST ?? "";
@@ -45,6 +46,20 @@ export const fetchJobs = async (query: string): Promise<any> => {
     } else {
       await JobModel.create({ query, results: JSON.stringify(data) });
     }
+
+    // 🔹 Store individual jobs in Job table
+    for (const job of data.jobs) {
+      await Job.upsert({
+        position: job.job_title,
+        description: job.description,
+        remote_onsite: job.remote ? "Remote" : "Onsite",
+        salary: job.salary ?? "Not specified",
+        date_published: new Date(job.date_posted),
+        experience_level: job.experience_level ?? "Not specified",
+        company_id: job.company_id, // Make sure company_id is properly linked
+      });
+    }
+
   // Return cached data
     return data;
   //   return { message: "JSearch API is currently unavailable. Please try again later." };
