@@ -37,12 +37,15 @@
 
     @media (max-width: 768px) {
         .homepage-h1 {
-            font-size: 3rem;
+          font-size: 3rem; /* Adjust the heading size for smaller screens */
         }
+      
         .homepage-h2 {
-            font-size: 2rem;
+          font-size: 2rem; /* Smaller subtitle size */
         }
+      
         .searchform-button {
-            padding: 8px 8px;
+          padding: 8px 8px; /* Adjust button padding */
         }
-    }
+      }
+      

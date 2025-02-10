@@ -159,7 +159,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <>
+    <div className="main-container">
       <h2 className="login-h2">Welcome Back!</h2>
       <h3 className="login-h3">Found a job you love? Login to your account now.</h3>
       <div className="login-form">
@@ -169,7 +169,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
         <button className="Login-button" onClick={handleLogin}>Login</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
-    </>
+    </div>
   );
 };
 

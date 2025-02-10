@@ -4,7 +4,6 @@ body {
   
 }
 
-
 ul.nav.nav-tabs {
   display: flex;
   justify-content: center;
@@ -100,11 +99,6 @@ ul {
     align-items: center;
   }
 
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-    }
-  }
 
   html, body {
     height: 100%; /* Ensure full height */
@@ -132,3 +126,18 @@ ul {
     flex: 1; /* Takes up all available space pushing the footer down */
     padding: 20px; /* Example padding, adjust as needed */
   }
+
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column; /* Stack navbar items vertically */
+      align-items: stretch; /* Stretch items to full width */
+    }
+  
+    .HomePage, .Career, .search, .location {
+      font-size: 1.25rem; /* Smaller font size */
+      padding: 0.5rem; /* Reduce padding */
+      text-align: center; /* Ensure center alignment */
+    }
+  }
+  
