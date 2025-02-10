@@ -1,6 +1,7 @@
 body {
-  background: rgb(195,191,204);
-  background: linear-gradient(180deg, rgba(195,191,204,1) 68%, rgba(161,164,227,1) 100%);
+  background: rgb(236,234,234);
+  background: linear-gradient(180deg, rgba(236,234,234,1) 0%, rgba(6,6,6,1) 69%);
+  
 }
 
 
@@ -70,22 +71,6 @@ ul {
     justify-content: center;
   }
 
-  h1 {
-    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
-    font-size: 2rem;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin: 50px 50px 50px 50px;
-  }
-
-  h2 {
-    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
-    font-size: 1.5rem;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-  }
 
   .search {
     font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
@@ -119,4 +104,31 @@ ul {
     .navbar {
       flex-direction: column;
     }
+  }
+
+  html, body {
+    height: 100%; /* Ensure full height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Makes the footer potentially stick at the bottom */
+  }
+  
+  #root {
+    flex: 1 0 auto; /* Flex grow and not shrink */
+    display: flex;
+    flex-direction: column; /* Ensures the structure flows top to bottom */
+  }
+  
+
+  .layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+  }
+
+
+  .main-content {
+    flex: 1; /* Takes up all available space pushing the footer down */
+    padding: 20px; /* Example padding, adjust as needed */
   }

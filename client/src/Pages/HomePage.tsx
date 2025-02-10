@@ -158,7 +158,6 @@ import { Job } from '../types/types';
 import fetchDummyJobs from '../types/types/fetchDummyJobs'; // ✅ Corrected Import Path!
 import '../App.css';
 import './HomePage.css';
-
 const HomePage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -201,6 +200,7 @@ const HomePage: React.FC = () => {
       ) : (
         !loading && <p>No results found.</p>
       )}
+
     </div>
   );
 };

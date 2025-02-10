@@ -1,0 +1,10 @@
+.footer {
+    background: rgb(55,55,53);
+    background: linear-gradient(180deg, rgba(55,55,53,1) 61%, rgba(0,0,0,1) 84%);
+    color: #f3f3f3; /* Dark text color */
+    text-align: center; /* Center-align text */
+    padding: 20px; /* Padding for some spacing */
+    font-size: 16px; /* Set a standard font size */
+    border-top: 1px solid #e2e2e2; /* Add a top border for visual separation */
+  }
+  

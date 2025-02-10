@@ -3,8 +3,8 @@
     color: #616161;
     padding: 10px;
     box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.1);
-    background: rgb(195,191,204);
-    background: linear-gradient(209deg, rgba(195,191,204,1) 68%, rgba(161,164,227,1) 100%);
+    background: rgb(244,244,243);
+    background: linear-gradient(252deg, rgba(244,244,243,1) 68%, rgba(202,202,207,1) 100%);
     display: flex;
     justify-content: center;
     font-size: 4rem;
@@ -14,11 +14,11 @@
 
   .homepage-h2 {  
     margin-bottom: 10px;
-    color: #616161;
+    color: 	#616161;
     padding: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    background: rgb(195,191,204);
-    background: linear-gradient(135deg, rgba(195,191,204,1) 68%, rgba(161,164,227,1) 100%);
+    background: rgb(244,244,243);
+    background: linear-gradient(121deg, rgba(244,244,243,1) 68%, rgba(202,202,207,1) 100%);
     display: flex;
     justify-content: center;
     font-size: 2.5rem;
