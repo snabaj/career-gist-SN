@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:3001/api/jsearch/query?query=${encodeURIComponent(query)}`, {
+      const response = await fetch(`http://localhost:3000/api/jsearch/query?query=${encodeURIComponent(query)}`, {
         method: "GET",
       });
 
