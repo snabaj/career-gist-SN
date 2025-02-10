@@ -169,12 +169,9 @@ const HomePage: React.FC = () => {
     setError(null);
 
     try {
-      console.log("Fetching dummy jobs for:", query);
-      const data = await fetchDummyJobs(); // ✅ Fetch from Dummy API
-      setJobs(data);
-      // const response = await fetch(`http://localhost:3001/api/jsearch/query?query=${encodeURIComponent(query)}`, {
-      //   method: "GET",
-      // });
+      const response = await fetch(`http://localhost:3001/api/jsearch/query?query=${encodeURIComponent(query)}`, {
+        method: "GET",
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
