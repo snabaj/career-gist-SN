@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
               <Link to="/applied-to" className={location === '/applied-to' ? 'active' : ''}>Applied To</Link>
             </li>
             <li>
-              <button onClick={onLogout}>Logout</button>
+              <button className="Logout-button" onClick={onLogout}>Logout</button>
             </li>
           </>
         ) : (

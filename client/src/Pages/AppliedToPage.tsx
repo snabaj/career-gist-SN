@@ -61,6 +61,7 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import { Job } from '../types/types';
+import styles from './AppliedTo.css';
 
 // Dummy API function to simulate applied jobs
 const fetchDummyAppliedJobs = async (): Promise<Job[]> => {

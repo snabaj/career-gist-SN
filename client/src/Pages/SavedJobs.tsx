@@ -138,8 +138,8 @@ const SavedJobs: React.FC = () => {
         <ul className={styles.jobsList}>
           {jobs.map((job) => (
             <li key={job.id} className={styles.jobItem}>
-              <h2>{job.title} at {job.company}</h2>
-              <p>{job.location} - {job.type}</p>
+              <h2 className={styles['job-title']}>{job.title} at {job.company}</h2>
+              <p className={styles['job-info']}>{job.location} - {job.type}</p>
               <a href={job.url} target="_blank" rel="noopener noreferrer">
                 View Job
               </a>

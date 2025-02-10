@@ -168,6 +168,25 @@ ul {
     flex-direction: column;
     align-items: center;
   }
+
+  .Logout-button {
+    background: rgb(244,244,243);
+    background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(41,41,43,1) 100%);
+    color: #332600;
+    font-size: 1rem; /* Example size */
+    cursor: pointer; /* Indicates clickable */
+  }
+  
+  .Logout-button, .Logout-button-outline {
+    padding: 10px 20px;
+    margin: 10px 10px 10px 0;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .Logout-button:hover {
+    background-color: #332600; /* Hover effect for the button */
+  }
   
   @media (max-width: 768px) {
     .navbar {
