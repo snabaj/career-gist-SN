@@ -1,16 +1,60 @@
-.listItem {
-    margin-bottom: 20px;
-  }
-  
-  .title {
-    color: #333;
-  }
-  
-  .location {
-    font-style: sans-serif;
-  }
-  
-  .link {
-    color: #0066cc;
-    text-decoration: none;
-  }
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.job-card {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.job-description {
+  margin-top: 10px;
+  color: #666; /* Example color, adjust as needed */
+}
+
+.job-link {
+  display: block;
+  color: #0066cc;
+  margin-top: 5px;
+}
+
+.button, .button-outline {
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: #4a67e4;
+  color: white;
+}
+
+.button-outline {
+  background-color: transparent;
+  border: 1px solid #4a67e4;
+  color: #4a67e4;
+}
+
+h2 {
+  margin: 0;
+  color: black;
+}
+
+.job-title {
+  color: #333; /* Example color, adjust as needed */
+  font-size: 1.5rem; /* Example size */
+  margin-bottom: 0.5rem; /* Provides spacing below the title */
+}
+
+.job-info {
+  color: #666; /* Example color, adjust as needed */
+  font-size: 1rem; /* Example font size */
+  margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
+}

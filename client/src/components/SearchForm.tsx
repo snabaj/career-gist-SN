@@ -55,3 +55,5 @@ export default SearchForm;
     // ✅ Once API call is complete:
       // ✅ Jobs are displayed in JobList.tsx
       // ✅ Re-enables the search button
+
+
