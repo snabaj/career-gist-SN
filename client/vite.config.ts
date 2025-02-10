@@ -7,12 +7,12 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api/jsearch/query': {
-        target: 'http://localhost:3001/api/jsearch/query',
+        target: 'http://localhost:3000/api/jsearch/query',
         changeOrigin: true,
         secure: false,
       },
       '/auth': {
-        target: 'http://localhost:3001/api/jsearch/query',
+        target: 'http://localhost:3000/api/jsearch/query',
         changeOrigin: true,
         secure: false
       },
