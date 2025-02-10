@@ -51,7 +51,6 @@ ul {
   color: white;
 }
 
-
 .navbar-tabs li {
   display: flex;
   justify-content: center;
@@ -70,33 +69,40 @@ ul {
     justify-content: center;
   }
 
+  .search-container {
+    display: flex; /* Use flexbox to align children */
+    padding: 5px;
+    border-radius: 2px;
+    align-items: center; /* Align children vertically */
+    justify-content: flex-end; /* Align children to the right */
+    gap: 10px; /* Adds space between the input and the button */
+  }
 
   .search {
     font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
-    font-size: 2.25rem;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin: 1rem;
+    width: 10%;
+    background: rgb(244,244,243);
+    background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(41,41,43,1) 100%);
+    color: #332600;
+    cursor: pointer; /* Indicates clickable */
+    padding: 8px 16px;
+    margin: 10px 10px 10px 0;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    font-size: 12px; /* Example size */
+    min-width: 100px; /* Ensures a minimum width */
   }
 
-  .location {
-    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
-    font-size: 2.25rem;
-    color: white;
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer; /* Indicates clickable */
     text-align: center;
-    padding: 1rem;
-  }
-
-  .HomePage {
-    display: flex;
     justify-content: center;
-    font-family: 'Merryweather', Verdana, Tahoma, sans-serif;
-    font-size: 1.5rem;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    align-items: center;
+    border: 1px solid #332600;
+    border-radius: 4px;
   }
 
 
@@ -138,6 +144,40 @@ ul {
       font-size: 1.25rem; /* Smaller font size */
       padding: 0.5rem; /* Reduce padding */
       text-align: center; /* Ensure center alignment */
+    }
+  }
+  
+
+  .navbar-toggle {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f4f4f4;
+    text-align: center;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .navbar.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      display: none; /* Hide the navbar by default on mobile devices */
+    }
+    .navbar.open {
+      display: flex; /* Show when open */
+    }
+    .navbar-toggle {
+      display: block; /* Show the toggle button on mobile */
     }
   }
   

@@ -198,7 +198,7 @@ const HomePage: React.FC = () => {
       {jobs.length > 0 ? (
         <JobList jobs={jobs} onSave={handleSaveJob} />
       ) : (
-        !loading && <p>No results found.</p>
+        !loading && <p id="noResults">No results found.</p>
       )}
 
     </div>

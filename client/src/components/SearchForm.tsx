@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 
 //Defining Props for the Component
   //Defines the props (onSearch and loading)
@@ -30,14 +31,15 @@ const SearchForm: React.FC<Props> = ({ onSearch, loading }) => {
     // ✅ Disables the button (disabled={loading}) when the API call is in progress
     // ✅ Changes the button text to 'Loading...' while fetching jobs
   return (
-    <div>
+    <div className="search-container">
       <input
+        className="search-input"
         type="text"
         value={query}
         onChange={e => setQuery(e.target.value)}
         placeholder="Job Title"
       />
-      <button onClick={() => onSearch(query)} disabled={loading}>
+      <button className="search" onClick={() => onSearch(query)} disabled={loading}>
         {loading ? 'Loading...' : 'Search'}
       </button>
     </div>
