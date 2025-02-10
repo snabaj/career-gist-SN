@@ -3,11 +3,11 @@ export interface Job {
     title: string;
     company: string;
     location: string;
-    description: string;
     type: string;
+    description: string;
     url: string;
-    appliedDate?: string; // Optional
-    status?: string;      // Optional
-}
+    appliedDate?: string; // Optional property
+    status?: string; // Optional property
+  }
 
 //This file will be deleted once we have merged Nathan's latest PR. This file is only here for my testing purposes.
