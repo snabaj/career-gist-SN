@@ -1,5 +1,3 @@
-//Dummy Data
-
 import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import type { JobDetails, JobSearchResponse } from "../types/interface/jobSearch";
@@ -9,6 +7,7 @@ const AppliedToPage: React.FC = () => {
   const [jobs, setJobs] = useState<JobDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   //Should only run once when the component mounts
   //The empty dependency array ensures that the effect runs only once
