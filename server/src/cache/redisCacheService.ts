@@ -1,19 +1,20 @@
 import Redis from "ioredis";
 import dotenv from "dotenv";
+import {createClient} from "redis";
 
 dotenv.config();
 
-const redisClient = new Redis({
+const redis = new Redis({
   host: process.env.REDIS_HOST ?? '127.0.0.1',
   port: Number(process.env.REDIS_PORT) || 6379,
   password: process.env.REDIS_PASSWORD ?? '',
   tls: process.env.REDIS_TLS ? {} : undefined as any,
 });
 
-redisClient.on("connect", () : void => console.log("✅ Connected to Redis"));
-redisClient.on("error", (err : Error) : void => console.error("❌ Redis error:", err));
-redisClient.on("end", () : void => console.warn("⚠️ Redis connection closed"));
-redisClient.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
+redis.on("connect", () : void => console.log("✅ Redis connection tested..."));
+redis.on("error", (err : Error) : void => console.error("❌ Redis error:", err));
+redis.on("end", () : void => console.warn("⚠️ Redis connection closed"));
+redis.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
 
 
 export const setCache : (key : string, value : unknown, ttl?: number) => Promise<void> = async (key: string, value: unknown, ttl: number = 900) : Promise<void> => {
@@ -22,7 +23,7 @@ export const setCache : (key : string, value : unknown, ttl?: number) => Promise
       timestamp: Date.now(),
       value
     };
-    await redisClient.setex(key, ttl, JSON.stringify(data));
+    await redis.setex(key, ttl, JSON.stringify(data));
     console.log(`✅ Cached: ${key} (TTL: ${ttl}s)`);
   } catch (error) {
     console.error("❌ Error setting cache:", error);
@@ -42,7 +43,6 @@ export const getCache : (key : string) => Promise<string | null> = async (key: s
   }
 };
 
-
 export const deleteCache : (key : string) => Promise<void> = async (key: string) : Promise<void> => {
   try {
     await redisClient.del(key);
@@ -54,9 +54,39 @@ export const deleteCache : (key : string) => Promise<void> = async (key: string)
 
 export const clearCache : () => Promise<void> = async () : Promise<void> => {
   try {
-    await redisClient.flushall();
+    await redis.flushall();
     console.log("✅ Redis cache cleared!");
   } catch (error) {
     console.error("❌ Error clearing cache:", error);
+  }
+};
+
+export const redisClient = createClient({
+  socket: {
+    host: process.env.REDIS_HOST ?? '127.0.0.1',
+    port: Number(process.env.REDIS_PORT) || 6379,
+  },
+});
+
+redisClient.on("error", (err) => console.error("❌ Redis error:", err));
+
+(async () : Promise<void> => {
+  try {
+    if (!redisClient.isOpen) {
+      await redisClient.connect();
+    }
+    console.log("✅ Redis connection established");
+  } catch (error) {
+    console.error("❌ Redis connection failed:", error);
+  }
+})();
+
+export const cacheEnhancedJobData = async (query: string, data: any) => {
+  try {
+    console.log(`📌 Caching enhanced job data: job-enhanced:${query}`);
+    await redisClient.set(`job-enhanced:${query}`, JSON.stringify(data), { EX: 900 });
+    console.log(`✅ Cached enhanced job data: job-enhanced:${query}`);
+  } catch (error) {
+    console.error("❌ Error caching enhanced job data:", error);
   }
 };
