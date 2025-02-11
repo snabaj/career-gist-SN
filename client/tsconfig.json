@@ -15,7 +15,7 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "skipLibCheck": true,
+        "skipLibCheck": false,
         "allowJs": true,
         "checkJs": false,
         "esModuleInterop": true,
@@ -29,6 +29,5 @@
         "noImplicitReturns": true,
         "noImplicitOverride": true,
         "useUnknownInCatchVariables": true
-    },
-    "include": ["src"]
+    }
 }
