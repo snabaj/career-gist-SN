@@ -8,6 +8,7 @@ import fetchDummyJobs from '../types/types/fetchDummyJobs'; // Ensure correct im
 import '../App.css';
 import './HomePage.css';
 import logo from '../assets/CareerGist.png';
+import type {JobDetails, JobSearchResponse, JobHighlights} from "../types/interface/jobSearch";
 
 const HomePage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -20,9 +21,42 @@ const HomePage: React.FC = () => {
     setError(null);
 
     try {
-      console.log("Fetching dummy jobs for:", query);
-      const data = await fetchDummyJobs(); // Fetch from Dummy API
-      setJobs(data);
+      const response = await fetch(`/api/jsearch/query?query=${encodeURIComponent(query)}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
+      }
+
+      const data : JobSearchResponse = await response.json();
+      setJobs(data.data.data.map((jobDetails: JobDetails) => ({
+        id: jobDetails.job_id,
+        title: jobDetails.job_title,
+        publisher: jobDetails.job_publisher,
+        company: jobDetails.employer_name,
+        location: jobDetails.job_location,
+        description: jobDetails.job_description,
+        type: jobDetails.job_employment_type,
+        url: jobDetails.job_apply_link,
+        highlights: jobDetails.job_highlights,
+        isRemote: jobDetails.job_is_remote,
+        postedAt: jobDetails.job_posted_at,
+        city: jobDetails.job_city,
+        state: jobDetails.job_state,
+        country: jobDetails.job_country,
+      })));
+
+      const jobHighlights : JobHighlights = await response.json();
+      setJobs(prevJobs => prevJobs.map(job => ({
+        ...job,
+        qualifications: jobHighlights.Qualifications,
+        benefits: jobHighlights.Benefits,
+        responsibilities: jobHighlights.Responsibilities,
+      })));
+
+      // ✅ Transforms JobDetails[] into Job[]
+      // Adjust according to API response structure
     } catch (error) {
       console.error("Failed to load jobs:", error);
       setError("Unable to fetch jobs. Please try again later.");
