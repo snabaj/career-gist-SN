@@ -40,7 +40,7 @@ JobModel.init(
   {
     sequelize, // Ensure it's associated with Sequelize
     modelName: 'JobModel', // Explicitly define the model name
-    tableName: "jobsQuery",
+    tableName: "jobs-query",
     timestamps: true,
   }
 );
