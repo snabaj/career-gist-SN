@@ -62,11 +62,12 @@ import styles from './JobList.module.css';
 interface JobListProps {
   jobs: JobDetails[];
   onSave: (job: JobDetails) => void;
-  onRemove: (job_id: string) => void; // ✅ Fixed `job_Id` → `job_id`
-  onMarkAsApplied: (job_id: string) => void; // ✅ Fixed `job_Id` → `job_id`
+  onRemove: (job_id: string) => void; 
+  onMarkAsApplied: (job_id: string) => void;
+  isLoggedIn: boolean; //Only logged in usrs can perform job actions
 }
 
-const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsApplied }) => { // ✅ Added missing props
+const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsApplied, isLoggedIn }) => {
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
   const toggleJobDescription = (job_id: string) => {
@@ -74,7 +75,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsAppli
   };
 
   if (!jobs || jobs.length === 0) {
-    return <p>No jobs found.</p>;
+    return <p>You have not saved any job yet.</p>;
   }
 
   return (
@@ -83,8 +84,10 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsAppli
         {jobs.map((jobDetails) => ( // ✅ Fixed variable name
           <li className={styles['job-card']} key={jobDetails.job_id}> 
             <h2 className={styles['job-title']}>{jobDetails.job_title} at {jobDetails.employer_name}</h2>
-            <p className={styles['job-info']}>{jobDetails.job_location} - {jobDetails.job_employment_type} - {jobDetails.job_is_remote ? 'Remote' : 'On-site'} - {jobDetails.job_posted_at}</p>
-            
+            <p className={styles['job-info']}>
+              {jobDetails.job_location} - {jobDetails.job_employment_type} - {jobDetails.job_is_remote ? 'Remote' : 'On-site'} - 
+              {jobDetails.job_posted_at}</p>
+
             <button className={styles.button} onClick={() => toggleJobDescription(jobDetails.job_id)}>
               {selectedJobId === jobDetails.job_id ? 'Hide Description' : 'View Job'}
             </button>
@@ -98,10 +101,13 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsAppli
               </>
             )}
 
-            {/* ✅ Fixed function calls */}
-            <button className={styles.button} onClick={() => onSave(jobDetails)}>Save Job</button>
-            <button className={styles.button} onClick={() => onMarkAsApplied(jobDetails.job_id)}>Mark as applied</button>
-            <button className={styles.button} onClick={() => onRemove(jobDetails.job_id)}>Remove</button>
+              {isLoggedIn && (
+              <>
+                <button className={styles.button} onClick={() => onSave(jobDetails)}>Save Job</button>
+                <button className={styles.button} onClick={() => onMarkAsApplied(jobDetails.job_id)}>Mark as Applied</button>
+                <button className={styles.button} onClick={() => onRemove(jobDetails.job_id)}>Remove</button>
+              </>
+            )}
           </li>
         ))}
       </ul>

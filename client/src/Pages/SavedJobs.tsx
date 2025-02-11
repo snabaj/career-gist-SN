@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Spinner from '../components/Spinner';
 import type {JobDetails, JobSearchResponse} from "../types/interface/jobSearch";
 import styles from './SavedJobs.module.css';
 
 
-const SavedJobs: React.FC = () => {
+interface SavedJobsProps {
+  isLoggedIn: boolean; // ✅ Ensures job actions are only available if user is logged in
+}
+
+const SavedJobs: React.FC<SavedJobsProps> = ({ isLoggedIn }) => {
   const [jobs, setJobs] = useState<JobDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -13,13 +17,13 @@ const SavedJobs: React.FC = () => {
 useEffect(() => {
   const fetchSavedJobs = async () => {
     try {
-      const response = await fetch('/api/saved-jobs'); // Adjust API endpoint
+      const response = await fetch('/api/saved-jobs'); // ✅ Correct API endpoint
       if (!response.ok) {
         throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
       }
 
       const data: JobSearchResponse = await response.json();
-      setJobs(data.data.data); // ✅ Directly using JobDetails[] from API response
+      setJobs(data.data.data); // ✅ Uses correct API response format
     } catch (error) {
       console.error('Error fetching saved jobs:', error);
       setError('Could not load saved jobs.');
@@ -30,43 +34,41 @@ useEffect(() => {
   fetchSavedJobs();
 }, []);
 
-  // 🔹 Remove a job from saved jobs list
-  const handleRemoveJob = async (jobId: string) => {
-    try {
-      const response = await fetch(`/api/remove-saved-job/${jobId}`, {
-        method: 'DELETE',
-      });
+// ✅ Remove job function with correct API endpoint
+const handleRemoveJob = useCallback(async (job_id: string) => {
+  try {
+    const response = await fetch(`/api/remove-saved-job/${job_id}`, {
+      method: 'DELETE',
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to remove job.');
-      }
-
-      // ✅ Update UI by filtering out the removed job
-      setJobs(jobs.filter((job) => job.job_id !== jobId));
-    } catch (error) {
-      console.error('Error removing job:', error);
-      setError('Could not remove job.');
+    if (!response.ok) {
+      throw new Error(`Failed to remove job: ${response.statusText}`);
     }
-  };
 
-  // 🔹 Mark job as "Applied"
-  const handleMarkAsApplied = async (jobId: string) => {
-    try {
-      const response = await fetch(`/api/mark-applied/${jobId}`, {
-        method: 'POST',
-      });
+    setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== job_id));
+  } catch (error) {
+    console.error('Error removing job:', error);
+    setError('Could not remove job.');
+  }
+}, []);
 
-      if (!response.ok) {
-        throw new Error('Failed to mark job as applied.');
-      }
+// ✅ Mark as applied function with correct API endpoint
+const handleMarkAsApplied = useCallback(async (job_id: string) => {
+  try {
+    const response = await fetch(`/api/mark-applied/${job_id}`, {
+      method: 'POST',
+    });
 
-      alert('Job marked as applied! ✅');
-    } catch (error) {
-      console.error('Error marking job as applied:', error);
-      setError('Could not mark job as applied.');
+    if (!response.ok) {
+      throw new Error(`Failed to mark job as applied: ${response.statusText}`);
     }
-  };
 
+    alert('Job marked as applied! ✅');
+  } catch (error) {
+    console.error('Error marking job as applied:', error);
+    setError('Could not mark job as applied.');
+  }
+}, []);
 
   return (
     <div className={styles.container}>
@@ -82,6 +84,12 @@ useEffect(() => {
               <a href={job.job_apply_link} target="_blank" rel="noopener noreferrer">
                 View Job
               </a>
+              {isLoggedIn && (
+                <>
+                  <button className={styles.button} onClick={() => handleMarkAsApplied(job.job_id)}>Mark as Applied</button>
+                  <button className={styles.button} onClick={() => handleRemoveJob(job.job_id)}>Remove</button>
+                </>
+              )} 
             </li>
           ))}
         </ul>
@@ -91,5 +99,6 @@ useEffect(() => {
     </div>
   );
 };
+
 
 export default SavedJobs;
