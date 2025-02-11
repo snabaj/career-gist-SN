@@ -1,52 +1,52 @@
-import React from 'react';
-import { Job } from '../types/types';
+import React, { useState, useEffect } from 'react';
+import type {JobDetails, JobSearchResponse, JobHighlights} from "../types/interface/jobSearch"; //new interface
+import styles from './JobList.module.css';
 
 
-
-
-
-
-//Defining Props for the Component
-  // jobs: Job[] → The list of jobs passed as a prop to be displayed.
-  // onSave: (job: Job) => void → A function prop that handles job-saving actions.
 interface JobListProps {
-  jobs: Job[];
   onSave: (job: Job) => void;
+  //add a jobs prop
 }
 
-//Functional Component Definition
-  // JobList is a functional component that accepts jobs and onSave as props.
-  // Uses TypeScript’s React Functional Component (React.FC) for type safety.
-  //rendering the list of jobs
-const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => {
-  console.log("Rendering jobs in JobList.tsx:", jobs); // ✅ Debugging Log
+const JobList: React.FC<JobListProps> = ({ onSave }) => {
+  const [jobs, setJobs] = useState<Job[]>([]); //get rid of this
+  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
-  if (!jobs || jobs.length == 0) {
-    return <p>No jobs found.</p>; // ✅ Display message if jobs is empty
+
+  const toggleJobDescription = (jobId: string) => {
+    setSelectedJobId((prevJobId) => (prevJobId === jobId ? null : jobId));
+  };
+
+  if (!jobs || jobs.length === 0) {
+    return <p>No jobs found.</p>;
   }
 
+  //check properties
   return (
-    <ul>
-      {jobs.map(job => (
-        <li key={job.id}>
-          <h2>{job.title} at {job.company}</h2>
-          <p>{job.description}</p>
-          <a href={job.url} target="_blank" rel="noopener noreferrer">View Job</a>
-          <button onClick={() => onSave(job)}>Save Job</button>
-        </li>
-      ))}
-    </ul>
+    <div className={styles['job-list']}>
+      <ul>
+        {jobs.map((job) => (
+          <li className={styles['job-card']} key={job.id}>
+            <h2 className={styles['job-title']}>{job.title} at {job.company}</h2>
+            <p className={styles['job-info']}>{job.location} - {job.type}</p>
+            <button className={styles.button} onClick={() => toggleJobDescription(job.id)}>
+              {selectedJobId === job.id ? 'Hide Description' : 'View Job'}
+            </button>
+            {selectedJobId === job.id && (
+              <>
+                <p className={styles['job-description']}>{job.description}</p>
+                <a href={job.url} target="_blank" rel="noopener noreferrer" className={styles['job-link']}>
+                  Job Details
+                </a>
+              </>
+            )}
+            <button className={styles.button} onClick={() => onSave(job)}>Save Job</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
 export default JobList;
 
-
-
-//Key Points:
-  //Keeping this file since we don't want the HomePage to be also responsible for rendering the job list.
-  //This file separates concerns (as Jason has advised). HomePage.tsx fetches data, while this displays it
-  //This makes the code more modular and easier to maintain.
-  //If we need to show the job list on another page, we won't have to rewrite the logic
-
-  //We can also re-use it instead of duplicating job list rendering logic

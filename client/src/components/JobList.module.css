@@ -1,16 +1,72 @@
-.listItem {
-    margin-bottom: 20px;
+.job-list {
+  display: grid;
+  grid-template-columns: 1fr; /* Ensures a single column layout */
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Responsive Layout for wider screens */
+@media (min-width: 768px) {
+  .job-list {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusts to multiple columns on wider screens */
   }
-  
-  .title {
-    color: #333;
-  }
-  
-  .location {
-    font-style: sans-serif;
-  }
-  
-  .link {
-    color: #0066cc;
-    text-decoration: none;
-  }
+}
+
+.job-card {
+  background: rgb(242,242,237);
+  background: linear-gradient(180deg, rgba(242,242,237,1) 68%, rgba(159,160,166,1) 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.job-description {
+  margin-top: 10px;
+  color: #332600; /* Example color, adjust as needed */
+  margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
+}
+
+.job-link {
+  display: block;
+  color: #425a71;
+  margin-top: 5px;
+}
+
+.button, .button-outline {
+  padding: 10px 20px;
+  margin: 10px 10px 10px 0; /* Adds spacing between buttons */
+  cursor: pointer;
+  border-radius: 5px;
+  display: inline-block; /* Ensures the button is displayed inline and respects the margin */
+}
+
+.button {
+  background: rgb(244,244,243);
+  background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(41,41,43,1) 100%);
+  color: #332600;
+}
+
+.button-outline {
+  background-color: transparent;
+  border: 1px solid #332600;
+  color:  #332600;
+}
+
+h2 {
+  margin: 0;
+  color: #616161;
+}
+
+.job-title {
+  color: #616161;
+  font-size: 1.5rem; /* Example size */
+  margin-bottom: 0.5rem; /* Provides spacing below the title */
+}
+
+.job-info {
+  color: #332600;
+  font-size: 1rem; /* Example font size */
+  margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
+}

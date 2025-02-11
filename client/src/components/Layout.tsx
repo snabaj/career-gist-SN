@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Navbar from './Navbar';
-import '../index.css';
+import Footer from '../Pages/Footer'; // Import the Footer component
+import '../App.css';
 
 interface LayoutProps {
   isLoggedIn: boolean;
@@ -10,11 +11,12 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ isLoggedIn, onLogout, children }) => {
   return (
-    <div>
+    <div className="layout-container"> {/* Ensure this class is styled appropriately */}
       <header>
         <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       </header>
-      <main>{children}</main>
+      <main className="main-content">{children}</main> {/* Main content area */}
+      <Footer />
     </div>
   );
 };
