@@ -1,10 +1,8 @@
-//Dummy API Function to Simulate Job Listings
 import React, { useState } from 'react';
 import SearchForm from '../components/SearchForm';
 import JobList from '../components/JobList';
 import Spinner from '../components/Spinner';
 import { Job } from '../types/types';
-import fetchDummyJobs from '../types/types/fetchDummyJobs'; // Ensure correct import path
 import '../App.css';
 import './HomePage.css';
 import logo from '../assets/CareerGist.png';
@@ -15,7 +13,6 @@ const HomePage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Handle Search Using Dummy API
   const handleSearch = async (query: string) => {
     setLoading(true);
     setError(null);
@@ -65,9 +62,9 @@ const HomePage: React.FC = () => {
   };
 
   const handleSaveJob = async (job: Job) => {
-    alert(`Job saved: ${job.title} at ${job.company}`); // Simulated Save
+    alert(`Job saved: ${job.title} at ${job.company}`);
   };
-
+  
   return (
     <div>
       <img className="logo" src={logo} alt="Career Gist Logo" />
