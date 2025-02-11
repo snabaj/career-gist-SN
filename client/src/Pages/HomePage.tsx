@@ -55,16 +55,31 @@ const HomePage: React.FC = () => {
     }
     setLoading(false);
   };
-
+  //we need to correct the API for the save-job endpoint
   const handleSaveJob = async (job: JobDetails) => {
-    alert(`Job saved: ${job.job_title} at ${job.employer_name}`);
+    try {
+      const response = await fetch('/api/save-job', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(job),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to save job: ${response.statusText}`);
+      }
+  
+      alert(`Job saved: ${job.job_title} at ${job.employer_name}`);
+    } catch (error) {
+      console.error('Error saving job:', error);
+      alert('Error saving job. Try again later.');
+    }
   };
 
   return (
     <div>
       <img className="logo" src={logo} alt="Career Gist Logo" />
-      <h1 className="homepage-h1">Welcome to Career Gist</h1>
-      <h2 className="homepage-h2">Because Searching for Jobs Should be Easy</h2>
+      <h1 className="homepage-h1">Welcome to CareerGist!</h1>
+      <h2 className="homepage-h2">Because Searching for Jobs Should be Easy.</h2>
 
       <SearchForm onSearch={handleSearch} loading={loading} />
 

@@ -3,33 +3,6 @@ import Spinner from '../components/Spinner';
 import type {JobDetails, JobSearchResponse} from "../types/interface/jobSearch";
 import styles from './SavedJobs.module.css';
 
-// // Dummy API function to simulate saved jobs
-// const fetchDummySavedJobs = async (): Promise<Job[]> => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve([
-//         {
-//           id: '1',
-//           title: 'Software Engineer',
-//           company: 'Tech Corp',
-//           location: 'San Francisco, CA',
-//           type: 'Full-time',
-//           description: 'Develop and maintain software applications.',
-//           url: 'https://example.com/job1',
-//         },
-//         {
-//           id: '2',
-//           title: 'Frontend Developer',
-//           company: 'Creative Solutions',
-//           location: 'New York, NY',
-//           type: 'Contract',
-//           description: 'Design and implement user interfaces.',
-//           url: 'https://example.com/job2',
-//         },
-//       ]);
-//     }, 1000);
-//   });
-// };
 
 const SavedJobs: React.FC = () => {
   const [jobs, setJobs] = useState<JobDetails[]>([]);
@@ -40,7 +13,7 @@ const SavedJobs: React.FC = () => {
 useEffect(() => {
   const fetchSavedJobs = async () => {
     try {
-      const response = await fetch('/api/saved-jobs'); // 🔹 Adjust API endpoint as needed
+      const response = await fetch('/api/saved-jobs'); // Adjust API endpoint
       if (!response.ok) {
         throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
       }

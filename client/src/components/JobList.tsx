@@ -27,7 +27,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => {
         {jobs.map((job) => (
           <li className={styles['job-card']} key={job.job_id}>
             <h2 className={styles['job-title']}>{job.job_title} at {job.employer_name}</h2>
-            <p className={styles['job-info']}>{job.job_location} - {job.job_employment_type}</p>
+            <p className={styles['job-info']}>{job.job_location} - {job.job_employment_type} - {job.job_is_remote} - {job.job_posted_at}</p>
             <button className={styles.button} onClick={() => toggleJobDescription(job.job_id)}>
               {selectedJobId === job.job_id ? 'Hide Description' : 'View Job'}
             </button>
