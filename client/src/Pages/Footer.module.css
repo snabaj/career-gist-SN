@@ -14,6 +14,17 @@
     bottom: 0; /* Anchors the footer at the bottom */
     left: 0; /* Anchors the footer to the left */
     z-index: 1000; /* Ensures the footer stays on top of other content */
+    margin-top: 20px; /* Adds space between the footer and the content above */
+}
+
+.footerLink {
+    color: white;
+}
+
+.githublogo {
+    width: 30px; /* Sets the width of the GitHub logo */
+    height: 30px; /* Sets the height of the GitHub logo */
+    margin-right: 10px; /* Adds space between the GitHub logo and text */
 }
 
 /* Media query for smaller devices */

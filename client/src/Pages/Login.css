@@ -73,6 +73,19 @@ main.main-container {
   background-color: #332600; /* Hover effect for the button */
 }
 
+.logo2 {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
   .login-h2, .login-h3 {
     font-size: 3.5rem; /* Smaller font for H2 and H3 on smaller screens */
