@@ -25,6 +25,7 @@
     width: 30px; /* Sets the width of the GitHub logo */
     height: 30px; /* Sets the height of the GitHub logo */
     margin-right: 10px; /* Adds space between the GitHub logo and text */
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow to the logo */
 }
 
 /* Media query for smaller devices */

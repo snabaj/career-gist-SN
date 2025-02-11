@@ -19,6 +19,7 @@ ul.nav.nav-tabs {
   display: flex;  /* Aligns items in a row */
   align-items: center;  /* Aligns items vertically */
   justify-content: center;  /* Aligns items horizontally */
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);  /* Adds a shadow effect */
 }
 
 .navbar li {
