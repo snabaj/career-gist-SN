@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Job } from '../types/types';
+import type {JobDetails, JobSearchResponse, JobHighlights} from "../types/interface/jobSearch"; //new interface
 import styles from './JobList.module.css';
 
 

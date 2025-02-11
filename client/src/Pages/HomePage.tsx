@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SearchForm from '../components/SearchForm';
 import JobList from '../components/JobList';
 import Spinner from '../components/Spinner';
-import { Job } from '../types/types';
 import '../App.css';
 import './HomePage.css';
 import logo from '../assets/CareerGist.png';
@@ -64,7 +63,7 @@ const HomePage: React.FC = () => {
   const handleSaveJob = async (job: Job) => {
     alert(`Job saved: ${job.title} at ${job.company}`);
   };
-  
+
   return (
     <div>
       <img className="logo" src={logo} alt="Career Gist Logo" />
