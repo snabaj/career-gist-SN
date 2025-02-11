@@ -3,7 +3,7 @@ import { Job } from '../models/jobsModel.js';
 export const seedJobs = async () => {
     await Job.bulkCreate([
         {
-          position: "Software Engineer",
+          title: "Software Engineer",
           description: 'Develop and maintain software applications.',
           remote_onsite: 'Remote',
           salary: '$80,000 - $100,000',
@@ -12,7 +12,7 @@ export const seedJobs = async () => {
           company_id: 1,
     },
     {
-          position: 'Frontend Developer',
+          title: 'Frontend Developer',
           description: 'Work on the frontend using React and TypeScript.',
           remote_onsite: 'Hybrid',
           salary: '$70,000 - $90,000',
@@ -21,7 +21,7 @@ export const seedJobs = async () => {
           company_id: 2,
     },
     {
-          position: 'Backend Developer',
+          title: 'Backend Developer',
           description: 'Develop APIs and handle database interactions.',
           remote_onsite: 'Onsite',
           salary: '$90,000 - $110,000',
