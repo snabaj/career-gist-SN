@@ -19,7 +19,6 @@ class JobModel extends Model<JobAttributes, JobCreationAttributes> implements Jo
   public readonly updatedAt!: Date;
 }
 
-// Properly initialize the model
 JobModel.init(
   {
     id: {
@@ -33,17 +32,16 @@ JobModel.init(
       unique: true,
     },
     results: {
-      type: DataTypes.TEXT, // Storing JSON as string
+      type: DataTypes.TEXT, 
       allowNull: false,
     },
   },
   {
-    sequelize, // Ensure it's associated with Sequelize
-    modelName: 'JobModel', // Explicitly define the model name
-    tableName: "jobsQuery",
+    sequelize, 
+    modelName: 'JobModel', 
+    tableName: "jobs-query",
     timestamps: true,
   }
 );
 
-// Register the model with Sequelize
 export default JobModel;
