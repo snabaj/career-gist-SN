@@ -3,6 +3,7 @@
   grid-template-columns: 1fr; /* Ensures a single column layout */
   gap: 20px;
   padding: 20px;
+  margin-bottom: 20px;
 }
 
 /* Responsive Layout for wider screens */
@@ -24,6 +25,7 @@
 .job-description {
   margin-top: 10px;
   color: #332600; /* Example color, adjust as needed */
+  margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
 }
 
 .job-link {

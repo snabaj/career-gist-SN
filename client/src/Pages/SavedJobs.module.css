@@ -2,7 +2,7 @@ h1 {
     margin-bottom: 10px;
     color: #616161;
     padding: 1px;
-    box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
     background: rgb(244,244,243);
     background: linear-gradient(252deg, rgba(244,244,243,1) 68%, rgba(202,202,207,1) 100%);
     display: flex;
