@@ -36,7 +36,7 @@ app.use(express.static('../client/dist'));
   }
   try {
     app.listen(PORT, () => {
-      console.log(`✅Client running on http://localhost:${PORT}`);
+      console.log(`✅Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error("❌ Database sync failed:", error);

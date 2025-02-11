@@ -14,7 +14,7 @@ import Spinner from '../components/Spinner';
 import { Job } from '../types/types';
 import '../App.css';
 import './HomePage.css';
-
+import type { JobSearchResponse } from "@/shared/interfaces/jobSearch";
 
 //State management
   //jobs: stores the list of jobs returned from the search query
@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/jsearch/query?query=${encodeURIComponent(query)}`, {
+      const response = await fetch(`/api/jsearch/query?query=${encodeURIComponent(query)}`, {
         method: "GET",
       });
 
