@@ -2,7 +2,7 @@ import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 
 interface JobAttributes {
   id: number;
-  position: string;
+  title: string;
   description: string;
   remote_onsite: 'Remote' | 'Onsite' | 'Hybrid';
   salary: string;
@@ -15,7 +15,7 @@ interface JobCreationAttributes extends Optional<JobAttributes, "id"> {}
 
 export class Job extends Model<JobAttributes, JobCreationAttributes> implements JobAttributes {
   public id!: number;
-  public position!: string;
+  public title!: string;
   public description!: string;
   public remote_onsite!: 'Remote' | 'Onsite' | 'Hybrid';
   public salary!: string;
@@ -31,7 +31,7 @@ export function JobFactory(sequelize: Sequelize): typeof Job {
       autoIncrement: true,
       primaryKey: true,
     },
-    position: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
