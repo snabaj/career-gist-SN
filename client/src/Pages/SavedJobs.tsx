@@ -30,6 +30,43 @@ useEffect(() => {
   fetchSavedJobs();
 }, []);
 
+  // 🔹 Remove a job from saved jobs list
+  const handleRemoveJob = async (jobId: string) => {
+    try {
+      const response = await fetch(`/api/remove-saved-job/${jobId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove job.');
+      }
+
+      // ✅ Update UI by filtering out the removed job
+      setJobs(jobs.filter((job) => job.job_id !== jobId));
+    } catch (error) {
+      console.error('Error removing job:', error);
+      setError('Could not remove job.');
+    }
+  };
+
+  // 🔹 Mark job as "Applied"
+  const handleMarkAsApplied = async (jobId: string) => {
+    try {
+      const response = await fetch(`/api/mark-applied/${jobId}`, {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to mark job as applied.');
+      }
+
+      alert('Job marked as applied! ✅');
+    } catch (error) {
+      console.error('Error marking job as applied:', error);
+      setError('Could not mark job as applied.');
+    }
+  };
+
 
   return (
     <div className={styles.container}>

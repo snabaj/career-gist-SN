@@ -6,6 +6,8 @@ import styles from './JobList.module.css';
 interface JobListProps {
   jobs: JobDetails[];
   onSave: (job: JobDetails) => void;
+  onRemove: (jobId: string) => void;
+  onMarkAsApplied: (jobId: string) => void;
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => {
@@ -40,6 +42,8 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => {
               </>
             )}
             <button className={styles.button} onClick={() => onSave(job)}>Save Job</button>
+            <button className={styles.button} onClick={() => onMarkAsApplied(job.job_id)}>Mark as applied</button>
+            <button className={styles.button} onClick={() => onRemove(job.job_id)}>Remove</button>
           </li>
         ))}
       </ul>
