@@ -5,10 +5,10 @@ import Spinner from '../components/Spinner';
 import '../App.css';
 import './HomePage.css';
 import logo from '../assets/CareerGist.png';
-import type {JobDetails, JobSearchResponse, JobHighlights} from "../types/interface/jobSearch";
+import type {JobDetails, JobSearchResponse} from "../types/interface/jobSearch";
 
 const HomePage: React.FC = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const [jobs, setJobs] = useState<JobDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,26 +25,27 @@ const HomePage: React.FC = () => {
         throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
       }
 
-      const data : JobSearchResponse = await response.json();
-      setJobs(data.data.data.map((jobDetails: JobDetails) => ({
-        id: jobDetails.job_id,
-        title: jobDetails.job_title,
-        publisher: jobDetails.job_publisher,
-        company: jobDetails.employer_name,
-        location: jobDetails.job_location,
-        description: jobDetails.job_description,
-        type: jobDetails.job_employment_type,
-        url: jobDetails.job_apply_link,
-        highlights: jobDetails.job_highlights,
-        isRemote: jobDetails.job_is_remote,
-        postedAt: jobDetails.job_posted_at,
-        city: jobDetails.job_city,
-        state: jobDetails.job_state,
-        country: jobDetails.job_country,
-        qualifications: jobDetails.job_highlights?.Qualifications,
-        benefits: jobDetails.job_highlights?.Benefits,
-        responsibilities: jobDetails.job_highlights?.Responsibilities,
-      })));
+      const data: JobSearchResponse = await response.json();
+      setJobs(data.data.data); 
+      // ((jobDetails: JobDetails) => ({
+      //   id: jobDetails.job_id,
+      //   title: jobDetails.job_title,
+      //   publisher: jobDetails.job_publisher,
+      //   company: jobDetails.employer_name,
+      //   location: jobDetails.job_location,
+      //   description: jobDetails.job_description,
+      //   type: jobDetails.job_employment_type,
+      //   url: jobDetails.job_apply_link,
+      //   highlights: jobDetails.job_highlights,
+      //   isRemote: jobDetails.job_is_remote,
+      //   postedAt: jobDetails.job_posted_at,
+      //   city: jobDetails.job_city,
+      //   state: jobDetails.job_state,
+      //   country: jobDetails.job_country,
+      //   qualifications: jobDetails.job_highlights?.Qualifications,
+      //   benefits: jobDetails.job_highlights?.Benefits,
+      //   responsibilities: jobDetails.job_highlights?.Responsibilities,
+      // })));
 
       // ✅ Transforms JobDetails[] into Job[]
       // Adjust according to API response structure
@@ -55,8 +56,8 @@ const HomePage: React.FC = () => {
     setLoading(false);
   };
 
-  const handleSaveJob = async (job: Job) => {
-    alert(`Job saved: ${job.title} at ${job.company}`);
+  const handleSaveJob = async (job: JobDetails) => {
+    alert(`Job saved: ${job.job_title} at ${job.employer_name}`);
   };
 
   return (

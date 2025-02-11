@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import type {JobDetails, JobSearchResponse, JobHighlights} from "../types/interface/jobSearch"; //new interface
+import type {JobDetails} from "../types/interface/jobSearch"; //new interface
 import styles from './JobList.module.css';
 
 
 interface JobListProps {
-  onSave: (job: Job) => void;
-  //add a jobs prop
+  jobs: JobDetails[];
+  onSave: (job: JobDetails) => void;
 }
 
-const JobList: React.FC<JobListProps> = ({ onSave }) => {
-  const [jobs, setJobs] = useState<Job[]>([]); //get rid of this
+const JobList: React.FC<JobListProps> = ({ jobs, onSave }) => {
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
 
@@ -26,16 +25,16 @@ const JobList: React.FC<JobListProps> = ({ onSave }) => {
     <div className={styles['job-list']}>
       <ul>
         {jobs.map((job) => (
-          <li className={styles['job-card']} key={job.id}>
-            <h2 className={styles['job-title']}>{job.title} at {job.company}</h2>
-            <p className={styles['job-info']}>{job.location} - {job.type}</p>
-            <button className={styles.button} onClick={() => toggleJobDescription(job.id)}>
-              {selectedJobId === job.id ? 'Hide Description' : 'View Job'}
+          <li className={styles['job-card']} key={job.job_id}>
+            <h2 className={styles['job-title']}>{job.job_title} at {job.employer_name}</h2>
+            <p className={styles['job-info']}>{job.job_location} - {job.job_employment_type}</p>
+            <button className={styles.button} onClick={() => toggleJobDescription(job.job_id)}>
+              {selectedJobId === job.job_id ? 'Hide Description' : 'View Job'}
             </button>
-            {selectedJobId === job.id && (
+            {selectedJobId === job.job_id && (
               <>
-                <p className={styles['job-description']}>{job.description}</p>
-                <a href={job.url} target="_blank" rel="noopener noreferrer" className={styles['job-link']}>
+                <p className={styles['job-description']}>{job.job_description}</p>
+                <a href={job.job_apply_link} target="_blank" rel="noopener noreferrer" className={styles['job-link']}>
                   Job Details
                 </a>
               </>
