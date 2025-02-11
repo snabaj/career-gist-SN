@@ -41,14 +41,9 @@ const HomePage: React.FC = () => {
         city: jobDetails.job_city,
         state: jobDetails.job_state,
         country: jobDetails.job_country,
-      })));
-
-      const jobHighlights : JobHighlights = await response.json();
-      setJobs(prevJobs => prevJobs.map(job => ({
-        ...job,
-        qualifications: jobHighlights.Qualifications,
-        benefits: jobHighlights.Benefits,
-        responsibilities: jobHighlights.Responsibilities,
+        qualifications: jobDetails.job_highlights?.Qualifications,
+        benefits: jobDetails.job_highlights?.Benefits,
+        responsibilities: jobDetails.job_highlights?.Responsibilities,
       })));
 
       // ✅ Transforms JobDetails[] into Job[]
@@ -85,4 +80,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-
