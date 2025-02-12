@@ -6,7 +6,7 @@ interface JobDescriptionProps {
 }
 
 const JobDescription: React.FC<JobDescriptionProps> = ({ text }) => {
-  const sentences = text.split(/(?<=\.)\s+/); // Regex to split by period followed by space
+  const sentences = text.split(/(?<=\.)\s+/);
   return (
     <div className={styles['job-description']}>
       {sentences.map((sentence, index) => (

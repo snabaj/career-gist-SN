@@ -38,40 +38,11 @@ const HomePage: React.FC = () => {
       }
 
       const data: JobSearchResponse = await response.json();
-      console.log(data);
-
-  //     // Transform the data to match the JobDetails type
-  //     const transformedJobs: JobDetails[] = data.data.map((JobDetails: JobSearchData) => ({
-  //     //   id: jobDetails.job_id,
-  //     //   title: jobDetails.job_title,
-  //     //   publisher: jobDetails.job_publisher,
-  //     //   company: jobDetails.employer_name,
-  //     //   location: jobDetails.job_location,
-  //     //   description: jobDetails.job_description,
-  //     //   type: jobDetails.job_employment_type,
-  //     //   url: jobDetails.job_apply_link,
-  //     //   highlights: jobDetails.job_highlights,
-  //     //   isRemote: jobDetails.job_is_remote,
-  //     //   postedAt: jobDetails.job_posted_at,
-  //     //   city: jobDetails.job_city,
-  //     //   state: jobDetails.job_state,
-  //     //   country: jobDetails.job_country,
-  //     //   qualifications: jobDetails.job_highlights?.Qualifications,
-  //     //   benefits: jobDetails.job_highlights?.Benefits,
-  //     //   responsibilities: jobDetails.job_highlights?.Responsibilities,
-  //     }));
-
-  //     setJobs(transformedJobs); // strictly following API response structure
-  //   } catch (error) {
-  //     console.error("Failed to load jobs:", error);
-  //     setError("Unable to fetch jobs. Please try again later.");
-  //   }
-  //   setLoading(false);
-  // };
+      console.log("API Response:", data);
 
   if (Array.isArray(data.data)) {
     // Transform the data to match the JobDetails type
-    const transformedJobs: JobDetails[] = data.data.map((jobDetails: JobSearchData) => ({
+    const transformedJobs: JobDetails[] = data.data.map((jobDetails: JobDetails) => ({
       job_id: jobDetails.job_id,
       job_title: jobDetails.job_title,
       employer_name: jobDetails.employer_name,
@@ -83,10 +54,11 @@ const HomePage: React.FC = () => {
       job_highlights: jobDetails.job_highlights,
       job_is_remote: jobDetails.job_is_remote,
       job_posted_at: jobDetails.job_posted_at,
-      job_city: jobDetails.job_city,
-      job_state: jobDetails.job_state,
-      job_country: jobDetails.job_country,
+      job_city: jobDetails?.job_city,
+      job_state: jobDetails?.job_state,
+      job_country: jobDetails?.job_country,
     }));
+    console.log("Transformed Jobs:", transformedJobs);
 
     setJobs(transformedJobs); // strictly following API response structure
   } else {
