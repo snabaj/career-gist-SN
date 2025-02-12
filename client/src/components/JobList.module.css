@@ -85,3 +85,8 @@ h2 {
   font-size: 1rem; /* Example font size */
   margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
 }
+
+.sentence-block {
+  display: block; /* Makes each span a block, putting it on a new line */
+  margin-bottom: 8px; /* Optional: adds space between sentences */
+}
