@@ -9,6 +9,7 @@ interface JobAttributes {
   date_published: Date;
   experience_level: string;
   company_id: number;
+  saved?: boolean;
 }
 
 interface JobCreationAttributes extends Optional<JobAttributes, "id"> {}

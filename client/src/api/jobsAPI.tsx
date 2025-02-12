@@ -71,7 +71,7 @@ const retrieveJobById = async (id: number): Promise<JobDetails> => {
 const retrieveSavedJobs = async (): Promise<JobDetails[]> => {
   try {
     const response = await fetch(
-      '/api/jobs', 
+      '/api/jobs/saved', 
       {
         headers: {
           'Content-Type': 'application/json',

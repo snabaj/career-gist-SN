@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Job } from '../models/jobsModel.js';
 import { User } from '../models/userModel.js';
 
-// GET /jobs
+// GET /jobs 
 export const getAllJobs = async (_req: Request, res: Response) => {
   try {
     const jobs = await Job.findAll({
@@ -43,32 +43,36 @@ export const getJobById = async (req: Request, res: Response) => {
   }
 };
 
-// POST /jobs
+// GET /jobs/saved - Get saved jobs for the user
+export const retrieveSavedJobs = async (_req: Request, res: Response) => {
+  try {
+    const savedJobs = await Job.findAll({
+      where: { saved: true }, 
+      include: [{ model: User, as: 'user', attributes: ['username'] }]
+    });
+    res.json(savedJobs);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// POST /jobs - save a job to database
 export const saveJob = async (req: Request, res: Response) => {
   const { title, description, remote_onsite, salary, date_published, experience_level, company_id } = req.body;
   try {
-    const newJob = await Job.create({ title, description, remote_onsite, salary, date_published, experience_level, company_id });
+    const newJob = await Job.create({ title, description, remote_onsite, salary, date_published, experience_level, company_id, saved: true });
     res.status(201).json(newJob);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
 };
 
-// PUT /jobs/:id
+// PUT /jobs/:id - Update a job by id
 export const updateJob = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { title, description, remote_onsite, salary, date_published, experience_level, company_id } = req.body;
   try {
-    const job = await Job.findByPk(id);
+    const job = await Job.findByPk(req.params.id);
     if (job) {
-      job.title = title;
-      job.description = description;
-      job.remote_onsite = remote_onsite;
-      job.salary = salary;
-      job.date_published = date_published;
-      job.experience_level = experience_level;
-      job.company_id = company_id;
-      await job.save();
+      await job.update(req.body);
       res.json(job);
     } else {
       res.status(404).json({ message: 'Job not found' });
