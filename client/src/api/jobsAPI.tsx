@@ -1,18 +1,16 @@
 import { JobDetails } from '../types/interface/jobSearch.js';
-import { ApiMessage } from '../interfaces/ApiMessage';
+import { ApiMessage } from '../types/interface/jobSearch.js';
 import Auth from '../utils/auth';
 
-const retrieveJobs = async () => {
-  try {
-    const response = await fetch(
-      'https://external-job-api.com/jobs', // Replace with actual API URL
-      {
+const retrieveJobs = async (): Promise<JobDetails[]> => {
+    try {
+      const response = await fetch('/api/jobs', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${Auth.getToken()}`
         }
-      }
-    );
+      });
+  
     const data = await response.json();
 
     if (!response.ok) {
@@ -26,37 +24,54 @@ const retrieveJobs = async () => {
   }
 };
 
-const saveJob = async (job: JobData) => {
-  try {
-    const response = await fetch(
-      '/api/jobs/', 
-      {
+const retrieveJobById = async (id: number): Promise<JobDetails> => {
+    try {
+      const response = await fetch(`/api/jobs/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error('Failed to fetch job details!');
+      }
+  
+      return data;
+    } catch (err) {
+      console.error('Error fetching job by ID:', err);
+      return Promise.reject('Could not fetch job');
+    }
+  };
+
+  const saveJob = async (job: JobDetails): Promise<JobDetails> => {
+    try {
+      const response = await fetch('/api/jobs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${Auth.getToken()}`
         },
         body: JSON.stringify(job)
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error('Failed to save job!');
       }
-    );
-    
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error('Invalid API response, check network tab!');
+  
+      return data;
+    } catch (err) {
+      console.error('Error saving job:', err);
+      return Promise.reject('Could not save job');
     }
-
-    return data;
-  } catch (err) {
-    console.log('Error saving job: ', err);
-    return Promise.reject('Could not save job');
-  }
-};
-
-const retrieveSavedJobs = async (): Promise<JobData[]> => {
+  };
+  
+const retrieveSavedJobs = async (): Promise<JobDetails[]> => {
   try {
     const response = await fetch(
-      '/api/jobs/saved', 
+      '/api/jobs', 
       {
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +93,7 @@ const retrieveSavedJobs = async (): Promise<JobData[]> => {
   }
 };
 
-const deleteSavedJob = async (jobId: number): Promise<ApiMessage> => {
+const deleteJob = async (jobId: number): Promise<ApiMessage> => {
   try {
     const response = await fetch(
       `/api/jobs/${jobId}`, 
@@ -104,4 +119,4 @@ const deleteSavedJob = async (jobId: number): Promise<ApiMessage> => {
   }
 };
 
-export { retrieveJobs, saveJob, retrieveSavedJobs, deleteSavedJob };
+export { retrieveJobs, retrieveJobById, saveJob, retrieveSavedJobs, deleteJob };
