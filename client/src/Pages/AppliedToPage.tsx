@@ -12,24 +12,38 @@ const AppliedToPage: React.FC = () => {
   //Should only run once when the component mounts
   //The empty dependency array ensures that the effect runs only once
   //Therefore, it does not re-run when the component updates
-  useEffect(() => {
-    const fetchAppliedJobs = async () => {
-      try {
-        const response = await fetch('/api/applied-jobs'); // 🔹 Adjust the API endpoint; this is to retrieve the user's applied jobs
-        if (!response.ok) {
-          throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
-        }
+ // ✅ Persist login check to get applied jobs only when the user is authenticated
+ useEffect(() => {
+  const checkAuth = () => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  };
+  checkAuth();
+}, []);
 
-        const data: JobSearchResponse = await response.json();
-        setJobs(data.data.data); // ✅ Extracts applied jobs from response
-      } catch (error) {
-        console.error('Error fetching applied jobs:', error);
-        setError('Could not load applied jobs.');
+useEffect(() => {
+  if (!isLoggedIn) return; // ✅ Only fetch jobs if logged in
+
+  const fetchAppliedJobs = async () => {
+    try {
+      const response = await fetch('/api/applied-jobs'); // 🔹 Adjust API endpoint
+      if (!response.ok) {
+        throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
       }
-      setLoading(false);
-    };
-    fetchAppliedJobs();
-  }, []);
+
+      const data: JobSearchResponse = await response.json();
+      setJobs(data.data.data); // ✅ Extracts applied jobs from response
+    } catch (error) {
+      console.error('Error fetching applied jobs:', error);
+      setError('Could not load applied jobs.');
+    }
+    setLoading(false);
+  };
+
+  fetchAppliedJobs();
+}, [isLoggedIn]); // ✅ Only run when login state changes
 
 
   return (
@@ -37,20 +51,24 @@ const AppliedToPage: React.FC = () => {
       <h1>Applied To Jobs</h1>
       {loading && <Spinner />}
       {error && <p className="error">{error}</p>}
-      {jobs.length > 0 ? (
-        <ul className={styles.jobsList}>
-          {jobs.map((job) => (
-            <li key={job.job_id}>
-              <h2 className={styles['job-title']}>{job.job_title} at {job.employer_name}</h2>
-              <p className={styles['job-info']}>{job.job_location} - {job.job_employment_type}</p>
-              <a href={job.job_apply_link} target="_blank" rel="noopener noreferrer">
-                View Job
-              </a>
-            </li>
-          ))}
-        </ul>
+      {isLoggedIn ? (
+        jobs.length > 0 ? (
+          <ul className={styles.jobsList}>
+            {jobs.map((job) => (
+              <li key={job.job_id}>
+                <h2 className={styles['job-title']}>{job.job_title} at {job.employer_name}</h2>
+                <p className={styles['job-info']}>{job.job_location} - {job.job_employment_type}</p>
+                <a href={job.job_apply_link} target="_blank" rel="noopener noreferrer">
+                  View Job
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          !loading && <p>You have not applied to any jobs yet.</p>
+        )
       ) : (
-        !loading && <p>You have not applied to any jobs yet.</p>
+        <p>Please log in to view applied jobs.</p>
       )}
     </div>
   );
