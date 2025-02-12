@@ -1,4 +1,4 @@
-import { JobData } from '../interfaces/JobData';
+import { JobDetails } from '../types/interface/jobSearch.js';
 import { ApiMessage } from '../interfaces/ApiMessage';
 import Auth from '../utils/auth';
 

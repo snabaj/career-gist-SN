@@ -39,3 +39,6 @@ export interface JobHighlights {
   Responsibilities?: string[];
 }
 
+export interface ApiMessage {
+  message: string;
+}
