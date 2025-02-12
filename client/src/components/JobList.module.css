@@ -1,19 +1,29 @@
 .job-list {
-  display: grid;
-  grid-template-columns: 1fr; /* Ensures a single column layout */
+  display: flex;
+  flex-direction: column; /* Forces items to stack */
+  align-items: center; /* Centers the job cards */
+  width: 100%;
+  max-width: 800px; /* Optional: Adjust width for better readability */
+  margin: 0 auto; /* Centers the whole job list */
   gap: 20px;
   padding: 20px;
-  margin-bottom: 20px;
 }
 
 /* Responsive Layout for wider screens */
 @media (min-width: 768px) {
   .job-list {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusts to multiple columns on wider screens */
+    flex-direction: column;
   }
 }
 
+li {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
 .job-card {
+  display: flex;
+  flex-direction: column;
   background: rgb(242,242,237);
   background: linear-gradient(180deg, rgba(242,242,237,1) 68%, rgba(159,160,166,1) 100%);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
