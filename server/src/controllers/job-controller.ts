@@ -57,7 +57,7 @@ export const retrieveSavedJobs = async (_req: Request, res: Response) => {
 };
 
 // POST /jobs - save a job to database
-export const saveJob = async (req: Request, res: Response) => {
+export const createJob = async (req: Request, res: Response) => {
   const { title, description, remote_onsite, salary, date_published, experience_level, company_id } = req.body;
   try {
     const newJob = await Job.create({ title, description, remote_onsite, salary, date_published, experience_level, company_id, saved: true });
