@@ -155,7 +155,7 @@ setLoading(false);
   };
 
   return (
-    <div>
+    <div className="header-container">
       <img className="logo" src={logo} alt="CareerGist Logo" />
       <h1 className="homepage-h1">Welcome to CareerGist</h1>
       <h2 className="homepage-h2">Because Searching for Jobs Should be Easy.</h2>

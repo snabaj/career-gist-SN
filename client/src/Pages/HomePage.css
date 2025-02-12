@@ -1,7 +1,18 @@
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers children horizontally */
+  justify-content: center; /* Centers children vertically in case of more height */
+  text-align: center; /* Ensures text alignment is centered */
+  min-height: 100vh; /* Minimum height to take full viewport height */
+  padding: 20px; /* Padding around the container */
+}
+
+
 .homepage-h1 {
     margin-bottom: 10px;
     color: #616161;
-    padding: 10px;
+    padding: 10px 20px;
     box-shadow: 3px 3px 3px 3px rgba(255, 254, 254, 0.1);
     background: rgb(244,244,243);
     background: linear-gradient(252deg, rgba(244,244,243,1) 68%, rgba(202,202,207,1) 100%);
@@ -11,6 +22,7 @@
     font: 400 4rem 'Open Sans', sans-serif;
     border-radius: 50px;
     text-align: center;
+    display: inline-block;
   }
 
   .homepage-h2 {  
@@ -26,6 +38,7 @@
     font: 400 2.5rem 'Open Sans', sans-serif;
     border-radius: 50px;
     text-align: center;
+    display:inline-block;
     }
 
     .searchform-button {
@@ -41,13 +54,13 @@
     #noResults {
         font: white;
     }
-
+    
     .logo {
         width: 300px;
         height: 300px;
         margin: 0 auto;
         display: block;
-        margin-top: 50px;
+        margin-top: 3px;
         box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
     }
 
