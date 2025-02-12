@@ -11,28 +11,33 @@ export const login = async (req: Request, res: Response) => {
         const user = await User.findOne({ where: { username } });
 
         if (!user) {
-            return res.status(401).json({ message: 'Invalid Username or Password' });
+            res.status(401).json({ message: 'Invalid Username or Password' });
+            return;
         }
         console.log(user.password, password);
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             console.log('Invalid password');
-            return res.status(401).json({ message: 'Invalid Username or Password' });
+            res.status(401).json({ message: 'Invalid Username or Password' });
+            return;
         }
 
         const secretKey = process.env.JWT_SECRET_KEY as string;
         if (!secretKey) {
             console.error('JWT secret key is not set');
-            return res.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json({ message: 'Internal Server Error' });
+            return;
 
         }
 
         const token = jwt.sign({ username: user.username }, secretKey, { expiresIn: '1h', });
 
-        return res.json({ token });
+        res.json({ token });
+        return;
     } catch (error) {
         console.error('Error during login:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error' });
+        return;
     }
 };
 
