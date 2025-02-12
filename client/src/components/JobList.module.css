@@ -19,6 +19,7 @@
   padding: 16px;
   margin-bottom: 20px;
   width: 100%; /* Ensure the cards stretch to the width of the container */
+  font-family: Arial, sans-serif; /* Example font stack */
 }
 
 ul {
@@ -38,6 +39,8 @@ li {
   margin-top: 10px;
   color: #332600; /* Example color, adjust as needed */
   margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
+  line-height: 1.5; /* More readable line height */
+  margin-bottom: 10px; /* Space before action buttons */
 }
 
 .job-link {
