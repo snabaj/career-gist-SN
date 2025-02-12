@@ -22,8 +22,8 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsAppli
   }
 
   return (
-    <div className={styles['job-list']}>
-      <ul>
+    <>
+      <ul className={styles['job-list']}>
         {jobs.map((jobDetails) => ( // ✅ Fixed variable name
           <li className={styles['job-card']} key={jobDetails.job_id}> 
             <h2 className={styles['job-title']}>{jobDetails.job_title} at {jobDetails.employer_name}</h2>
@@ -54,7 +54,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsAppli
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 
