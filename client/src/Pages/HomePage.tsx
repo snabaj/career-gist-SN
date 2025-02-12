@@ -38,48 +38,66 @@ const HomePage: React.FC = () => {
       }
 
       const data: JobSearchResponse = await response.json();
-      setJobs(data.data.data); // strictly following API response structure
-    } catch (error) {
-      console.error("Failed to load jobs:", error);
-      setError("Unable to fetch jobs. Please try again later.");
-    }
-    setLoading(false);
-  };
+      console.log(data);
 
-//   const handleSearch = async (query: string) => {
-//     setLoading(true);
-//     setError(null);
+  //     // Transform the data to match the JobDetails type
+  //     const transformedJobs: JobDetails[] = data.data.map((JobDetails: JobSearchData) => ({
+  //     //   id: jobDetails.job_id,
+  //     //   title: jobDetails.job_title,
+  //     //   publisher: jobDetails.job_publisher,
+  //     //   company: jobDetails.employer_name,
+  //     //   location: jobDetails.job_location,
+  //     //   description: jobDetails.job_description,
+  //     //   type: jobDetails.job_employment_type,
+  //     //   url: jobDetails.job_apply_link,
+  //     //   highlights: jobDetails.job_highlights,
+  //     //   isRemote: jobDetails.job_is_remote,
+  //     //   postedAt: jobDetails.job_posted_at,
+  //     //   city: jobDetails.job_city,
+  //     //   state: jobDetails.job_state,
+  //     //   country: jobDetails.job_country,
+  //     //   qualifications: jobDetails.job_highlights?.Qualifications,
+  //     //   benefits: jobDetails.job_highlights?.Benefits,
+  //     //   responsibilities: jobDetails.job_highlights?.Responsibilities,
+  //     }));
 
-//     try {
-//       const response = await fetch(`/api/jsearch/query?query=${encodeURIComponent(query)}`, {
-//         method: "GET", 
-//       });
+  //     setJobs(transformedJobs); // strictly following API response structure
+  //   } catch (error) {
+  //     console.error("Failed to load jobs:", error);
+  //     setError("Unable to fetch jobs. Please try again later.");
+  //   }
+  //   setLoading(false);
+  // };
 
-//       if (!response.ok) {
-//         throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
-//       }
+  if (Array.isArray(data.data)) {
+    // Transform the data to match the JobDetails type
+    const transformedJobs: JobDetails[] = data.data.map((jobDetails: JobSearchData) => ({
+      job_id: jobDetails.job_id,
+      job_title: jobDetails.job_title,
+      employer_name: jobDetails.employer_name,
+      job_publisher: jobDetails.job_publisher,
+      job_location: jobDetails.job_location,
+      job_description: jobDetails.job_description,
+      job_employment_type: jobDetails.job_employment_type,
+      job_apply_link: jobDetails.job_apply_link,
+      job_highlights: jobDetails.job_highlights,
+      job_is_remote: jobDetails.job_is_remote,
+      job_posted_at: jobDetails.job_posted_at,
+      job_city: jobDetails.job_city,
+      job_state: jobDetails.job_state,
+      job_country: jobDetails.job_country,
+    }));
 
-//       const data: JobSearchResponse = await response.json();
-//       setJobs(data.data.data); //strictly following API response structure
-//       // ((jobDetails: JobDetails) => ({
-//       //   id: jobDetails.job_id,
-//       //   title: jobDetails.job_title,
-//       //   publisher: jobDetails.job_publisher,
-//       //   company: jobDetails.employer_name,
-//       //   location: jobDetails.job_location,
-//       //   description: jobDetails.job_description,
-//       //   type: jobDetails.job_employment_type,
-//       //   url: jobDetails.job_apply_link,
-//       //   highlights: jobDetails.job_highlights,
-//       //   isRemote: jobDetails.job_is_remote,
-//       //   postedAt: jobDetails.job_posted_at,
-//       //   city: jobDetails.job_city,
-//       //   state: jobDetails.job_state,
-//       //   country: jobDetails.job_country,
-//       //   qualifications: jobDetails.job_highlights?.Qualifications,
-//       //   benefits: jobDetails.job_highlights?.Benefits,
-//       //   responsibilities: jobDetails.job_highlights?.Responsibilities,
-//       // })));
+    setJobs(transformedJobs); // strictly following API response structure
+  } else {
+    throw new Error("Unexpected response format");
+  }
+} catch (error) {
+  console.error("Failed to load jobs:", error);
+  setError("Unable to fetch jobs. Please try again later.");
+}
+setLoading(false);
+};
 
   const handleSaveJob = async (job: JobDetails) => {
     if (!isLoggedIn) return alert('Please log in to save jobs.');
@@ -147,7 +165,7 @@ const HomePage: React.FC = () => {
       {loading && <Spinner />}
       {error && <p className="error">{error}</p>}
 
-      {jobs.length > 0 ? (
+      {jobs?.length > 0 ? (
         <JobList
           jobs={jobs}
           onSave={handleSaveJob}
@@ -163,4 +181,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

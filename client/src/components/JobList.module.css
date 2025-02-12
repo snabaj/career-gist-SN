@@ -1,5 +1,5 @@
 .job-list {
-  display: flex;
+  /* display: flex; */
   flex-direction: column; /* Forces items to stack */
   align-items: center; /* Centers the job cards */
   width: 100%;

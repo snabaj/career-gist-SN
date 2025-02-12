@@ -34,6 +34,8 @@ const SearchForm: React.FC<Props> = ({ onSearch, loading }) => {
     <div className="search-container">
       <input
         className="search-input"
+        id="jobSearch"
+        name="jobSearch"
         type="text"
         value={query}
         onChange={e => setQuery(e.target.value)}
