@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import sequelize from '../config/connection.js';
 import { CompanyFactory } from './companyModel.js';
 import { JobContactInfoFactory } from './jobContactInfoModel.js';
 import { SkillFactory } from './skillsModel.js';
 import { JobFactory } from './jobsModel.js';
 import { ApplicationFactory } from './applicationsModel.js';
 import { UserFactory } from './userModel.js';
+import sequelize from '../config/connection.js';
 
 const Company = CompanyFactory(sequelize);
 const JobContactInfo = JobContactInfoFactory(sequelize);
