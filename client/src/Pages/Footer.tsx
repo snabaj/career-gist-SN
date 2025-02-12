@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <a href="https://github.com/nathangreen1632/career-gist">
        <img className={styles.githublogo} src={github} alt="Career Gist Logo" />
       </a>
-      <p>Copyright © 2025. || <a className={styles.footerLink} href= "https://github.com/nathangreen1632">Nathan Green,</a> <a className={styles.footerLink} href="https://github.com/ccasalme">Cyrl Casalme,</a> <a className={styles.footerLink} href="https://github.com/snabaj">Stella Nabajja</a></p>
+      <p>CareerGist. Copyright © 2025. || <a className={styles.footerLink} href= "https://github.com/nathangreen1632">Nathan Green,</a> <a className={styles.footerLink} href="https://github.com/ccasalme">Cyrl Casalme,</a> <a className={styles.footerLink} href="https://github.com/snabaj">Stella Nabajja</a></p>
     </footer>
   );
 };
