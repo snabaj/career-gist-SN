@@ -1,23 +1,14 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { Sequelize } from 'sequelize';
 import { CompanyFactory } from './companyModel.js';
 import { JobContactInfoFactory } from './jobContactInfoModel.js';
 import { SkillFactory } from './skillsModel.js';
 import { JobFactory } from './jobsModel.js';
 import { ApplicationFactory } from './applicationsModel.js';
 import { UserFactory } from './userModel.js';
+import sequelize from '../config/connection.js';
 
-const sequelize = process.env.DB_URL
-  ? new Sequelize(process.env.DB_URL)
-  : new Sequelize(process.env.DB_NAME ?? '', process.env.DB_USER ?? '', process.env.DB_PASSWORD ?? '', {
-      host: 'localhost',
-      dialect: 'postgres',
-      dialectOptions: {
-        decimalNumbers: true,
-      },
-    });
 
 const Company = CompanyFactory(sequelize);
 const JobContactInfo = JobContactInfoFactory(sequelize);
