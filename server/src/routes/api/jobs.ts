@@ -2,7 +2,7 @@ import express from 'express';
 import { 
     getAllJobs, 
     getJobById, 
-    createJob, 
+    saveJob, 
     updateJob, 
     deleteJob 
 } from '../../controllers/job-controller.js';
@@ -16,7 +16,7 @@ router.get('/', getAllJobs);
 router.get('/:id', getJobById);
 
 // POST /jobs - Create a new job
-router.post('/', createJob);
+router.post('/', saveJob);
 
 // PUT /jobs/:id - Update a job by id
 router.put('/:id', updateJob);
