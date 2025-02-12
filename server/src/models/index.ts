@@ -9,7 +9,6 @@ import { ApplicationFactory } from './applicationsModel.js';
 import { UserFactory } from './userModel.js';
 import sequelize from '../config/connection.js';
 
-
 const Company = CompanyFactory(sequelize);
 const JobContactInfo = JobContactInfoFactory(sequelize);
 const Skill = SkillFactory(sequelize);
