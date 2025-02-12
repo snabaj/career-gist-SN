@@ -1,35 +1,37 @@
 .job-list {
-  /* display: flex; */
-  flex-direction: column; /* Forces items to stack */
-  align-items: center; /* Centers the job cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  max-width: 800px; /* Optional: Adjust width for better readability */
-  margin: 0 auto; /* Centers the whole job list */
+  max-width: 800px;
+  margin: auto;
   gap: 20px;
   padding: 20px;
+  margin-bottom: 50px;
 }
 
-/* Responsive Layout for wider screens */
-@media (min-width: 768px) {
-  .job-list {
-    flex-direction: column;
-  }
-}
-
-li {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-}
 .job-card {
-  display: flex;
+  display: flex; /* Overrides the default list-item display */
   flex-direction: column;
-  background: rgb(242,242,237);
   background: linear-gradient(180deg, rgba(242,242,237,1) 68%, rgba(159,160,166,1) 100%);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 20px;
+  width: 100%; /* Ensure the cards stretch to the width of the container */
+}
+
+ul {
+  width: 100%; /* Ensure the ul takes the full width of its parent */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  list-style-type: none; /* Remove bullet points */
+}
+
+li {
+  display: flex; /* This ensures that the list items use flexbox */
+  flex-direction: column; /* Stack the contents of the list item vertically */
+  width: 100%; /* Full width to match the job-card settings */
 }
 
 .job-description {
