@@ -102,3 +102,5 @@ const handleMarkAsApplied = useCallback(async (job_id: string) => {
 
 
 export default SavedJobs;
+
+
