@@ -38,7 +38,30 @@ const HomePage: React.FC = () => {
       }
 
       const data: JobSearchResponse = await response.json();
-      console.log("API Response:", data);
+      console.log("🚀 API Response:", data);
+
+      if (data?.data && Array.isArray(data.data) && data.data.length > 0) {
+        console.log("✅ Setting job data:", data.data);
+        setJobs(data.data);
+      } else {
+        console.warn("⚠️ No enhanced data. Checking for raw job data...");
+        setJobs([]);
+      }
+    } catch (error) {
+      console.error("❌ Failed to load jobs:", error);
+    } finally {
+      setLoading(false);
+    } try {
+      const response = await fetch(`/api/jsearch/query?query=${encodeURIComponent(query)}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
+      }
+
+      const data: JobSearchResponse = await response.json();
+      console.log("🚀 API Response:", data);
 
   if (Array.isArray(data.data)) {
     // Transform the data to match the JobDetails type
@@ -65,8 +88,8 @@ const HomePage: React.FC = () => {
     throw new Error("Unexpected response format");
   }
 } catch (error) {
-  console.error("Failed to load jobs:", error);
-  setError("Unable to fetch jobs. Please try again later.");
+  console.error("Error fetching job data:", error);
+  setError("Failed to load jobs. Please try again later.");
 }
 setLoading(false);
 };
@@ -146,7 +169,7 @@ setLoading(false);
           isLoggedIn={isLoggedIn} // ✅ Pass login state to JobList
         />
       ) : (
-        !loading && <p>No results found.</p>
+        !loading && <p>Not the job you're looking for? Try a different keyword or location.</p>
       )}
     </div>
   );

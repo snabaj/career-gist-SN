@@ -69,30 +69,32 @@ Ensure there is no additional formatting, explanations, or surrounding text. Ret
     });
 
     const data = await response.json();
-    if (!data.choices[0]?.message?.content || !data.choices) {
-      return [];
+    if (!data.choices || !data.choices[0]?.message?.content) {
+      console.warn("⚠️ No enhancement returned from OpenAI. Using raw job data.");
+      return jobData; // Ensure raw data is returned
+
     } try {
-      const question = JSON.parse(data.choices[0].message.content); // change to real variable name
-      return question.map((job: any) => ({ // change to real variable name
-        job_id: job.job_id,
-        job_title: job.job_title,
-        employer_name: job.employer_name,
-        job_publisher: job.job_publisher,
-        job_location: job.job_location,
-        job_description: job.job_description,
-        job_employment_type: job.job_employment_type,
-        job_apply_link: job.job_apply_link,
-        job_highlights: job.job_highlights,
-        job_is_remote: job.job_is_remote,
-        job_posted_at: job.job_posted_at,
-        job_city: job?.job_city,
-        job_state: job?.job_state,
-        job_country: job?.job_country,
-      }));
+        const question = JSON.parse(data.choices[0].message.content); // change to real variable name
+        return question.map((job: any) => ({ // change to real variable name
+          job_id: job.job_id,
+          job_title: job.job_title,
+          employer_name: job.employer_name,
+          job_publisher: job.job_publisher,
+          job_location: job.job_location,
+          job_description: job.job_description,
+          job_employment_type: job.job_employment_type,
+          job_apply_link: job.job_apply_link,
+          job_highlights: job.job_highlights,
+          job_is_remote: job.job_is_remote,
+          job_posted_at: job.job_posted_at,
+          job_city: job?.job_city,
+          job_state: job?.job_state,
+          job_country: job?.job_country,
+        }));
+      } catch {
+        return [];
+      }
     } catch {
       return [];
-    }
-  } catch {
-    return [];
   }
 };
