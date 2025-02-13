@@ -1,3 +1,4 @@
+//New gptService.ts codes
 import fetch, { Response } from "node-fetch";
 
 const CAREER_GIST_URL: string = process.env.CAREER_GIST_URL ?? "";
@@ -25,14 +26,25 @@ ${JSON.stringify(limitedJobs, null, 2)}
 The JSON structure must follow this format and order:
 [
   {
-    "title": "Job Title",
+    "job_id": "If available",
+    "job_title": "Job Title",
+    "job_details": "If available",
+    "employer_name": "Company Name",
     "job_publisher": "If available",
-    "company": "Company Name",
-    "location": "City, State, Country",
-    "salary": "If available",
-    "employment_type": "If available",
-    "job_is_remote": "If available",
+    "employer_name": "Company Name",
+    "job_location": "City, State, Country",
     "job_description": "Give a detailed, but concise, job description that is **500 words or less**",
+    "job_employment_type": "If available",
+    "job_apply_link": "URL to the job posting",
+    "job_highlights": {
+      "Responsibilities": "If available",
+      "Qualifications": "If available",
+      "Benefits": "If available",
+    },
+    "job_is_remote": "If available",
+    "job_posted_at": "If available",
+    "job_salary": "If available",
+    "job_is_remote": "If available",
     "responsibilities": "Give a detailed, but concise, job description that is **250 words or less**",
     "qualifications": "List of qualifications",
     "benefits": ["Benefit 1", "Benefit 2", "Benefit 3"],
@@ -60,7 +72,23 @@ Ensure there is no additional formatting, explanations, or surrounding text. Ret
     if (!data.choices[0]?.message?.content || !data.choices) {
       return [];
     } try {
-      return JSON.parse(data.choices[0].message.content);
+      const question = JSON.parse(data.choices[0].message.content); // change to real variable name
+      return question.map((job: any) => ({ // change to real variable name
+        job_id: job.job_id,
+        job_title: job.job_title,
+        employer_name: job.employer_name,
+        job_publisher: job.job_publisher,
+        job_location: job.job_location,
+        job_description: job.job_description,
+        job_employment_type: job.job_employment_type,
+        job_apply_link: job.job_apply_link,
+        job_highlights: job.job_highlights,
+        job_is_remote: job.job_is_remote,
+        job_posted_at: job.job_posted_at,
+        job_city: job?.job_city,
+        job_state: job?.job_state,
+        job_country: job?.job_country,
+      }));
     } catch {
       return [];
     }

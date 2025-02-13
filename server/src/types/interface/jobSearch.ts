@@ -31,6 +31,7 @@ export interface JobDetails {
   job_state?: string;
   job_country?: string;
   job_highlights?: JobHighlights;
+  job_salary?: string;
 }
 
 export interface JobHighlights {
@@ -39,3 +40,6 @@ export interface JobHighlights {
   Responsibilities?: string[];
 }
 
+export interface ApiMessage {
+  message: string;
+}
