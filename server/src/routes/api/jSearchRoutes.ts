@@ -41,7 +41,8 @@ router.get("/query", (req: Request, res: Response) => {
 
       await cacheEnhancedJobData(query, enhancedData);
 
-      return res.json(enhancedData);
+      const data = enhancedData.length ? enhancedData : jobData;
+      return res.json({data});
     } catch (error) {
       console.error("❌ Job search error:", error);
       return res.status(500).json({ error: "Failed to fetch job listings." });
