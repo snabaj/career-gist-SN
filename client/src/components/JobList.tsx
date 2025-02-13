@@ -1,46 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import type {JobDetails, JobSearchResponse, JobHighlights} from "../types/interface/jobSearch"; //new interface
+import React, { useState } from 'react';
+import type { JobDetails } from "../types/interface/jobSearch";
+import JobDescription from './JobDescription'; // Import the new component
 import styles from './JobList.module.css';
 
-
 interface JobListProps {
-  onSave: (job: Job) => void;
-  //add a jobs prop
+  jobs: JobDetails[];
+  onSave: (job: JobDetails) => void;
+  onRemove: (job_id: string) => void; 
+  onMarkAsApplied: (job_id: string) => void;
+  isLoggedIn: boolean;
 }
 
-const JobList: React.FC<JobListProps> = ({ onSave }) => {
-  const [jobs, setJobs] = useState<Job[]>([]); //get rid of this
+const JobList: React.FC<JobListProps> = ({ jobs, onSave, onRemove, onMarkAsApplied, isLoggedIn }) => {
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
-
-  const toggleJobDescription = (jobId: string) => {
-    setSelectedJobId((prevJobId) => (prevJobId === jobId ? null : jobId));
+  const toggleJobDescription = (job_id: string) => {
+    setSelectedJobId(prevJobId => prevJobId === job_id ? null : job_id);
   };
 
   if (!jobs || jobs.length === 0) {
-    return <p>No jobs found.</p>;
+    return <p>You have not saved any job yet.</p>;
   }
 
-  //check properties
   return (
     <div className={styles['job-list']}>
       <ul>
-        {jobs.map((job) => (
-          <li className={styles['job-card']} key={job.id}>
-            <h2 className={styles['job-title']}>{job.title} at {job.company}</h2>
-            <p className={styles['job-info']}>{job.location} - {job.type}</p>
-            <button className={styles.button} onClick={() => toggleJobDescription(job.id)}>
-              {selectedJobId === job.id ? 'Hide Description' : 'View Job'}
+        {jobs.map((jobDetails) => (
+          <li className={styles['job-card']} key={jobDetails.job_id}>
+            <h2 className={styles['job-title']}>{jobDetails.job_title} at {jobDetails.employer_name}</h2>
+            <p className={styles['job-info']}>
+              {jobDetails.job_location} - {jobDetails.job_employment_type} - {jobDetails.job_is_remote ? 'Remote' : 'On-site'} - 
+              {jobDetails.job_posted_at}</p>
+            <button className={styles.button} onClick={() => toggleJobDescription(jobDetails.job_id)}>
+              {selectedJobId === jobDetails.job_id ? 'Hide Description' : 'View Job'}
             </button>
-            {selectedJobId === job.id && (
+            {selectedJobId === jobDetails.job_id && (
               <>
-                <p className={styles['job-description']}>{job.description}</p>
-                <a href={job.url} target="_blank" rel="noopener noreferrer" className={styles['job-link']}>
+                <JobDescription text={jobDetails.job_description} />
+                <a href={jobDetails.job_apply_link} target="_blank" rel="noopener noreferrer" className={styles['job-link']}>
                   Job Details
                 </a>
               </>
             )}
-            <button className={styles.button} onClick={() => onSave(job)}>Save Job</button>
+            {isLoggedIn && (
+              <>
+                <button className={styles.button} onClick={() => onSave(jobDetails)}>Save Job</button>
+                <button className={styles.button} onClick={() => onMarkAsApplied(jobDetails.job_id)}>Mark as Applied</button>
+                <button className={styles.button} onClick={() => onRemove(jobDetails.job_id)}>Remove</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
@@ -49,4 +57,3 @@ const JobList: React.FC<JobListProps> = ({ onSave }) => {
 };
 
 export default JobList;
-
