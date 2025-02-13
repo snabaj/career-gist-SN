@@ -37,17 +37,28 @@ router.get("/query", (req: Request, res: Response) => {
       }
 
       console.log("⚡ Enhancing job data using GPT...");
-      const enhancedData = await generateEnhancedJobData(jobData);
+      let enhancedData;
+      try {
+        enhancedData = await generateEnhancedJobData(jobData);
+        if (!enhancedData || enhancedData.length === 0) {
+          console.warn("⚠️ OpenAI enhancement failed. Using raw job data.");
+          enhancedData = jobData;
+        }
+      } catch (error) {
+        console.error("❌ Error enhancing job data:", error);
+        enhancedData = jobData; // Ensure raw job data is returned
+      }
+
+      console.log("📢 Final response being sent to frontend:", JSON.stringify(enhancedData, null, 2));
 
       await cacheEnhancedJobData(query, enhancedData);
+      return res.json({ data: enhancedData });
 
-      const data = enhancedData.length ? enhancedData : jobData;
-      return res.json({data});
     } catch (error) {
-      console.error("❌ Job search error:", error);
-      return res.status(500).json({ error: "Failed to fetch job listings." });
+      console.error("❌ Error fetching job data:", error);
+      return res.status(500).json({ error: "Error fetching job data." });
     }
-  })();
+    })();
 });
 
 export default router;
