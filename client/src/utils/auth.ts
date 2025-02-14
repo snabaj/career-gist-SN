@@ -16,13 +16,13 @@ class AuthService {
       const decoded = jwtDecode<JwtPayload>(token);
       if (!decoded.exp) return false;
       return decoded.exp * 1000 < Date.now();
-    } catch (error) {
-      return true;
+    } catch {
+        return true;
     }
   }
 
   getToken(): string {
-    return localStorage.getItem('id_token') || '';
+    return localStorage.getItem('id_token') ?? '';
   }
 
   login(idToken: string) {

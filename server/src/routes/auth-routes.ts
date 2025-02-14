@@ -14,7 +14,6 @@ export const login = async (req: Request, res: Response) => {
             res.status(401).json({ message: 'Invalid Username or Password' });
             return;
         }
-        console.log(user.password, password);
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             console.log('Invalid password');
@@ -41,7 +40,7 @@ export const login = async (req: Request, res: Response) => {
     }
 };
 
-const router = Router();
+const router : Router = Router();
 
 router.post('/login', login);
 

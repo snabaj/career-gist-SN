@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Router} from 'express';
 import { 
     getAllJobs, 
     getJobById, 
@@ -7,7 +7,7 @@ import {
     deleteJob 
 } from '../../controllers/job-controller.js';
 
-const router = express.Router();
+const router :Router = express.Router();
 
 router.get('/', getAllJobs);
 

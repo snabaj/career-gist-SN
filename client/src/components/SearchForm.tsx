@@ -19,7 +19,7 @@ const SearchForm: React.FC<Props> = ({ onSearch, loading }) => {
         type="text"
         value={query}
         onChange={e => setQuery(e.target.value)}
-        placeholder="Job Title"
+        placeholder="Enter Search Here"
       />
       <button className="search" onClick={() => onSearch(query)} disabled={loading}>
         {loading ? 'Loading...' : 'Search'}

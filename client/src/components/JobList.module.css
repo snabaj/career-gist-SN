@@ -4,43 +4,40 @@
   align-items: center;
   width: 100%;
   max-width: 800px;
-  margin: auto;
   gap: 20px;
   padding: 20px;
-  margin-bottom: 50px;
 }
 
 .job-card {
-  display: flex; /* Overrides the default list-item display */
+  display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, rgba(242,242,237,1) 68%, rgba(159,160,166,1) 100%);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 20px;
-  width: 100%; /* Ensure the cards stretch to the width of the container */
-  font-family: Arial, sans-serif; /* Example font stack */
+  width: 100%;
+  font-family: Arial, sans-serif;
 }
 
 ul {
-  width: 100%; /* Ensure the ul takes the full width of its parent */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-  list-style-type: none; /* Remove bullet points */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 li {
-  display: flex; /* This ensures that the list items use flexbox */
-  flex-direction: column; /* Stack the contents of the list item vertically */
-  width: 100%; /* Full width to match the job-card settings */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .job-description {
   margin-top: 10px;
   color: #332600; 
-  margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
-  line-height: 1.5; /* More readable line height */
-  margin-bottom: 10px; /* Space before action buttons */
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
 
 .job-link {
@@ -51,10 +48,10 @@ li {
 
 .button, .button-outline {
   padding: 10px 20px;
-  margin: 10px 10px 10px 0; /* Adds spacing between buttons */
+  margin: 10px 10px 10px 0;
   cursor: pointer;
   border-radius: 5px;
-  display: inline-block; /* Ensures the button is displayed inline and respects the margin */
+  display: inline-block;
 }
 
 .button {
@@ -76,17 +73,17 @@ h2 {
 
 .job-title {
   color: #616161;
-  font-size: 1.5rem; /* Example size */
-  margin-bottom: 0.5rem; /* Provides spacing below the title */
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .job-info {
   color: #332600;
-  font-size: 1rem; /* Example font size */
-  margin-bottom: 0.5rem; /* Provides spacing below the paragraph */
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .sentence-block {
-  display: block; /* Makes each span a block, putting it on a new line */
-  margin-bottom: 8px; /* Optional: adds space between sentences */
+  display: block;
+  margin-bottom: 8px;
 }
