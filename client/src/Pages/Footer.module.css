@@ -1,20 +1,19 @@
 .footer {
-    display: flex; /* Ensures that content is flexibly designed */
-    justify-content: center; /* Horizontally centers the content */
-    align-items: center; /* Vertically centers the content */
-    width: 100%; /* Stretches to the full width of the viewport */
-    padding: 20px 0; /* Top and bottom padding only */
-    background: rgb(55,55,53); /* Dark background */
-    background: linear-gradient(180deg, rgba(55,55,53,1) 61%, rgba(0,0,0,1) 100%); /* Gradient background */
-    color: #f3f3f3; /* Light text color for readability */
-    text-align: center; /* Centers text inside the footer */
-    font-size: 16px; /* Sets a readable font size */
-    border-top: 1px solid #e2e2e2; /* Subtle top border for visual separation */
-    position: fixed; /* Fixes position relative to the viewport */
-    bottom: 0; /* Anchors the footer at the bottom */
-    left: 0; /* Anchors the footer to the left */
-    z-index: 1000; /* Ensures the footer stays on top of other content */
-    padding-top: 30px; /* Adds space between the footer and the content above */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+    background: rgb(55,55,53);
+    background: linear-gradient(180deg, rgba(55,55,53,1) 61%, rgba(0,0,0,1) 100%);
+    color: #f3f3f3;
+    text-align: center;
+    font-size: 16px;
+    border-top: 1px solid #e2e2e2;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .footerLink {
@@ -22,16 +21,15 @@
 }
 
 .githublogo {
-    width: 30px; /* Sets the width of the GitHub logo */
-    height: 30px; /* Sets the height of the GitHub logo */
-    margin-right: 10px; /* Adds space between the GitHub logo and text */
-    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow to the logo */
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Media query for smaller devices */
 @media (max-width: 768px) {
     .footer {
-        padding: 10px 0; /* Reduces padding on smaller screens */
-        font-size: 14px; /* Slightly smaller font size for small devices */
+        padding: 10px 0;
+        font-size: 14px;
     }
 }

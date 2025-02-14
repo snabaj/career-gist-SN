@@ -21,7 +21,7 @@ const App: React.FC = () => {
       <Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/saved-jobs" element={<SavedJobs />} />
+          <Route path="/saved-jobs" element={<SavedJobs isLoggedIn={isLoggedIn} />} />
           <Route path="/applied-to" element={<AppliedToPage />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/footer" element={<Footer />} />

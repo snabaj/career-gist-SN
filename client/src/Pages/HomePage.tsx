@@ -14,7 +14,6 @@ const HomePage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // ✅ Track login state
 
   useEffect(() => {
-    // Check if the user is logged in when the component mounts
     const checkAuth = () => {
       const token = localStorage.getItem("authToken");
       if (token) {
@@ -64,7 +63,6 @@ const HomePage: React.FC = () => {
       console.log("🚀 API Response:", data);
 
   if (Array.isArray(data.data)) {
-    // Transform the data to match the JobDetails type
     const transformedJobs: JobDetails[] = data.data.map((jobDetails: JobDetails) => ({
       job_id: jobDetails.job_id,
       job_title: jobDetails.job_title,
@@ -83,7 +81,7 @@ const HomePage: React.FC = () => {
     }));
     console.log("Transformed Jobs:", transformedJobs);
 
-    setJobs(transformedJobs); // strictly following API response structure
+    setJobs(transformedJobs);
   } else {
     throw new Error("Unexpected response format");
   }
@@ -165,10 +163,10 @@ setLoading(false);
           onSave={handleSaveJob}
           onMarkAsApplied={handleMarkAsApplied}
           onRemove={handleRemoveJob}
-          isLoggedIn={isLoggedIn} // ✅ Pass login state to JobList
+          isLoggedIn={isLoggedIn}
         />
       ) : (
-        !loading && <p>Not the job you're looking for? Try a different keyword or location.</p>
+        !loading && <p>Enter a job title and location, then click search</p>
       )}
     </div>
   );

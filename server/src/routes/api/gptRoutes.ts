@@ -11,7 +11,6 @@ router.post("/generate", (req: Request, res: Response, next: NextFunction) => {
         return res.status(400).json({ error: "Missing job data for enhancement." });
       }
 
-      console.log("‼️ Enhancing job data...");
       const enhancedJobData = await generateEnhancedJobData(jobData);
 
       return res.json(enhancedJobData);

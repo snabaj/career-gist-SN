@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './Footer.module.css'; // Ensure the path is correct
-import github from '../assets/github-mark.png'; // Ensure the path is correct
+import styles from './Footer.module.css';
+import github from '../assets/github-mark.png';
 
 const Footer: React.FC = () => {
   return (

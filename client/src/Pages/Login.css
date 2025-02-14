@@ -1,11 +1,11 @@
 .main-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers children horizontally */
-  justify-content: center; /* Centers children vertically */
-  text-align: center; /* Ensures text alignment is centered */
-  min-height: 100vh; /* Minimum height to take full viewport height */
-  padding: 10px 0px 0px 10px; /* Padding around the container */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 10px 0 0 10px;
 }
 
 .login-form {
@@ -25,85 +25,83 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   background: rgb(244,244,243);
   background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(202,202,207,1) 100%);
-  display: block; /* Ensures they are treated as block-level elements, stacking them */
+  display: block;
   justify-content: center;
   text-align: center;
-  font-size: 5.5rem; /* Size for H2 */
   font: 400 5.5rem 'Open Sans', sans-serif;
   border-radius: 50px;
-  margin-top: 20px; /* Ensures spacing between the H2 and H3 */
+  margin-top: 20px;
 }
 
 .login-h3 {
-  font-size: 2.5rem; /* Smaller font size for H3 */
-  margin-top: 20px; /* Additional space from H2 */
+  font-size: 2.5rem;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
   .login-h2, .login-h3 {
-    font-size: 3.5rem; /* Smaller font for H2 and H3 on smaller screens */
+    font-size: 3.5rem;
     padding: 8px;
   }
 
   .login-form {
-    max-width: 100%; /* Allows the form to expand to full width */
-    padding: 15px; /* Consistent padding */
+    max-width: 100%;
+    padding: 15px;
   }
 }
 
 .logo2 {
   display: flex;
-  width: 10%; /* Relative width */
-  height: auto; /* Maintains aspect ratio */
-  max-width: 100px; /* Limits maximum size */
-  max-height: 100px; /* Limits maximum height */
-  margin: 20px auto; /* Centered horizontally and space from other elements */
+  width: 10%;
+  height: auto;
+  max-width: 100px;
+  max-height: 100px;
+  margin: 20px auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
   box-shadow: 3px 3px 3px 3px rgba(255, 254, 254, 0.1);
-  gap: 10px; /* Adds space between child elements */
+  gap: 10px;
 }
 
 @media (max-width: 768px) {
   .login-h2, .login-h3 {
-    font-size: 3.5rem; /* Smaller font for H2 and H3 on smaller screens */
-    padding: 8px; /* Smaller padding */
+    font-size: 3.5rem;
+    padding: 8px;
   }
 
   .login-form {
-    max-width: 100%; /* Allows the form to expand to full width */
-    padding: 15px; /* Consistent padding */
+    max-width: 100%;
+    padding: 15px;
   }
 
   .login-input, .login-button {
-    margin-bottom: 10px; /* Consistent spacing */
+    margin-bottom: 10px;
   }
   .logo2 {
-    width: 15%; /* Slightly larger on small screens */
-    max-width: 70px; /* Adjusted max width */
-    max-height: 70px; /* Adjusted max height */
+    width: 15%;
+    max-width: 70px;
+    max-height: 70px;
   }
 }
 
 .login-input {
   padding: 10px;
   border-radius: 4px;
-  cursor: pointer; /* Indicates clickable */
+  cursor: pointer;
   text-align: center;
   justify-content: center;
   border: 1px solid #332600;
-  border-radius: 4px;
-  margin-bottom: 10px; /* Adds space between inputs */
+  margin-bottom: 10px;
 }
 
 .Login-button {
   background: rgb(244,244,243);
   background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(41,41,43,1) 100%);
   color: #332600;
-  font-size: 1rem; /* Example size */
-  cursor: pointer; /* Indicates clickable */
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .Login-button, .Login-button-outline {
@@ -111,15 +109,4 @@
   margin: 10px 10px 10px 0;
   border-radius: 5px;
   display: inline-block;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
 }

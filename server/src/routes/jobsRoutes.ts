@@ -13,7 +13,6 @@ router.get("/search", (req: Request, res: Response, next: NextFunction) => {
     try {
       const cachedData = await getCache(cacheKey);
       if (cachedData) {
-        console.log("⚡ Serving from cache");
         return res.json(cachedData);
       }
 
@@ -29,8 +28,6 @@ router.get("/search", (req: Request, res: Response, next: NextFunction) => {
 
       const data = await response.json();
       await setCache(cacheKey, data, 900);
-
-      console.log("🌍 Fetched from API");
       return res.json(data);
     } catch (error) {
       console.error("❌ API Error:", error);
@@ -49,7 +46,6 @@ router.delete("/clear-cache", async (req: Request, res: Response, next: NextFunc
     res.status(400).json({ error: "Cache key is required." });
     return;
   }
-
   try {
     await deleteCache(key);
     console.log(`🗑️ Deleted cache key: ${key}`);
@@ -63,7 +59,6 @@ router.delete("/clear-cache", async (req: Request, res: Response, next: NextFunc
 router.delete("/clear-all-cache", async (_req: Request, res: Response) => {
   try {
     await clearCache();
-    console.log("🧹 Cleared all Redis cache.");
     res.json({ message: "All cache cleared." });
   } catch (error) {
     console.error("❌ Error clearing cache:", error);

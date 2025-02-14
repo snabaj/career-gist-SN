@@ -6,29 +6,28 @@ ul.nav.nav-tabs {
   padding: 1rem;
   }
 
-/* Additional styling within src/index.css */
 .navbar {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: flex;  /* Aligns items in a row */
-  align-items: center;  /* Aligns items vertically */
-  justify-content: center;  /* Aligns items horizontally */
-  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);  /* Adds a shadow effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar li {
-  margin-right: 20px;  /* Adjust spacing between links */
+  margin-right: 20px;
 }
 
 .navbar a {
   text-decoration: none;
-  color: black;  /* Set default link color */
+  color: black;
 }
 
 .navbar a.active {
   font-weight: bold;
-  color: #007BFF;  /* Highlight color for active link */
+  color: #007BFF;
 }
 
 .navbar-tabs li {
@@ -47,13 +46,6 @@ ul.nav.nav-tabs {
   text-align: center;
 }
 
-.navbar {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  padding: 0;
-}
-
 .navbar.open {
   display: flex;
   flex-direction: column;
@@ -64,8 +56,8 @@ ul.nav.nav-tabs {
   background: rgb(244,244,243);
   background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(41,41,43,1) 100%);
   color: #332600;
-  font-size: 1rem; /* Example size */
-  cursor: pointer; /* Indicates clickable */
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .Logout-button, .Logout-button-outline {
@@ -76,29 +68,29 @@ ul.nav.nav-tabs {
 }
 
 .Logout-button:hover {
-  background-color: #332600; /* Hover effect for the button */
+  background-color: #332600;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    display: none; /* Hide the navbar by default on mobile devices */
+    display: none;
   }
   .navbar.open {
-    display: flex; /* Show when open */
+    display: flex;
   }
   .navbar-toggle {
-    display: block; /* Show the toggle button on mobile */
+    display: block;
   }
 }
 
 
 .search-container {
-  display: flex; /* Use flexbox to align children */
+  display: flex;
   padding: 5px;
   border-radius: 2px;
-  align-items: center; /* Align children vertically */
-  justify-content: flex-end; /* Align children to the right */
-  gap: 10px; /* Adds space between the input and the button */
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .search {
@@ -107,40 +99,37 @@ ul.nav.nav-tabs {
   background: rgb(244,244,243);
   background: linear-gradient(180deg, rgba(244,244,243,1) 68%, rgba(41,41,43,1) 100%);
   color: #332600;
-  cursor: pointer; /* Indicates clickable */
+  cursor: pointer;
   padding: 8px 16px;
   margin: 10px 10px 10px 0;
   border-radius: 5px;
   display: inline-block;
   border: none;
-  font-size: 12px; /* Example size */
-  min-width: 100px; /* Ensures a minimum width */
+  font-size: 12px;
+  min-width: 100px;
 }
 
 .search-input {
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  cursor: pointer; /* Indicates clickable */
+  width: 20rem;
+  cursor: pointer;
   text-align: center;
   justify-content: center;
-  border: 1px solid #332600;
-  border-radius: 4px;
 }
 
 html, body {
-  height: 100%; /* Ensures the html and body take full viewport height */
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* General body styling */
 body {
-  margin: 0;
   padding: 0;
   background: rgb(236,234,234);
   background: linear-gradient(180deg, rgba(236,234,234,1) 0%, rgba(6,6,6,1) 100%);
-  font-family: 'Open Sans', sans-serif; /* Ensures font consistency */
+  font-family: 'Open Sans', sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -151,14 +140,12 @@ body {
   margin-bottom: 30px;
 }
 
-/* Ensure full height for root and structure */
 #root, .layout-container {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Styling for main content area */
 .main-content {
   flex: 1;
   padding: 20px;
