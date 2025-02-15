@@ -86,7 +86,8 @@ const HomePage: React.FC = () => {
     throw new Error("Unexpected response format");
   }
 } catch (error) {
-  console.error("Error fetching jobs:", error);
+  console.error("Error fetching job data:", error);
+  setError("Failed to load jobs. Please try again later.");
 }
 setLoading(false);
 };
