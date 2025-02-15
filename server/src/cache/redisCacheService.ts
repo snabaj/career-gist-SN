@@ -12,9 +12,10 @@ const redis = new Redis({
 });
 
 redis.on("connect", () : void => console.log("✅ Redis connection tested..."));
+redis.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
 redis.on("error", (err : Error) : void => console.error("❌ Redis error:", err));
 redis.on("end", () : void => console.warn("⚠️ Redis connection closed"));
-redis.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
+
 
 
 export const setCache : (key : string, value : unknown, ttl?: number) => Promise<void> = async (key: string, value: unknown, ttl: number = 900) : Promise<void> => {
@@ -24,8 +25,8 @@ export const setCache : (key : string, value : unknown, ttl?: number) => Promise
       value
     };
     await redis.setex(key, ttl, JSON.stringify(data));
-    console.log(`✅ Cached: ${key} (TTL: ${ttl}s)`);
   } catch (error) {
+    console.log(`✅ Cached: ${key} (TTL: ${ttl}s)`);
     console.error("❌ Error setting cache:", error);
   }
 };
@@ -85,9 +86,7 @@ redisClient.on("error", (err) => console.error("❌ Redis error:", err));
 
 export const cacheEnhancedJobData = async (query: string, data: any) => {
   try {
-    console.log(`📌 Caching enhanced job data: job-enhanced:${query}`);
     await redisClient.set(`job-enhanced:${query}`, JSON.stringify(data), { EX: 900 });
-    console.log(`✅ Cached enhanced job data: job-enhanced:${query}`);
   } catch (error) {
     console.error("❌ Error caching enhanced job data:", error);
   }
