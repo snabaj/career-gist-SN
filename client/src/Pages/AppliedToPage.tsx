@@ -9,6 +9,10 @@ const AppliedToPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+  //Should only run once when the component mounts
+  //The empty dependency array ensures that the effect runs only once
+  //Therefore, it does not re-run when the component updates
+ // ✅ Persist login check to get applied jobs only when the user is authenticated
  useEffect(() => {
   const checkAuth = () => {
     const token = localStorage.getItem("authToken");
@@ -20,17 +24,17 @@ const AppliedToPage: React.FC = () => {
 }, []);
 
 useEffect(() => {
-  if (!isLoggedIn) return;
+  if (!isLoggedIn) return; // ✅ Only fetch jobs if logged in
 
   const fetchAppliedJobs = async () => {
     try {
-      const response = await fetch('/api/applied-jobs');
+      const response = await fetch('/api/applied-jobs'); // 🔹 Adjust API endpoint
       if (!response.ok) {
         throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
       }
 
       const data: JobSearchResponse = await response.json();
-      setJobs(data.data.data);
+      setJobs(data.data.data); // ✅ Extracts applied jobs from response
     } catch (error) {
       console.error('Error fetching applied jobs:', error);
       setError('Could not load applied jobs.');
@@ -39,7 +43,7 @@ useEffect(() => {
   };
 
   fetchAppliedJobs();
-}, [isLoggedIn]);
+}, [isLoggedIn]); // ✅ Only run when login state changes
 
 
   return (

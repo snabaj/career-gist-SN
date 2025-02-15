@@ -19,6 +19,7 @@ router.get("/query", (req: Request, res: Response) => {
 
       const cachedEnhancedData : string | null = await redisClient.get(enhancedCacheKey);
       if (cachedEnhancedData) {
+        console.log("✅ Returning cached enhanced job data...");
         return res.json(JSON.parse(cachedEnhancedData));
       }
 
@@ -26,13 +27,16 @@ router.get("/query", (req: Request, res: Response) => {
       let jobData;
 
       if (cachedRawData) {
+        console.log("✅ Returning cached raw job data...");
         jobData = JSON.parse(cachedRawData);
       } else {
+        console.log("🛠 Fetching fresh job data from JSearch API...");
         jobData = await getJobListings(query);
 
         await redisClient.set(rawCacheKey, JSON.stringify(jobData), { EX: 900 });
       }
 
+      console.log("⚡ Enhancing job data using GPT...");
       let enhancedData;
       try {
         enhancedData = await generateEnhancedJobData(jobData);
@@ -42,8 +46,10 @@ router.get("/query", (req: Request, res: Response) => {
         }
       } catch (error) {
         console.error("❌ Error enhancing job data:", error);
-        enhancedData = jobData;
+        enhancedData = jobData; // Ensure raw job data is returned
       }
+
+      console.log("📢 Final response being sent to frontend:", JSON.stringify(enhancedData, null, 2));
 
       await cacheEnhancedJobData(query, enhancedData);
       return res.json({ data: enhancedData });

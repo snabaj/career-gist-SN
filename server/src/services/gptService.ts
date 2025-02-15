@@ -69,7 +69,7 @@ Ensure there is no additional formatting, explanations, or surrounding text. Ret
     });
 
     const data = await response.json();
-    if (!data.choices[0]?.message?.content || !data.choices) {
+    if (!data.choices || !data.choices[0]?.message?.content) {
       console.warn("⚠️ No enhancement returned from OpenAI. Using raw job data.");
       return jobData; // Ensure raw data is returned
 

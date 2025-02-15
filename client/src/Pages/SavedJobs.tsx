@@ -13,6 +13,7 @@ const SavedJobs: React.FC<SavedJobsProps> = ({ isLoggedIn }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+//need to take out the dummy data and replace with the actual fetch call
 useEffect(() => {
   const fetchSavedJobs = async () => {
     try {
@@ -33,6 +34,7 @@ useEffect(() => {
   fetchSavedJobs();
 }, []);
 
+// ✅ Remove job function with correct API endpoint
 const handleRemoveJob = useCallback(async (job_id: string) => {
   try {
     const response = await fetch(`/api/remove-saved-job/${job_id}`, {
@@ -50,6 +52,7 @@ const handleRemoveJob = useCallback(async (job_id: string) => {
   }
 }, []);
 
+// ✅ Mark as applied function with correct API endpoint
 const handleMarkAsApplied = useCallback(async (job_id: string) => {
   try {
     const response = await fetch(`/api/mark-applied/${job_id}`, {

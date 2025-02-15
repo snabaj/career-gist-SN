@@ -1,3 +1,5 @@
+/* Global styles in src/index.css */
 main {
-  padding-top: 60px;
+  padding: 20px;  /* Add padding around the main content area */
+  padding-top: 60px;  /* Additional padding to account for the fixed navbar */
 }

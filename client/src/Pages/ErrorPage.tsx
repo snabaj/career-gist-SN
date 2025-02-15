@@ -11,7 +11,7 @@ const ErrorPage: React.FC = () => {
   const error = useRouteError() as ErrorType;
   console.error(error);
 
-  const displayError = error?.statusText ?? error?.message ?? "Unknown error";
+  const displayError = error?.statusText || error?.message || "Unknown error";
 
   return (
     <div id="error-page">

@@ -43,6 +43,7 @@ export const getJobById = async (req: Request, res: Response) => {
   }
 };
 
+// GET /jobs/saved - Get saved jobs for the user
 export const retrieveSavedJobs = async (_req: Request, res: Response) => {
   try {
     const savedJobs = await Job.findAll({
@@ -55,6 +56,7 @@ export const retrieveSavedJobs = async (_req: Request, res: Response) => {
   }
 };
 
+// POST /jobs - save a job to database
 export const createJob = async (req: Request, res: Response) => {
   try {
     const newJob = await Job.create({ ...req.body, saved: true }); // Mark as saved
@@ -63,7 +65,7 @@ export const createJob = async (req: Request, res: Response) => {
     res.status(400).json({ message: error.message });
   }
 };
-
+// PUT /jobs/:id - Update a job by id
 export const updateJob = async (req: Request, res: Response) => {
   try {
     const job = await Job.findByPk(req.params.id);
@@ -78,7 +80,7 @@ export const updateJob = async (req: Request, res: Response) => {
   }
 };
 
-
+// DELETE /jobs/:id
 export const deleteJob = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {

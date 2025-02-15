@@ -20,7 +20,7 @@ const limiter : RateLimitRequestHandler = rateLimit({
     prefix: 'rate-limit:',
   }),
   windowMs: 60 * 60 * 1000,
-  limit: 15,
+  limit: 10,
   message: { error: '❌ Rate limit exceeded. Try again in an hour.' },
   standardHeaders: 'draft-8',
   legacyHeaders: false,
