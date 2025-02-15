@@ -11,6 +11,8 @@ const redis = new Redis({
   tls: process.env.REDIS_TLS ? {} : undefined as any,
 });
 
+redis.on("connect", () : void => console.log("✅ Redis connection tested..."));
+redis.on("reconnecting", (): void => console.log("🔄 Reconnecting to Redis..."));
 redis.on("error", (err : Error) : void => console.error("❌ Redis error:", err));
 redis.on("end", () : void => console.warn("⚠️ Redis connection closed"));
 
@@ -23,6 +25,7 @@ export const setCache : (key : string, value : unknown, ttl?: number) => Promise
     };
     await redis.setex(key, ttl, JSON.stringify(data));
   } catch (error) {
+    console.log(`✅ Cached: ${key} (TTL: ${ttl}s)`);
     console.error("❌ Error setting cache:", error);
   }
 };
@@ -74,6 +77,7 @@ redisClient.on("error", (err) => console.error("❌ Redis error:", err));
     if (!redisClient.isOpen) {
       await redisClient.connect();
     }
+    console.log("✅ Redis connection established");
   } catch (error) {
     console.error("❌ Redis connection failed:", error);
   }
