@@ -1,13 +1,33 @@
 # <span style="color:#FF6F61;">CareerGist</span>
 
+![JSearch API](https://img.shields.io/badge/JSearch-API-blue.svg)
+![OpenAI API](https://img.shields.io/badge/OpenAI-API-blue.svg)
+![React](https://img.shields.io/badge/React-18.3.1-blue.svg)
+![React Router](https://img.shields.io/badge/React_Router-6.14.1-blue.svg)
+![React Query](https://img.shields.io/badge/React_Query-3.39.3-blue.svg)
+![React_Router_Dom](https://img.shields.io/badge/React_Router_Dom-6.14.1-blue.svg)
+![Express.js](https://img.shields.io/badge/Express.js-4.18.2-blue.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15.2-blue.svg)
+![Redis](https://img.shields.io/badge/Redis-4.6.7-blue.svg)
+![Sequelize](https://img.shields.io/badge/Sequelize-6.32.1-blue.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-blue.svg)
+![Vite](https://img.shields.io/badge/Vite-6.0.11-blue.svg)
+![Node.js](https://img.shields.io/badge/Node.js-22.11.0-blue.svg)
+
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Build_Status](https://cdn.prod.website-files.com/5e0f1144930a8bc8aace526c/65dd9eb5aaca434fac4f1c7c_Build-Passing-brightgreen.svg)
+[![Deps](https://cdn.prod.website-files.com/5e0f1144930a8bc8aace526c/65dd9eb5aaca434fac4f1c9e_Deps-Up--to--date-brightgreen.svg)]()
+___
+
 ### Table of Contents
 <details>
   <summary>Click to expand</summary>
 
+- [CareerGist](#career-gist)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-    - [Backend](#backend)
     - [Frontend](#frontend)
+    - [Backend](#backend)
 - [How the System Works](#how-the-system-works)
     - [User Requests a Job Search](#1-user-requests-a-job-search)
     - [AI-Generated Job Summaries](#2-ai-generated-job-summaries)
@@ -25,17 +45,15 @@
     - [Logging in](#logging-in)
     - [Searching for Jobs](#searching-for-jobs)
 - [Supplemental Docs](#supplemental-docs)
-    - [Contributing](supplemental-docs/contributing.md)
-    - [Contributors](supplemental-docs/contributors.md)
-    - [License](supplemental-docs/license.md)
-    - [Contact](supplemental-docs/contact.md)
+    - [Contributing](#contributing)
+    - [Contributors](#contributors)
+    - [License](#license)
+    - [Contact](#contact)
 
 </details>
 
-
-
 ---
-<strong><span style="color:coral">CareerGist</span><Strong> is an advanced job board aggregator designed to streamline the job search process by fetching listings from the JSearch API. By integrating artificial intelligence, CareerGist enhances job descriptions, providing users with more concise, readable, and enriched job summaries. Additionally, a robust caching system powered by Redis ensures efficient performance by storing frequently searched job queries and details for quick retrieval.
+<strong><span id="career-gist" style="color:coral">CareerGist</span><Strong> is an advanced job board aggregator designed to streamline the job search process by fetching listings from the JSearch API. By integrating artificial intelligence, CareerGist enhances job descriptions, providing users with more concise, readable, and enriched job summaries. Additionally, a robust caching system powered by Redis ensures efficient performance by storing frequently searched job queries and details for quick retrieval.
 
 The backend is built using TypeScript, Express.js, and Sequelize (PostgreSQL ORM), ensuring type safety, a structured API, and a well-optimized relational database. The use of Express.js allows for the creation of a scalable RESTful API, while Sequelize provides seamless interaction with PostgreSQL for managing job postings, user data, and other essential information.
 
@@ -43,9 +61,15 @@ The frontend leverages React.js, a highly responsive framework that offers a dyn
 
 With CareerGist, job-seekers gain access to an AI-assisted, high-performance platform that simplifies job discovery, enhances job descriptions, and improves search efficiency.
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ---
 
-## <span style="color:#FF6F61;">Features</span>
+## <span id="features" style="color:#FF6F61;">Features</span>
 
 - **Job Search Aggregation** – Retrieves job listings from **JSearch API** in real time.
 - **AI-Powered Summaries** – Uses **OpenAI API** to generate **concise job descriptions** for better readability.
@@ -57,9 +81,15 @@ With CareerGist, job-seekers gain access to an AI-assisted, high-performance pla
 - **Resilient API Design** – If **Redis fails**, cached jobs are **automatically transferred** to **PostgreSQL**.
 - **Graceful API Degradation** – If **JSearch API is unavailable**, cached job data remains accessible for **1 hour**.
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ---
 
-## <span style="color:#FF6F61;">Technologies Used</span>
+## <span id="technologies-used" style="color:#FF6F61;">Technologies Used</span>
 
 <br>&nbsp; <span id="html5"> [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://html.com/html5)</span>
 <br>&nbsp; <span id="css-3">[![CSS 3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3schools.com/css/css_intro.asp)</span>
@@ -77,8 +107,13 @@ With CareerGist, job-seekers gain access to an AI-assisted, high-performance pla
 <br>&nbsp; <span id="openai">[![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)</span>
 <br>&nbsp; <span id="Render">[![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com)</span>
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
 
-### <span style="color:#40E0D0;">Frontend</span>
+### <span id="frontend" style="color:#40E0D0;">Frontend</span>
 
 | Technology       | Purpose |
 |------------------|---------|
@@ -89,8 +124,13 @@ With CareerGist, job-seekers gain access to an AI-assisted, high-performance pla
 | **React Router** | Handles **client-side navigation** |
 | **Render.com**   | Hosts the **frontend application** |
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
 
-### <span style="color:#40E0D0;">Backend</span>
+### <span id="backend" style="color:#40E0D0;">Backend</span>
 
 | Technology | Purpose |
 |-------------|---------|
@@ -103,10 +143,15 @@ With CareerGist, job-seekers gain access to an AI-assisted, high-performance pla
 | **Render.com** | Hosts the **backend server** |
 | **Postman** | Used for **API testing** and debugging |
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
 
 ---
 
-## <span style="color:#FF6F61;">How the System Works</span>
+## <span id="how-the-system-works" style="color:#FF6F61;">How the System Works</span>
 
 ### **1. User Requests a Job Search**
 - The **frontend (React)** sends a request to the backend API.
@@ -122,9 +167,15 @@ With CareerGist, job-seekers gain access to an AI-assisted, high-performance pla
 - Users **save jobs** to their **favorites list**.
 - User preferences and saved jobs are **stored in PostgreSQL** via **Sequelize ORM**.
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ---
 
-## <span style="color:#FF6F61;">Error Handling</span>
+## <span id="error-handling" style="color:#FF6F61;">Error Handling</span>
 
 | Error | Possible Cause | Solution |
 |-------|--------------|----------|
@@ -133,64 +184,140 @@ With CareerGist, job-seekers gain access to an AI-assisted, high-performance pla
 | **<span style="color:#FF0000;">504 Gateway Timeout</span>** | Redis connection failure | Data is automatically stored in PostgreSQL |
 | **<span style="color:#FF0000;">404 Not Found</span>** | Invalid job ID | Ensure job exists before requesting |
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ---
 
-## <span style="color:#FF6F61;">Installation</span>
+## <span id="installation" style="color:#FF6F61;">Installation</span>
 
-### <span style="color:#40E0D0;">Prerequisites</span>
-- Node.js and npm installed
-- PostgreSQL database set up
-- Redis installed for caching
+### <span style="color:#FF6F61;">Prerequisites</span>
 
-### <span style="color:#40E0D0;">Clone the Repository</span>
+Before setting up the career-gist project, ensure you have the following dependencies installed:
+
+#### 1. Install Node.js and npm
+- Download and install the latest **[Node.js](https://nodejs.org/en/)** (which includes npm) from the official site.
+- Verify installation:
+  ```sh
+  node -v
+  npm -v
+  ```
+
+#### 2. Set up PostgreSQL Database
+- Install **PostgreSQL** from the official [PostgreSQL site](https://www.postgresql.org/download/).
+- Ensure the PostgreSQL service is running:
+  ```sh
+  psql --version
+  ```
+- Create a database for the project:
+  ```sh
+  createdb career_serach
+  ```
+
+#### 3. Install Redis for Caching
+- Install Redis via Homebrew (Mac):
+  ```sh
+  brew install redis
+  ```
+- Install Redis for Windows:
+  - Download the latest version from the [Redis website](https://redis.io/download).
+  - Follow the installation instructions.
+
+
+- Start Redis:
+  ```sh
+  redis-server
+  ```
+- Verify Redis is running:
+  ```sh
+  redis-cli ping
+  ```
+- You should see the response `PONG`.
+
+Once these dependencies are installed, proceed to clone and set up the project.
+
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
+___
+
+### <span id="clone-the-repository" style="color:#40E0D0;">Clone the Repository</span>
 ```sh
-git clone https://github.com/nathangreen1632/CareerGist.git
-cd CareerGist
+git clone https://github.com/nathangreen1632/career-gist.git
+cd career-gist
 ```
 
-### <span style="color:#40E0D0;">Install Dependencies</span>
+### <span id="install-dependencies" style="color:#40E0D0;">Install Dependencies</span>
 ```sh
 npm install
 ```
 
-### <span style="color:#40E0D0;">Set up Environment Variables</span>
+### <span id="set-up-environment-variables" style="color:#40E0D0;">Set up Environment Variables</span>
 Create a `.env` file and add:
 ```
-DATABASE_URL=your_database_url
-REDIS_URL=your_redis_url
-OPENAI_API_KEY=your_openai_api_key
+DB_NAME=career_search
+DB_USER=
+DB_PASSWORD=
+DB_HOST=localhost
+DB_PORT=5432
+PORT=3000
+JWT_SECRET_KEY=
+REDIS_HOST=
+REDIS_PORT=
+REDIS_USERNAME=default
+REDIS_PASSWORD=
+CAREER_GIST_API=OpenAI_API_KEY
+CAREER_GIST_URL=OpenAI_API_URL
+JSEARCH_API_URL=
+RAPIDAPI_HOST=
+RAPIDAPI_KEY=
 ```
 
-### <span style="color:#40E0D0;">Start the Development Server</span>
+### <span id="start-the-development-server" style="color:#40E0D0;">Start the Development Server</span>
 ```sh
 npm run dev
 ```
 
-[⬆ Back to top](#career-gist)
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
 
 ---
 
-## <span style="color:#FF6F61;">Usage</span>
+## <span id="usage" style="color:#FF6F61;">Usage</span>
 
-### <span style="color:#40E0D0;">Opening the Application</span>
+### <span id="opening-the-application" style="color:#40E0D0;">Opening the Application</span>
 1. Navigate to `http://localhost:3000`.
 2. Ensure backend is running.
 
-### <span style="color:#40E0D0;">Browsing Pages</span>
+### <span id="browsing-pages" style="color:#40E0D0;">Browsing Pages</span>
 - Home page shows latest job postings.
 - Navigation bar allows filtering jobs.
 
-### <span style="color:#40E0D0;">Logging in</span>
+### <span id="logging-in" style="color:#40E0D0;">Logging in</span>
 1. Click `Sign In` on the top right.
 2. Enter credentials.
 
-### <span style="color:#40E0D0;">Searching for Jobs</span>
+### <span id="searching-for-jobs" style="color:#40E0D0;">Searching for Jobs</span>
 1. Use the search bar.
 2. Filter results using dropdowns.
 
-[⬆ Back to top](#career-gist)
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
 
 ---
+## <span id="supplemental-docs" style="color:#FF6F61;">Supplemental Docs</span>
 
 ## <span id="contributing" style="color:lightseagreen;"> Contributing </span>
 Contributions to this project are highly encouraged and appreciated. If you want to improve the project or introduce new features, follow the structured workflow below to ensure a smooth collaboration process.
@@ -237,7 +364,7 @@ Contributions to this project are highly encouraged and appreciated. If you want
 8. **<span style="color:cornflowerblue;"> Review and Collaborate </span>**:
    Your pull request will be reviewed by project maintainers to ensure it meets quality standards and aligns with project goals. Constructive feedback will be provided if necessary. Once approved, it will be merged into the main branch.
 
-### **<span id="contributing-workflow" style="color:coral;">Contribution Guidelines:</span>**
+### **<span id="contribution-guidelines" style="color:coral;">Contribution Guidelines:</span>**
 - Ensure your changes are well-tested and do not introduce any breaking changes.
 - Follow the project's coding standards and guidelines.
 - Make sure your commits are descriptive and provide context.
@@ -246,21 +373,39 @@ Contributions to this project are highly encouraged and appreciated. If you want
 
 #  🎉 Thank you for contributing to the Applicant Manager project! 🎉
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ___
-## <span style="color:#FF6F61;">Contributors</span>
+## <span id="contributors" style="color:#FF6F61;">Contributors</span>
 <a href="https://github.com/nathangreen1632/career-gist/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=nathangreen1632/career-gist" />
 </a>
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ---
 
-## <span style="color:#FF6F61;">License</span>
+## <span id="license" style="color:#FF6F61;">License</span>
 
-**CareerGist is licensed under the MIT license. Click [here](https://opensource.org/licenses/MIT) for more information.**
+**Career-Gist is licensed under the MIT license. Click [here](https://opensource.org/licenses/MIT) for more information.**
+
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
 
 ---
 
-## <span style="color:#FF6F61;">Contact</span>
+## <span id="contact" style="color:#FF6F61;">Contact</span>
 
 Reach out to **Nathan Green (Server)**:
 - **GitHub**: [@nathangreen1632](https://github.com/nathangreen1632)
@@ -274,7 +419,18 @@ Reach out to **Cyrl Casalme (Client)**:
 - **GitHub**: [@ccasalme](https://github.com/ccasalme)
 - **LinkedIn**: [Cy Casalme]()
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
+
 ---
 
 CareerGist enhances job searching using **AI, caching, and a modern UI**, ensuring users get the best experience. 🚀
 
+<div style="text-align: right;">
+  <a href="#top">
+    <img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-royalblue" alt="Back to Top">
+  </a>
+</div>
