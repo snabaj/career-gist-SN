@@ -330,8 +330,8 @@ Contributions to this project are highly encouraged and appreciated. If you want
 2. **<span style="color:cornflowerblue;"> Clone Your Fork </span>**:
    Clone the repository to your local machine using the following command:
     ```bash
-    git clone https://github.com/YOUR_USERNAME/applicant-manager.git
-    cd applicant-manager
+    git clone https://github.com/YOUR_USERNAME/career-gist.git
+    cd career-gist
     ```
 
 3. **<span style="color:cornflowerblue;"> Create a New Branch </span>**:
@@ -371,7 +371,7 @@ Contributions to this project are highly encouraged and appreciated. If you want
 - Document any new features, changes, or improvements made.
 - Keep your branch up to date with the latest changes from the main branch to avoid conflicts.
 
-#  🎉 Thank you for contributing to the Applicant Manager project! 🎉
+#  🎉 Thank you for contributing to the CareerGist project! 🎉
 
 <div style="text-align: right;">
   <a href="#top">
