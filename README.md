@@ -1,6 +1,6 @@
 # <span style="color:#FF6F61;">CareerGist</span>
 
-## Table of Contents
+### Table of Contents
 <details>
   <summary>Click to expand</summary>
 
@@ -26,6 +26,7 @@
     - [Searching for Jobs](#searching-for-jobs)
 - [Supplemental Docs](#supplemental-docs)
     - [Contributing](supplemental-docs/contributing.md)
+    - [Contributors](supplemental-docs/contributors.md)
     - [License](supplemental-docs/license.md)
     - [Contact](supplemental-docs/contact.md)
 
@@ -34,7 +35,7 @@
 
 
 ---
-CareerGist is an advanced job board aggregator designed to streamline the job search process by fetching listings from the JSearch API. By integrating artificial intelligence, CareerGist enhances job descriptions, providing users with more concise, readable, and enriched job summaries. Additionally, a robust caching system powered by Redis ensures efficient performance by storing frequently searched job queries and details for quick retrieval.
+<strong><span style="color:coral">CareerGist</span><Strong> is an advanced job board aggregator designed to streamline the job search process by fetching listings from the JSearch API. By integrating artificial intelligence, CareerGist enhances job descriptions, providing users with more concise, readable, and enriched job summaries. Additionally, a robust caching system powered by Redis ensures efficient performance by storing frequently searched job queries and details for quick retrieval.
 
 The backend is built using TypeScript, Express.js, and Sequelize (PostgreSQL ORM), ensuring type safety, a structured API, and a well-optimized relational database. The use of Express.js allows for the creation of a scalable RESTful API, while Sequelize provides seamless interaction with PostgreSQL for managing job postings, user data, and other essential information.
 
@@ -245,19 +246,33 @@ Contributions to this project are highly encouraged and appreciated. If you want
 
 #  🎉 Thank you for contributing to the Applicant Manager project! 🎉
 
+___
+## <span style="color:#FF6F61;">Contributors</span>
+<a href="https://github.com/nathangreen1632/career-gist/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=nathangreen1632/career-gist" />
+</a>
+
 ---
 
 ## <span style="color:#FF6F61;">License</span>
 
-CareerGist is licensed under the **MIT License**.
+**CareerGist is licensed under the MIT license. Click [here](https://opensource.org/licenses/MIT) for more information.**
 
 ---
 
 ## <span style="color:#FF6F61;">Contact</span>
 
-Reach out to **Nathan Green**:
+Reach out to **Nathan Green (Server)**:
 - **GitHub**: [@nathangreen1632](https://github.com/nathangreen1632)
-- **LinkedIn**: (Insert LinkedIn profile)
+- **LinkedIn**: [Nathan Green](https://www.linkedin.com/in/nathangreen1632/)
+
+Reach out to **Stella Najbaj (Database)**:
+- **GitHub**: [@snabaj](https://github.com/snabaj)
+- **LinkedIn**: [Stella Nabaj]()
+
+Reach out to **Cyrl Casalme (Client)**:
+- **GitHub**: [@ccasalme](https://github.com/ccasalme)
+- **LinkedIn**: [Cy Casalme]()
 
 ---
 
