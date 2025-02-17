@@ -395,7 +395,7 @@ ___
 
 ## <span id="license" style="color:#FF6F61;">License</span>
 
-**Career-Gist is licensed under the MIT license. Click [here](https://opensource.org/licenses/MIT) for more information.**
+**Career-Gist is not licensed and therefore falls under Copyright Law as stipulated by the Berne Convention, which grants the author exclusive rights to their work upon creation, without the need for formal registration. Unauthorized use, reproduction, or distribution of this software without explicit permission is prohibited.**
 
 <div style="text-align: right;">
   <a href="#top">
