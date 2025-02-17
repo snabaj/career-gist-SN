@@ -14,7 +14,6 @@
 ![Vite](https://img.shields.io/badge/Vite-6.0.11-blue.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-22.11.0-blue.svg)
 
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Build_Status](https://cdn.prod.website-files.com/5e0f1144930a8bc8aace526c/65dd9eb5aaca434fac4f1c7c_Build-Passing-brightgreen.svg)
 [![Deps](https://cdn.prod.website-files.com/5e0f1144930a8bc8aace526c/65dd9eb5aaca434fac4f1c9e_Deps-Up--to--date-brightgreen.svg)]()
 ___
