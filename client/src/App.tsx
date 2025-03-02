@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './Pages/HomePage';
-import SavedJobs from './Pages/SavedJobs';
+//import SavedJobs from './Pages/SavedJobs';
 import AppliedToPage from './Pages/AppliedToPage';
 import Login from './Pages/Login';
 import Footer from './Pages/Footer';
+import SignUp from './Pages/signUp';
 
 
 const App: React.FC = () => {
@@ -21,10 +22,11 @@ const App: React.FC = () => {
       <Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/saved-jobs" element={<SavedJobs />} />
+          {/* <Route path="/saved-jobs" element={<SavedJobs />} /> */}
           <Route path="/applied-to" element={<AppliedToPage />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Layout>
     </Router>

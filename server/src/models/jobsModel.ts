@@ -1,6 +1,7 @@
 import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 
 interface JobAttributes {
+  id: number;
   job_id: string;
   job_title: string;
   employer_name: string;
@@ -20,6 +21,7 @@ interface JobAttributes {
 interface JobCreationAttributes extends Optional<JobAttributes, "job_id"> {}
 
 export class Job extends Model<JobAttributes, JobCreationAttributes> implements JobAttributes {
+  public id!: number;
   public job_id!: string;
   public job_title!: string;
   public employer_name!: string;
@@ -38,10 +40,14 @@ export class Job extends Model<JobAttributes, JobCreationAttributes> implements 
 export function JobFactory(sequelize: Sequelize): typeof Job {
   Job.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     job_id: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
     },
     job_title: {
       type: DataTypes.STRING,

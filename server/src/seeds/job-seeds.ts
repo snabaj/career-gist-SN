@@ -3,6 +3,7 @@ import { Job } from '../models/jobsModel.js';
 export const seedJobs = async () => {
     await Job.bulkCreate([
       {
+            id: 1,
             job_id: "job_001",
             job_title: "Frontend Developer",
             employer_name: "TechCorp",
@@ -19,6 +20,7 @@ export const seedJobs = async () => {
             saved: false,
           },
           {
+            id: 2,
             job_id: "job_002",
             job_title: "Backend Engineer",
             employer_name: "DevSolutions",

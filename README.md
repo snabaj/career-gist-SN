@@ -22,32 +22,39 @@ ___
 <details>
   <summary>Click to expand</summary>
 
-- [CareerGist](#career-gist)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
+- [CareerGist](#careergist)
+    - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
     - [Frontend](#frontend)
     - [Backend](#backend)
-- [How the System Works](#how-the-system-works)
-    - [User Requests a Job Search](#1-user-requests-a-job-search)
-    - [AI-Generated Job Summaries](#2-ai-generated-job-summaries)
-    - [User Preferences & Saved Jobs](#3-user-preferences--saved-jobs)
-- [Error Handling](#error-handling)
-- [Installation](#installation)
+  - [How the System Works](#how-the-system-works)
+    - [**1. User Requests a Job Search**](#1-user-requests-a-job-search)
+    - [**2. AI-Generated Job Summaries**](#2-ai-generated-job-summaries)
+    - [**3. User Preferences \& Saved Jobs**](#3-user-preferences--saved-jobs)
+  - [Error Handling](#error-handling)
+  - [Installation](#installation)
     - [Prerequisites](#prerequisites)
+      - [1. Install Node.js and npm](#1-install-nodejs-and-npm)
+      - [2. Set up PostgreSQL Database](#2-set-up-postgresql-database)
+      - [3. Install Redis for Caching](#3-install-redis-for-caching)
     - [Clone the Repository](#clone-the-repository)
     - [Install Dependencies](#install-dependencies)
     - [Set up Environment Variables](#set-up-environment-variables)
     - [Start the Development Server](#start-the-development-server)
-- [Usage](#usage)
+  - [Usage](#usage)
     - [Opening the Application](#opening-the-application)
     - [Browsing Pages](#browsing-pages)
     - [Logging in](#logging-in)
     - [Searching for Jobs](#searching-for-jobs)
-- [Supplemental Docs](#supplemental-docs)
-    - [Contributing](#contributing)
-    - [Contributors](#contributors)
-    - [License](#license)
-    - [Contact](#contact)
+  - [Supplemental Docs](#supplemental-docs)
+  - [ Contributing ](#-contributing-)
+    - [**Contributing Workflow:**](#contributing-workflow)
+    - [**Contribution Guidelines:**](#contribution-guidelines)
+- [🎉 Thank you for contributing to the CareerGist project! 🎉](#-thank-you-for-contributing-to-the-careergist-project-)
+  - [Contributors](#contributors)
+  - [License](#license)
+  - [Contact](#contact)
 
 </details>
 
@@ -410,9 +417,9 @@ Reach out to **Nathan Green (Server)**:
 - **GitHub**: [@nathangreen1632](https://github.com/nathangreen1632)
 - **LinkedIn**: [Nathan Green](https://www.linkedin.com/in/nathangreen1632/)
 
-Reach out to **Stella Najbaj (Database)**:
+Reach out to **Stella Nabajja (Database)**:
 - **GitHub**: [@snabaj](https://github.com/snabaj)
-- **LinkedIn**: [Stella Nabaj]()
+- **LinkedIn**: [Stella Nabajja]()
 
 Reach out to **Cyrl Casalme (Client)**:
 - **GitHub**: [@ccasalme](https://github.com/ccasalme)

@@ -30,6 +30,10 @@ export function JobContactInfoFactory(sequelize: Sequelize): typeof JobContactIn
       },
       job_id: {
         type: DataTypes.INTEGER,
+        references: {
+          model: 'jobs',
+          key: 'id',
+        },
         allowNull: false,
       },
       email: {
