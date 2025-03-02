@@ -25,4 +25,27 @@ const login = async (userInfo: UserLogin) => {
   }
 }
 
-export { login };
+const createUser = async (user: any) => {
+  try {
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user)
+    });
+    const data = await response.json();
+
+    if(!response.ok) {
+      throw new Error('invalid user API response, check network tab!');
+    }
+
+    return data;
+
+  } catch (err) { 
+    console.log('Error from data retrieval:', err);
+    return [];
+  }
+}
+
+export { login, createUser };

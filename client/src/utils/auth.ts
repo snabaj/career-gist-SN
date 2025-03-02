@@ -27,6 +27,7 @@ class AuthService {
 
   login(idToken: string) {
     localStorage.setItem('id_token', idToken);
+    
   }
 
   logout() {
